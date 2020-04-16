@@ -1,0 +1,261 @@
+@media only screen and (min-width: 1030px) 
+{
+    body{
+        background-image: url(../appThemes/desktopWp/img1veryLow.jpg);
+    }
+}
+@media only screen and (max-width: 1029px) 
+{  
+    body{
+        background-image: url(../appThemes/mobileWp/img1mbLow.jpg);
+        /* overflow: hidden !important; */
+    }
+}
+
+body{
+    /* overflow: hidden; */
+    background-size: 100% 100%;
+}
+#navTest{
+    width: 100%;
+    height: 10vh;
+    background-size: 100% 100%;
+    transition: background 0.6s linear !important;
+    -moz-transition: background 0.6s linear !important;
+    -o-transition: background 0.6s linear !important;
+    -webkit-transition: background 0.6s linear !important;
+    transition-duration: 1s !important;
+    -moz-transition-duration: 1s !important;
+    -o-transition-duration: 1s !important;
+    -webkit-transition-duration: 1s !important;
+    
+}   
+    
+a:link 
+{ 
+ text-decoration:none; 
+}
+
+@media only screen and (min-width: 1030px) {  
+
+}
+@media only screen and (max-width: 1029px) 
+{  
+
+}
+.option{
+    position: absolute;
+    color: rgb(228, 229, 236);
+    font-size: 30px;
+    font-stretch: wider;
+    font-weight: 900;
+    font-family: bigJohn;
+    text-emphasis: bold;
+    top: 30px;
+    
+}
+.option:hover{
+    transition: 0.1s;
+    position: absolute;
+    font-size: 35px;
+    font-stretch: wider;
+    font-weight: 900;
+    font-family: bigJohn ;
+    color: rgb(30, 30, 34);
+    text-emphasis: bold;
+    top: 35px;
+}
+
+.modal-body{
+    text-emphasis: bold;
+    /* margin-bottom: 10%; */
+}
+.modal-content{
+    text-align: center;
+    margin-top: 25px;
+    background-color: rgb(88, 88, 90,0);
+}
+
+.modalOption{
+    font-size: 30px !important;
+    color: rgb(230, 230, 230);
+    font-size: 10vh !important;
+    font-family: pierSansBold;
+    
+}
+.modalOption:hover{
+    transition: 0.0.5s;
+    color: rgb(255, 255, 255, 0.8);
+    font-family: pierSansBold;
+    
+}
+#logoLitta{
+    position: absolute;
+    display: inline; 
+    color: rgb(29, 28, 28);
+    font-stretch: wider;
+    font-weight: 900;
+    font-family: bigJohn;
+    text-emphasis: bold;
+    left: 6vh;
+    top: 35px;
+    z-index: 3;
+    font-size: 40px;
+    transition: 1s;
+}
+#logoLitta.active{
+    color: rgb(230, 230, 230);
+    transition: 1s;
+}
+#option1{
+    margin-top: 1%;
+    right: 30%;
+}
+#option2{
+    margin-top: 1%;
+    right: 18%;
+}
+#option3{
+    margin-top: 1%;
+    right: 5%;
+}
+
+  .carousel-indicators li{
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    margin-right: 1.5vw;
+    margin-bottom: 2vw;
+  }
+
+  .carousel-indicators.active {
+    background: white !important;
+    border-radius: 100% !important;
+    height: 1.5vw !important;
+    width: 1.5vw !important;
+    opacity: 1 !important;
+  }
+  
+.modal-backdrop
+{
+    position: absolute !important;
+    z-index: 1 !important;
+    background-color: rgb(26, 26, 26) !important;
+    opacity: 0.85 !important;
+}
+
+/* >>>>>>>>>>>>> TOGGLE ICON <<<<<<<<<<<  */
+
+
+.navbar-toggler{
+    position: relative;
+    border: none !important;
+    right: 8vh;
+    z-index: 3 !important;
+    font-size: 20px;
+}
+.toggle{
+    position: absolute;
+    display: inline; 
+    /* top: 50%; */
+    /* left: 50%; */
+    transform: translate(-50%, -50%);
+    /* height: 80px;
+    width: 80px; */
+    z-index: 3;
+    top: -15px;
+}
+.toggle span{
+    display: block;
+    width: 60px;
+    height: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(26, 26, 26);
+    transition: .3s;
+    box-shadow: 0 2px 2px rgba(0,0,0,.20);
+    z-index: 3;
+}
+.toggle.active span{
+    background: #fff;
+}
+
+.toggle span:nth-child(1){
+    transform: translate(-50%, -50%) translateY(-20px); 
+}
+.toggle span:nth-child(4){
+    transform: translate(-50%, -50%) translateY(20px); 
+}
+.toggle.active span:nth-child(1){
+    background: #fff;
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 0; 
+}
+.toggle.active span:nth-child(4){
+    background: #fff;
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 0; 
+}
+
+.toggle.active span:nth-child(2){
+    background: #fff;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition-delay: .2s; 
+}
+.toggle.active span:nth-child(3){
+    background: #fff;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    transition-delay: .2s;  
+}
+
+#toggleBt{
+    position: absolute;
+    top: 80px !important;
+    
+    
+}
+#toggleBt:focus {outline:0;}
+/* >>>>>>>>>>>>>>> SWIPER <<<<<<<<<<<<<<     */
+
+html, body {
+    position: relative;
+    height: 100%;
+  }
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+  }
+  .swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color:#000;
+    opacity: 1;
+    background: rgba(0,0,0,0.4);
+    margin-left: 10px!important;
+    margin-right: 10px!important;
+  }
+  .swiper-pagination-bullet-active {
+    background: #fff;
+  }
+/* >>>>>>>>>>>>>>> FONTS <<<<<<<<<<<<<<     */
+@font-face {
+    font-family: bigJohn;
+    src: url('../appThemes/fonts/BigJohnPRO-Regular.otf');
+}
+@font-face {
+    font-family: bigJohnBold;
+    src: url('../appThemes/fonts/BigJohnPRO-Bold.otf');
+}
+@font-face {
+    font-family: pierSansBold ;
+    src: url('../appThemes/fonts/pier-sans-bold.otf');
+}

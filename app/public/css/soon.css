@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding:0;
+}
+body{
+    overflow: hidden;
+    text-align: center;
+}
+img{
+width: 101vw;
+height: 101vh;
+-webkit-filter: brightness(100%);
+filter: brightness(100%);
+}
+img.active{
+    width: 101vw;
+    height: 101vh;
+    -webkit-filter: brightness(10%);
+    filter: brightness(10%);
+    transition: ease-in-out;
+    transition-delay: 1s;
+    transition-duration: 2s;
+}
+span{
+    opacity: 0;
+    position: relative;
+    font-family: bigJohn;
+    font-size: 10vh;
+    color: ivory;
+}
+span.active{
+    opacity: 1;
+    transition-delay: 3s;
+    transition-duration: 1s;
+}
+.container{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
+}
+@font-face {
+    font-family: bigJohn;
+    src: url('../appThemes/fonts/BigJohnPRO-Regular.otf');
+}
