@@ -21,7 +21,7 @@ if($btnCadastra){
 	if($stmt = mysqli_prepare($conn, $sql)){
 		mysqli_stmt_bind_param($stmt, "sssssssss", $nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha);
 	    if(mysqli_stmt_execute($stmt)){
-			$_SESSION['msgOk'] = "Cadastro realizado! Olá ";
+			$_SESSION['msgOk'] = "Cadastro realizado! Olá $nome";
 			header("Location: ../login.php");
 		} else{
 			$_SESSION['msgErro'] = "Erro no Cadastro! \n";
