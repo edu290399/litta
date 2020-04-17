@@ -16,16 +16,21 @@ if($btnCadastra){
 	$estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_STRING);
 	$cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
 	$senha = password_hash($senha, PASSWORD_DEFAULT);
-	$result_cadastro = "INSERT INTO `usuarios`( `nome`, `sobrenome`, `sexo`, `datanas`, `telefone1`, `telefone2`, `email`, `usuario`, `senha`, `pais`, `estado`, `cidade`) VALUES ('$nome', '$sobrenome', '$sexo', '$datanas', '$telefone1', '$telefone2', '$email', '$usuario', '$senha', 'Brasil', 'Goias', 'Goiania')";
-	$resultado_cadastro = mysqli_query($conn, $result_cadastro);
-	if($resultado_cadastro){
-		$_SESSION['msgOk'] = "Cadastro realizado! Olá ";
-		header("Location: ../login.php");
+	$sql = "INSERT INTO `usuarios`( `nome`, `sobrenome`, `sexo`, `datanas`, `telefone1`, `telefone2`, `email`, `usuario`, `senha`, `pais`, `estado`, `cidade`) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, 'Brasil', 'Goias', 'Goiania')";
+	
+	if($stmt = mysqli_prepare($conn, $sql)){
+		mysqli_stmt_bind_param($stmt, "sssssssss", $nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha);
+	    if(mysqli_stmt_execute($stmt)){
+			$_SESSION['msgOk'] = "Cadastro realizado! Olá ";
+			header("Location: ../login.php");
+		} else{
+			$_SESSION['msgErro'] = "Erro no Cadastro! \n";
+			header("Location: ../register.php");
+		}
+	} else{
+		echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
 	}
-	else{
-		$_SESSION['msgErro'] = "Erro no Cadastro! \n";
-		header("Location: ../register.php");
-	}
+
 }
 
 else{
