@@ -17,22 +17,70 @@ if($btnCadastra){
 	$cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
 	$senha = password_hash($senha, PASSWORD_DEFAULT);
 	$sql = "INSERT INTO `usuarios`( `nome`, `sobrenome`, `sexo`, `datanas`, `telefone1`, `telefone2`, `email`, `usuario`, `senha`, `pais`, `estado`, `cidade`) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, 'Brasil', 'Goias', 'Goiania')";
-	
-	if($stmt = mysqli_prepare($conn, $sql)){
+	$sqlUsuario = "SELECT id FROM usuarios where usuario = ? LIMIT 1";
+	$sqlEmail = "SELECT id FROM usuarios where email = ? LIMIT 1";
+	if( ($stmt = mysqli_prepare($conn, $sql)) && ($stmtUsuario = mysqli_prepare($conn, $sqlUsuario)) && ($stmtEmail = mysqli_prepare($conn,$sqlEmail)) ){
 		mysqli_stmt_bind_param($stmt, "sssssssss", $nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha);
-	    if(mysqli_stmt_execute($stmt)){
-			$_SESSION['msgOk'] = "Cadastro realizado! Olá $nome";
-			header("Location: ../login.php");
-		} else{
-			$_SESSION['msgErro'] = "Erro no Cadastro! \n";
+		mysqli_stmt_bind_param($stmtEmail, "s", $email);
+		mysqli_stmt_bind_param($stmtUsuario, "s", $usuario);
+
+		if( mysqli_stmt_execute($stmtEmail) ){
+			mysqli_stmt_bind_result($stmtEmail, $email);
+		} 
+		else{
+			echo "ERROR: Could not execute query: Consulta no BD de email. \n" .  mysqli_stmt_error($stmtEmail) . "\n"  .mysqli_error($conn);
+		}
+		if(mysqli_stmt_fetch($stmtEmail)){
+			$_SESSION['msgErro'] = "Email já está em uso \n";
+			$_SESSION['nome'] = $nome;
+			$_SESSION['sobrenome'] = $sobrenome;
+			$_SESSION['sexo'] = $sexo;
+			$_SESSION['datanas'] = $datanas;
+			$_SESSION['telefone1'] = $telefone1;
+			$_SESSION['telefone2'] = $telefone2;
+			$_SESSION['usuario'] = $usuario;
+			$_SESSION['pais'] = $pais;
+			$_SESSION['estado'] = $estado;
+			$_SESSION['cidade'] = $cidade;
+
 			header("Location: ../register.php");
 		}
-	} else{
-		echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
+		else{
+			if(mysqli_stmt_execute($stmtUsuario) ){
+				mysqli_stmt_bind_result($stmtUsuario, $usuario);
+			}
+			else{
+				echo "ERROR: Could not execute query: Consulta no BD de usuario \n" .  mysqli_stmt_error($stmtUsuario) . "\n"  .mysqli_error($conn);
+			}
+			if(mysqli_stmt_fetch($stmtUsuario)){
+				$_SESSION['msgErro'] = "Usuario já existe \n";
+				$_SESSION['nome'] = $nome;
+				$_SESSION['sobrenome'] = $sobrenome;
+				$_SESSION['sexo'] = $sexo;
+				$_SESSION['datanas'] = $datanas;
+				$_SESSION['telefone1'] = $telefone1;
+				$_SESSION['telefone2'] = $telefone2;
+				$_SESSION['email'] = $email;
+				$_SESSION['pais'] = $pais;
+				$_SESSION['estado'] = $estado;
+				$_SESSION['cidade'] = $cidade;
+				header("Location: ../register.php");				
+			}
+			else{
+				if(mysqli_stmt_execute($stmt)){
+					$_SESSION['msgOk'] = "Cadastro realizado! Olá $nome";
+					header("Location: ../login.php");
+				} else{
+					$_SESSION['msgErro'] = "Erro no Cadastro! \n";
+					header("Location: ../register.php");
+				}
+			}
+		}
+	} 
+	else{
+		echo "ERROR: Could not prepare query to access DB. " . mysqli_error($conn);
 	}
-
 }
-
 else{
     $_SESSION['msgErro'] = "Página não encontrada";
 	header("Location: ../register.php");
