@@ -14,7 +14,7 @@
     
     
     <!-- <img id="corpo" src="./public/appThemes/carouselPics/residencial/esmeralda/esmeralda2.JPG"> -->
-    <nav id="navTest" class="navbar navbar-expand-md bg-white navbar-light fixed-top">
+    <nav id="navTest" class="navbar navbar-expand-md bg-white navbar-light ">
 
         <a class="navbar-brand" href="index" id="logoLitta">LITTA</a>
   
@@ -89,22 +89,23 @@
             <input name="senha" id="senha" onchange="validatePassword()" type="password" minlength="8" placeholder="Senha" required/>
             <input name="senhaconf" id="senhaConf" onkeyup="validatePassword()" type="password" minlength="8" placeholder="Confirmar senha" required/>
             <br>
-            <select id="paises">
-              <option name="pais" value="pais 01"></option>
+            <br>
+            
+            <select id="paises" name="pais">
+              <option  value="<?php echo $_SESSION['pais']?>"><?php echo $_SESSION['pais']?></option>
             </select>
-            <select id="estados">
-              <option name="estado" id="estados" value="estado 01"></option>
+            <select name="subdivision" id="subdivision">
             </select>
-            <select name="cidade" id="cidades" value="cidade 01">
+            <select name="cidade" id="cidades">
             </select>
-          
+            <br>
             <button id="btcadastrar"name="btnCadastra" type="submit"><img src="./public/open-iconic/svg/check.svg" class="icon" alt="check">Certo</button>
         </form>  
       </div>
-
+      
       
 </body>
- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script>
@@ -165,8 +166,170 @@
             });
         });
 
-  </script>
+
+  $(document).ready(function () {
+    $.getJSON('./public/places/country.json', function (data) {
+      var items = [];
+      <?php if(isset($_SESSION['pais'])){ ?>
+        console.log("Pais setado!");
+			  var options = '<option value="<?php echo $_SESSION['pais']?>"><?php echo $_SESSION['pais']?></option>';
+        <?}else{ ?>
+          var options = '<option value="">País</option>';
+          console.log("Pais nao setado!");
+        <? } ?>
+
+      $.each(data, function (key, val) {
+					options += '<option value="' + val.native + '">' + val.native + '</option>';
+			});
+
+      $("#paises").html(options);
+
+      		$("#paises").change(function () {				
+				
+					var options_subdivision = '';
+					var str = "";					
+					
+					$("#paises option:selected").each(function () {
+            str = $(this).text();
+            console.log("str ==> ",str);
+          });
+          
+
+					switch(str) {
+					  
+						case "Brasil":
+             
+              $.getJSON('./public/places/brasil.json', function (data) {
+                
+                var items = [];
+                var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
+                var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select> ';
+                $("#subdivision").replaceWith(options_subdivision);
+                $("#cidades").replaceWith(options_cidades);
+
+                $.each(data, function (key, val) {
+                    options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
+                });
+                $("#subdivision").html(options_subdivision);
+
+                  $("#subdivision").change(function () {
+                    var options_cidades = '';
+					          var str = "";	
+                    
+                    $("#subdivision option:selected").each(function () {
+                      str += $(this).text();
+                    });
+
+                    $.each(data, function (key, val) {
+                      if(val.nome == str) {							
+                        $.each(val.cidades, function (key_city, val_city) {
+                          options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+                        });							
+                      }
+                    });
+
+					          $("#cidades").html(options_cidades);
+                  
+                  }).change();
+              
+              })
+            
+            break;
+
+            case "Canada":
+              $.getJSON('./public/places/canada.json', function (data) {
+                
+                var items = [];
+                var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
+                var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select> ';
+                $("#subdivision").replaceWith(options_subdivision);
+                $("#cidades").replaceWith(options_cidades);
+
+                $.each(data, function (key, val) {
+                    options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
+                });
+                $("#subdivision").html(options_subdivision);
+
+                  $("#subdivision").change(function () {
+                    var options_cidades = '';
+					          var str = "";	
+                    
+                    $("#subdivision option:selected").each(function () {
+                      str += $(this).text();
+                    });
+                  
+                    $.each(data, function (key, val) {
+                      if(val.nome == str) {							
+                        $.each(val.cidades, function (key_city, val_city) {
+                          options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+                        });							
+                      }
+                    });
+
+                    $("#cidades").html(options_cidades);
+                  }).change();
+              
+              })
+            break;
+
+            case "Italia":
+              $.getJSON('./public/places/italia.json', function (data) {
+                
+                var items = [];
+                var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
+                var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select>';
+                $("#subdivision").replaceWith(options_subdivision);
+                $("#cidades").replaceWith(options_cidades);
+
+                $.each(data, function (key, val) {
+                    options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
+                });
+                $("#subdivision").html(options_subdivision);
+
+                  $("#subdivision").change(function () {
+                    var options_cidades = '';
+					          var str = "";	
+                    
+                    $("#subdivision option:selected").each(function () {
+                      str += $(this).text();
+                    });
+
+                    $.each(data, function (key, val) {
+                      if(val.nome == str) {							
+                        $.each(val.cidades, function (key_city, val_city) {
+                          options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+                        });							
+                      }
+                    });
+
+                    $("#cidades").html(options_cidades);
+                  
+                  }).change();
+              
+              })
+            break;
+
+            default:
+              var options_subdivision  = '<input id="subdivision" placeholder="Subdivisao" class="inputLocal" value="<?php echo $_SESSION['estado']?>"  name="estado" style="width:25vw"></input>';
+              var options_cidades  = '<input id="cidades" placeholder="Cidade" value="<?php echo $_SESSION['cidade']?>" class="inputLocal" name="cidade" style="width:25vw";></input>';
+              $("#subdivision").replaceWith(options_subdivision);
+              $("#cidades").replaceWith(options_cidades);
+          }
+					
+					
+				}).change();	
+      });
+		
+  });
+  
+    </script>
+  </body>
 <?php
   session_destroy();
 ?>
-  </html>
+</html>
+  
+
+
+
+

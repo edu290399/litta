@@ -1,0 +1,228 @@
+[{
+      
+      "nome": "Abruzzo",
+      "cidades": [
+       "Chieti", 
+       "L'Aquila",
+       "Pescara", 
+       "Teramo"
+      ]
+    },
+
+    {
+          
+          "nome": "Basilicata",
+          "cidades": [
+            "Matera",
+            "Potenza"
+          ]
+        },
+
+      {
+          
+          "nome": "Calabria",
+          "cidades": [
+            "Catanzaro",
+            "Cosenza",
+            "Crotone",
+            "Reggio Calabria",
+            "Vibo Valentia"
+          ]
+      },
+
+      {
+          
+          "nome": "Campania",
+          "cidades": [
+            "Avellino",
+            "Benevento",
+            "Caserta",
+            "Napoli",
+            "Salerno"
+          ]
+      },
+
+      {
+          
+          "nome": "Emilia-Romagna",
+          "cidades": [
+            "Bologna",
+            "Ferrara",
+            "Forlì-Cesena",
+            "Modena",
+            "Parma",
+            "Piacenza",
+            "Ravenna",
+            "Reggio Emilia",
+            "Rimini"
+          ]
+      },
+
+      {
+          "nome": "Friuli-Venezia Giulia",
+          "cidades": [
+            "Gorizia",
+            "Pordenone",
+            "Trieste",
+            "Udine"
+          ]
+      },
+
+      {
+          "nome": "Lazio",
+          "cidades": [
+            "Frosinone",
+            "Latina",
+            "Rieti",
+            "Roma",
+            "Viterbo"
+          ]
+      },
+
+      {
+          "nome": "Liguria",
+          "cidades": [
+            "Genova",
+            "Imperia",
+            "La Spezia",
+            "Savona"
+          ]
+      },
+
+      {
+          "nome": "Lombardia",
+          "cidades": [
+            "Bergamo",
+            "Brescia",
+            "Como",
+            "Cremona",
+            "Lecco",
+            "Lodi",
+            "Mantova",
+            "Milano",
+            "Pavia",
+            "Sondrio",
+            "Varese"
+          ]
+      },
+
+      {
+          "nome": "Marche",
+          "cidades": [
+            "Ancona",
+            "Ascoli Piceno",
+            "Macerata",
+            "Pesaro Urbino"
+          ]
+      },
+
+      {
+          "nome": "Molise",
+          "cidades": [
+            	"Campobasso",
+              "Isernia"
+            ]
+      },
+
+      {
+          "nome": "Piemonte",
+          "cidades": [
+          "Alessandria",
+          "Asti",
+          "Biella",
+          "Cuneo",
+          "Novara",
+          "Torino",
+          "Verbano-Cuseo-Ossola",
+         "Vercelli"
+          ]
+      },
+
+      {
+          "nome": "Puglia",
+          "cidades": [
+            "Bari",
+            "Brindisi",
+            "Foggia",
+            "Lecce",
+            "Taranto"
+          ]
+      },
+
+      {
+          "nome": "Sardegna",
+          "cidades": [
+            "Cagliari",
+            "Nuoro",
+            "Oristano",
+            "Sassari"
+          ]
+      },
+
+      {
+          "nome": "Sicilia",
+          "cidades": [
+            "Agrigento",
+            "Caltanissetta",
+            "Catania",
+            "Enna",
+            "Messina",
+            "Palermo",
+            "Ragusa",
+            "Siracusa",
+            "Trapani"
+          ]
+      },
+
+      {
+          "nome": "Toscana",
+          "cidades": [
+            "Arezzo",
+            "Firenze",
+            "Grosseto",
+            "Livorno",
+            "Lucca",
+            "Massa-Carrara",
+            "Pisa",
+            "Pistoia" ,
+            "Prato",
+            "Siena"
+          ]
+      },
+      {
+          "nome": "Trentino-Alto Adige",
+          "cidades": [
+            "Bolzano",
+            "Trento"
+          ]
+      },
+      {
+          "nome": "Umbria",
+          "cidades": [
+            "Perugia",
+            "Terni"
+          ]
+      },
+
+      {
+          "nome": "Vale D'Aosta",
+          "cidades": [
+            "Aosta"
+          ]
+      },
+
+      {
+          "nome": "Veneto",
+          "cidades": [
+            	"Belluno",
+              "Padova",
+              "Rovigo",
+              "Treviso",
+              "Venezia",
+              "Verona",
+              "Vicenza"
+          ]
+      }
+
+]
+

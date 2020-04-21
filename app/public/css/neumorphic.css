@@ -69,6 +69,10 @@ background: #fcfcfc;
 box-shadow: inset 2px 2px 5px #656565, 
             inset -2px -2px 5px #ffffff;
 }
+.inputLocal{
+    width:25vw !important;
+}
+
 .icon{
     width: 13px;
     margin-right: 5px;
