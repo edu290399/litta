@@ -67,7 +67,7 @@ session_start();
         </div>    
       </nav>
 
-        <div id="container">
+        <div id="containerLogin">
 
         <?php if(isset($_SESSION['msgOk'])){ ?>
           <div class="alert alert-success">
@@ -77,12 +77,16 @@ session_start();
           } ?>
 
         <form method="POST" action="./dataBaseManager/valida.php">
-            <h2>Login de Usuário</h2>
-            <input name="usuario" placeholder="Usuário ou E-mail"/>
+            <h2>LOGIN</h2>
+            <input name="usuario" class="inputLogin" placeholder="Usuário ou E-mail"/>
             <br>
-            <input name="senha" type="password" placeholder="Senha"/>
-            <a href="register"><span id="dica">Ainda não tem conta? Registre-se clicando aqui. É grátis!</span></a>
-            <button id="btcadastrar" name="btnLogin" type="submit"> <img src="./public/open-iconic/svg/account-login.svg" class="icon" alt="check">Entrar</button>
+            <input name="senha" class="inputLogin" type="password" placeholder="Senha"/>
+            <br>
+            <button id="btcadastrar" name="btnLogin" type="submit">Entrar</button>
+            <br>
+            <br>
+            <a href="register"><span id="dica" style="float:left;margin-left:2%">CADASTRAR</span></a>
+            <a href="forgot"><span id="dica"style="float:right;margin-right:2%" >Esqueceu a senha?</span></a>
         </form>
 
         </div>

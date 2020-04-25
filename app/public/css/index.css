@@ -44,18 +44,31 @@ a:link
 
 }
 .option{
-    position: absolute;
+    /* position: absolute;
     color: rgb(228, 229, 236);
     font-size: 30px;
     font-stretch: wider;
     font-weight: 900;
     font-family: bigJohn;
     text-emphasis: bold;
-    top: 30px;
+    top: 30px; */
+    position: absolute;
+    color: rgb(105, 105, 105);
+    font-size: 30px;
+    font-stretch: wider;
+    font-weight: 900;
+    font-family: bigJohn;
+    text-emphasis: bold;
+    -webkit-transform: scale(1 , 1);
+    -ms-transform: scale(1 , 1);
+    transform: scale(1 , 1);
+
+    -webkit-transition: -webkit-transform 250ms linear;
+    transition: transform 250ms linear;
     
 }
 .option:hover{
-    transition: 0.1s;
+    /* transition: 0.1s;
     position: absolute;
     font-size: 35px;
     font-stretch: wider;
@@ -63,7 +76,18 @@ a:link
     font-family: bigJohn ;
     color: rgb(30, 30, 34);
     text-emphasis: bold;
-    top: 35px;
+    top: 35px; */
+    position: absolute;
+    font-stretch: wider;
+    font-weight: 900;
+    font-family: bigJohn ;
+    color: rgb(23, 23, 24);
+    text-emphasis: bold;
+    -webkit-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2 , 1.2);
+    transform: scale(1.2 , 1.2);
+    -webkit-transition: -webkit-transform 250ms linear;
+    transition: transform 250ms linear;
 }
 
 .modal-body{
@@ -98,7 +122,7 @@ a:link
     font-family: bigJohn;
     text-emphasis: bold;
     left: 6vh;
-    top: 35px;
+    top: 0;
     z-index: 3;
     font-size: 40px;
     transition: 1s;
