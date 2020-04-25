@@ -93,13 +93,16 @@
             <input name="senha" id="senha" onchange="validatePassword()" type="password" minlength="8" placeholder="Senha" required/>
             <input name="senhaconf" id="senhaConf" onkeyup="validatePassword()" type="password" minlength="8" placeholder="Confirmar senha" required/>
             <br>
-            <select id="paises" name="pais">
+            <input  placeholder="País" value="<?php echo $_SESSION['pais']?>" name="pais" required></input>
+            <input  placeholder="Estado" value="<?php echo $_SESSION['estado']?>" name="estado" required></input>
+            <input  placeholder="Cidade" value="<?php echo $_SESSION['cidade']?>" name="cidade" required></input>
+            <!-- <select id="paises" name="pais">
               <option  value="<?php echo $_SESSION['pais']?>"><?php echo $_SESSION['pais']?></option>
             </select>
             <select name="subdivision" id="subdivision">
             </select>
             <select name="cidade" id="cidades">
-            </select>
+            </select> -->
             <br>
             <button id="btcadastrar"name="btnCadastra" type="submit">Concluído<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
         </form>  
@@ -169,160 +172,160 @@
         });
 
 
-  $(document).ready(function () {
-    $.getJSON('./public/places/country.json', function (data) {
-      var items = [];
-      <?php if(isset($_SESSION['pais'])){ ?>
-        console.log("Pais setado!");
-			  var options = '<option value="<?php echo $_SESSION['pais']?>"><?php echo $_SESSION['pais']?></option>';
-        <?}else{ ?>
-          var options = '<option value="">País</option>';
-          console.log("Pais nao setado!");
-        <? } ?>
+  // $(document).ready(function () {
+  //   $.getJSON('./public/places/country.json', function (data) {
+  //     var items = [];
+  //     <?php if(isset($_SESSION['pais'])){ ?>
+  //       console.log("Pais setado!");
+	// 		  var options = '<option value="<?php echo $_SESSION['pais']?>"><?php echo $_SESSION['pais']?></option>';
+  //       <?}else{ ?>
+  //         var options = '<option value="">País</option>';
+  //         console.log("Pais nao setado!");
+  //       <? } ?>
 
-      $.each(data, function (key, val) {
-					options += '<option value="' + val.native + '">' + val.native + '</option>';
-			});
+  //     $.each(data, function (key, val) {
+	// 				options += '<option value="' + val.native + '">' + val.native + '</option>';
+	// 		});
 
-      $("#paises").html(options);
+  //     $("#paises").html(options);
 
-      		$("#paises").change(function () {				
+  //     		$("#paises").change(function () {				
 				
-					var options_subdivision = '';
-					var str = "";					
+	// 				var options_subdivision = '';
+	// 				var str = "";					
 					
-					$("#paises option:selected").each(function () {
-            str = $(this).text();
-            console.log("str ==> ",str);
-          });
+	// 				$("#paises option:selected").each(function () {
+  //           str = $(this).text();
+  //           console.log("str ==> ",str);
+  //         });
           
 
-					switch(str) {
+	// 				switch(str) {
 					  
-						case "Brasil":
+	// 					case "Brasil":
              
-              $.getJSON('./public/places/brasil.json', function (data) {
+  //             $.getJSON('./public/places/brasil.json', function (data) {
                 
-                var items = [];
-                var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
-                var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select> ';
-                $("#subdivision").replaceWith(options_subdivision);
-                $("#cidades").replaceWith(options_cidades);
+  //               var items = [];
+  //               var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
+  //               var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select> ';
+  //               $("#subdivision").replaceWith(options_subdivision);
+  //               $("#cidades").replaceWith(options_cidades);
 
-                $.each(data, function (key, val) {
-                    options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
-                });
-                $("#subdivision").html(options_subdivision);
+  //               $.each(data, function (key, val) {
+  //                   options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
+  //               });
+  //               $("#subdivision").html(options_subdivision);
 
-                  $("#subdivision").change(function () {
-                    var options_cidades = '';
-					          var str = "";	
+  //                 $("#subdivision").change(function () {
+  //                   var options_cidades = '';
+	// 				          var str = "";	
                     
-                    $("#subdivision option:selected").each(function () {
-                      str += $(this).text();
-                    });
+  //                   $("#subdivision option:selected").each(function () {
+  //                     str += $(this).text();
+  //                   });
 
-                    $.each(data, function (key, val) {
-                      if(val.nome == str) {							
-                        $.each(val.cidades, function (key_city, val_city) {
-                          options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-                        });							
-                      }
-                    });
+  //                   $.each(data, function (key, val) {
+  //                     if(val.nome == str) {							
+  //                       $.each(val.cidades, function (key_city, val_city) {
+  //                         options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+  //                       });							
+  //                     }
+  //                   });
 
-					          $("#cidades").html(options_cidades);
+	// 				          $("#cidades").html(options_cidades);
                   
-                  }).change();
+  //                 }).change();
               
-              })
+  //             })
             
-            break;
+  //           break;
 
-            case "Canada":
-              $.getJSON('./public/places/canada.json', function (data) {
+  //           case "Canada":
+  //             $.getJSON('./public/places/canada.json', function (data) {
                 
-                var items = [];
-                var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
-                var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select> ';
-                $("#subdivision").replaceWith(options_subdivision);
-                $("#cidades").replaceWith(options_cidades);
+  //               var items = [];
+  //               var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
+  //               var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select> ';
+  //               $("#subdivision").replaceWith(options_subdivision);
+  //               $("#cidades").replaceWith(options_cidades);
 
-                $.each(data, function (key, val) {
-                    options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
-                });
-                $("#subdivision").html(options_subdivision);
+  //               $.each(data, function (key, val) {
+  //                   options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
+  //               });
+  //               $("#subdivision").html(options_subdivision);
 
-                  $("#subdivision").change(function () {
-                    var options_cidades = '';
-					          var str = "";	
+  //                 $("#subdivision").change(function () {
+  //                   var options_cidades = '';
+	// 				          var str = "";	
                     
-                    $("#subdivision option:selected").each(function () {
-                      str += $(this).text();
-                    });
+  //                   $("#subdivision option:selected").each(function () {
+  //                     str += $(this).text();
+  //                   });
                   
-                    $.each(data, function (key, val) {
-                      if(val.nome == str) {							
-                        $.each(val.cidades, function (key_city, val_city) {
-                          options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-                        });							
-                      }
-                    });
+  //                   $.each(data, function (key, val) {
+  //                     if(val.nome == str) {							
+  //                       $.each(val.cidades, function (key_city, val_city) {
+  //                         options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+  //                       });							
+  //                     }
+  //                   });
 
-                    $("#cidades").html(options_cidades);
-                  }).change();
+  //                   $("#cidades").html(options_cidades);
+  //                 }).change();
               
-              })
-            break;
+  //             })
+  //           break;
 
-            case "Italia":
-              $.getJSON('./public/places/italia.json', function (data) {
+  //           case "Italia":
+  //             $.getJSON('./public/places/italia.json', function (data) {
                 
-                var items = [];
-                var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
-                var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select>';
-                $("#subdivision").replaceWith(options_subdivision);
-                $("#cidades").replaceWith(options_cidades);
+  //               var items = [];
+  //               var options_subdivision  = '<select id="subdivision"  name="estado" style="width:25vw"></select>';
+  //               var options_cidades  = '<select id="cidades" name="cidade" style="width:25vw"></select>';
+  //               $("#subdivision").replaceWith(options_subdivision);
+  //               $("#cidades").replaceWith(options_cidades);
 
-                $.each(data, function (key, val) {
-                    options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
-                });
-                $("#subdivision").html(options_subdivision);
+  //               $.each(data, function (key, val) {
+  //                   options_subdivision += '<option value="' + val.nome + '">' + val.nome + '</option>';
+  //               });
+  //               $("#subdivision").html(options_subdivision);
 
-                  $("#subdivision").change(function () {
-                    var options_cidades = '';
-					          var str = "";	
+  //                 $("#subdivision").change(function () {
+  //                   var options_cidades = '';
+	// 				          var str = "";	
                     
-                    $("#subdivision option:selected").each(function () {
-                      str += $(this).text();
-                    });
+  //                   $("#subdivision option:selected").each(function () {
+  //                     str += $(this).text();
+  //                   });
 
-                    $.each(data, function (key, val) {
-                      if(val.nome == str) {							
-                        $.each(val.cidades, function (key_city, val_city) {
-                          options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-                        });							
-                      }
-                    });
+  //                   $.each(data, function (key, val) {
+  //                     if(val.nome == str) {							
+  //                       $.each(val.cidades, function (key_city, val_city) {
+  //                         options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+  //                       });							
+  //                     }
+  //                   });
 
-                    $("#cidades").html(options_cidades);
+  //                   $("#cidades").html(options_cidades);
                   
-                  }).change();
+  //                 }).change();
               
-              })
-            break;
+  //             })
+  //           break;
 
-            default:
-              var options_subdivision  = '<input id="subdivision" placeholder="Subdivisao" class="inputLocal" value="<?php echo $_SESSION['estado']?>"  name="estado" style="width:25vw"></input>';
-              var options_cidades  = '<input id="cidades" placeholder="Cidade" value="<?php echo $_SESSION['cidade']?>" class="inputLocal" name="cidade" style="width:25vw";></input>';
-              $("#subdivision").replaceWith(options_subdivision);
-              $("#cidades").replaceWith(options_cidades);
-          }
+  //           default:
+  //             var options_subdivision  = '<input id="subdivision" placeholder="Subdivisao" class="inputLocal" value="<?php echo $_SESSION['estado']?>"  name="estado" style="width:25vw"></input>';
+  //             var options_cidades  = '<input id="cidades" placeholder="Cidade" value="<?php echo $_SESSION['cidade']?>" class="inputLocal" name="cidade" style="width:25vw";></input>';
+  //             $("#subdivision").replaceWith(options_subdivision);
+  //             $("#cidades").replaceWith(options_cidades);
+  //         }
 					
 					
-				}).change();	
-      });
+	// 			}).change();	
+  //     });
 		
-  });
+  // });
   
     </script>
   </body>
