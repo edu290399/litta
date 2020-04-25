@@ -120,6 +120,14 @@ input{
     margin-left: 10px;
     margin-bottom: 1px;
 }
+
+.btIcon{
+    background-color: white;
+    height: 60px;
+    width:60px;
+    border-radius: 100%;
+    border: none;
+}
 #btcadastrar{
     margin-top: 15px;
     font-size: 19px;

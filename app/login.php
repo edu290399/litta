@@ -78,8 +78,10 @@ session_start();
 
         <form method="POST" action="./dataBaseManager/valida.php">
             <h2>LOGIN</h2>
+            <button disabled="true" class="btIcon"><img src="./public/open-iconic/svg/person.svg" class="iconLogin" alt="check" style="margin-bottom:1px ; width:18px"></button>
             <input name="usuario" class="inputLogin" placeholder="Usuário ou E-mail"/>
             <br>
+            <button disabled="true" class="btIcon"><img src="./public/open-iconic/svg/lock-locked.svg" class="iconLogin" alt="check" style="width:20px"></button>
             <input name="senha" class="inputLogin" type="password" placeholder="Senha"/>
             <br>
             <button id="btcadastrar" name="btnLogin" type="submit">Entrar</button>
