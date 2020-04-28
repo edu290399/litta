@@ -35,7 +35,7 @@ if($btnLogin){
 		mysqli_close($link);
 	}
 	else{
-		$sql = "SELECT id, nome, email, senha FROM usuarios WHERE email= ? LIMIT 1";
+		$sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ? LIMIT 1";
 		if($stmt = mysqli_prepare($conn, $sql)){
 			mysqli_stmt_bind_param($stmt, "s", $usuario);
 			if(mysqli_stmt_execute($stmt)){
@@ -71,7 +71,7 @@ if($btnLogin){
 		mysqli_stmt_close($stmt);
 		
 		// Close connection
-		mysqli_close($link);
+		mysqli_close($conn);
 	}
 }
 else{

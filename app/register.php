@@ -82,10 +82,10 @@
             <input name="sobrenome" placeholder="Sobrenome" value="<?php echo $_SESSION['sobrenome']?>" required/>
             <br>
             <input name="sexo" placeholder="Gênero" value="<?php echo $_SESSION['sexo']?>" required/>
-            <input name="datanas" id="data" oninput="M_datanas(this)" placeholder="Data de nascimento" value="<?php echo $_SESSION['datanas']?>" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required/>
+            <input name="datanas" id="data" onkeydown="M_datanas(this)" placeholder="Data de nascimento" value="<?php echo $_SESSION['datanas']?>" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required/>
             <br>
-            <input name="telefone1" id="tel1" placeholder="Telefone" value="<?php echo $_SESSION['telefone1']?>" oninput="M_tel(this)" required/>
-            <input name="telefone2" id="tel2" placeholder="Telefone 2" title="Opcional" value="<?php echo $_SESSION['telefone2']?>" oninput="M_tel(this)"/>
+            <input name="telefone1" id="tel1" placeholder="Telefone" value="<?php echo $_SESSION['telefone1']?>" onkeydown="M_tel(this)" required/>
+            <input name="telefone2" id="tel2" placeholder="Telefone 2" title="Opcional" value="<?php echo $_SESSION['telefone2']?>" onkeydown="M_tel(this)"/>
             <br>
             <input name="email" value="<?php echo $_SESSION['email']?>"pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|&quot(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*&quot)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])" placeholder="E-mail" required/>
             <input name="usuario" value="<?php echo $_SESSION['usuario']?>" placeholder="Usuário" required/>
@@ -110,41 +110,51 @@
       
       
 </body>
- <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <script>
-   function M_number(e){
-          var N = e.value;
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+  //  function M_number(e){
+  //         var N = e.value;
 
-          if(isNaN(N[N.length-1])){ 
-              e.value = N.substring(0, N.length-1);
-              return;
-          }
-        }
-        function M_datanas(e){
+  //         if(isNaN(N[N.length-1])){ 
+  //             e.value = N.substring(0, N.length-1);
+  //             return;
+  //         }
+  //       }
+  //       function M_datanas(e){
    
-          var dat = e.value;
+  //         var dat = e.value;
           
-          M_number(e);
+  //         M_number(e);
           
-          e.setAttribute("maxlength", "10");
-          if (dat.length == 2 || dat.length == 5) e.value += "/";
+  //         e.setAttribute("maxlength", "10");
+  //         if (dat.length == 2 || dat.length == 5) e.value += "/";
         
         
-        }
-        function M_tel(e){
-          var T = e.value;
+  //       }
+  //       function M_tel(e){
+  //         var T = e.value;
 
-          M_number(e);
+  //         M_number(e);
 
-            e.setAttribute("maxlength", "17");
-            if (T.length == 1) e.value = "("+e.value;
-            if (T.length == 3) e.value += ")";
-            if (T.length == 6) e.value += " ";
-            if (T.length == 12) e.value += "-";
-        }
-
+  //           e.setAttribute("maxlength", "17");
+  //           if (T.length == 1) e.value = "(+"+e.value;
+  //           if (T.length == 4) e.value += ")";
+  //           if (T.length == 7) e.value += " ";
+  //           if (T.length == 13) e.value += "-";
+  //       }
+      
+3
+4
+5
+6
+        jQuery(function($){
+          $("#data").mask("99/99/9999");
+          $("#tel1").mask("(+99) 99 99999-9999");
+          $("#tel2").mask("(+99) 99 99999-9999");
+        });
 
         senha1 = document.getElementById('senha');
         senha2 = document.getElementById('senhaConf');
