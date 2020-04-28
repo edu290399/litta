@@ -1,5 +1,5 @@
 <?php
-
+  session_start();
   if( !empty($_POST) ){
     // processar o pedido
     include_once("conexao.php");
@@ -28,22 +28,19 @@
           $link = "https://littadesign.com/recuperacao.php?utilizador=$email&confirmacao=$chave";
   
           if( mail($email, 'Recuperação de password', 'Olá '.$email.', visite este link '.$link) ){
-            echo '<p>Foi enviado um e-mail para o seu endereço, onde poderá encontrar um link único para alterar a sua password</p>';
-  
+            $_SESSION['msgOk'] ="Verifique a caixa de entrada de <br> <strong> $email </strong> <br>Onde poderá encontrar um link único para alterar sua senha. <br>Caso não encontre, verifique seus spams.";
+            header("Location: ../resultadoSol.php");  
           } else {
             echo '<p>Houve um erro ao enviar o email (o servidor suporta a função mail?)</p>';
   
           }
-  
-      // Apenas para testar o link, no caso do e-mail falhar
-      echo '<p>Link: '.$link.' (apresentado apenas para testes; nunca expor a público!)</p>';
-  
         } else {
           echo "ERROR: Could not execute query: Consulta no BD de usuario \n" .  mysqli_stmt_error($stmtInsert) . "\n"  .mysqli_error($conn);
         }
       }
       else {
-        echo '<p>Esse utilizador não existe</p>';
+        $_SESSION['msgErro'] = "Esse utilizador não existe";
+        header("Location: ../perdisenha.php");
       }
       
     } 

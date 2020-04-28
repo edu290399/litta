@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once("conexao.php");  
 $btnConfirma = filter_has_var(INPUT_POST, 'btnConfirma');
 if($btnConfirma){

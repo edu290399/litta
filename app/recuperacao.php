@@ -96,7 +96,6 @@ session_start();
                   mysqli_query($conn, $sqlDelete);
                   ?>
 
-                  <div id="containerLogin">
                   <form method="POST" action="./dataBaseManager/novasenha.php">
                       <h2>Alterar password</h2>
                       <button type="button" disabled="true" class="btIcon"><img src="./public/open-iconic/svg/lock-locked.svg" class="iconLogin" alt="check" style="margin-bottom:1px ; width:18px"></button>
@@ -105,11 +104,11 @@ session_start();
                       <button type="button" disabled="true" class="btIcon"><img src="./public/open-iconic/svg/loop-circular.svg" class="iconLogin" alt="check" style="width:20px"></button>
                       <input name="senhaconf" id="senhaConf" onkeyup="validatePassword()" type="password" minlength="8" placeholder="Repetir nova senha" required/>
                       <br>
-                      <button id="btnConfirma" name="btnConfirma" type="submit">Confirmar</button>
+                      <button id="btcadastrar" name="btnConfirma" type="submit">Confirmar</button>
                       <br>
                       <br>
-                      <a href="register"><span id="dica" style="float:left;margin-left:2%">CADASTRAR</span></a>
-                      <input name="email" value="<?php echo $email?>" required />
+                      <a href="register"><span id="dica" style="margin-left:2%">CADASTRAR</span></a>
+                      <input name="email" value="<?php echo $email?>" style="display:none" required />
                   </form>
           
                   </div>

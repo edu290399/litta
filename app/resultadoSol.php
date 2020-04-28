@@ -10,8 +10,7 @@ session_start();
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/neumorphic.css">
 </head>
-
-<body>
+<body style="overflow-x:hidden">
     
     
     <!-- <img id="corpo" src="./public/appThemes/carouselPics/residencial/esmeralda/esmeralda2.JPG"> -->
@@ -70,28 +69,17 @@ session_start();
 
         <div id="containerLogin">
 
-        <?php if(isset($_SESSION['msgErro'])){ ?>
-          <div class="alert alert-danger">
-            <strong><?php echo $_SESSION['msgErro']?></strong>
-          </div>
-            <?php unset($_SESSION['msgErro']);
+        <?php if(isset($_SESSION['msgOk'])){ ?>
+            <h2>Email enviado</h2>
+            <br> 
+            <p><?php echo $_SESSION['msgOk']?></p>
+            <?php unset($_SESSION['msgOk']);
           } ?>
 
-        <form method="POST" action="./dataBaseManager/passo1rec.php">
-            <h2 style="margin-left:40px">Esqueci a Senha</h2>
-            <button disabled="true" class="btIcon"><img src="./public/open-iconic/svg/envelope-closed.svg" class="iconLogin" alt="check" style="margin-bottom:1px ; width:18px"></button>
-            <input name="email" class="inputLogin" placeholder="E-mail"/>
-            <br>
-            <button id="btcadastrar" name="btnLogin" type="submit" style="margin-left:40px">Enviar</button>
-            <br>
-            <br>
-            <a href="register"><span id="dica" style="margin-left:40px"> CADASTRAR</span></a>
-        </form>
 
         </div>
         
 </body>
-
  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
