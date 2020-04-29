@@ -77,21 +77,22 @@
           </div>
           <?php unset($_SESSION['msgErro']);
         } ?>
-        <form method="POST" action="./dataBaseManager/registra.php" id="regForm">
+        <form method="POST" action="./dataBaseManager/registra.php" id="regForm" onchange="validateTel1();validateTel2()">
             <input name="nome" placeholder="Nome" value="<?php echo $_SESSION['nome']?>" required/>
             <input name="sobrenome" placeholder="Sobrenome" value="<?php echo $_SESSION['sobrenome']?>" required/>
             <br>
             <input name="sexo" placeholder="Gênero" value="<?php echo $_SESSION['sexo']?>" required/>
             <input name="datanas" id="data" onkeydown="M_datanas(this)" placeholder="Data de nascimento" value="<?php echo $_SESSION['datanas']?>" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required/>
             <br>
-            <input name="telefone1" id="tel1" placeholder="Telefone" value="<?php echo $_SESSION['telefone1']?>" onkeydown="M_tel(this)" required/>
-            <input name="telefone2" id="tel2" placeholder="Telefone 2" title="Opcional" value="<?php echo $_SESSION['telefone2']?>" onkeydown="M_tel(this)"/>
+            <input name="telefone1" onload="validateTel1()" onfocus="validateTel1()" onkeydown="validateTel1()" id="tel1" placeholder="Telefone" value="<?php echo $_SESSION['telefone1']?>" onkeydown="M_tel(this)" required/>
+            <input name="telefone2" onload="validateTel2()" onfocus="validateTel2()" onkeydown="validateTel2()" id="tel2" placeholder="Telefone 2" title="Opcional" value="<?php echo $_SESSION['telefone2']?>" onkeydown="M_tel(this)"/>
             <br>
             <input name="email" value="<?php echo $_SESSION['email']?>"pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|&quot(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*&quot)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])" placeholder="E-mail" required/>
-            <input name="usuario" value="<?php echo $_SESSION['usuario']?>" placeholder="Usuário" required/>
-            <br>
-            <input name="senha" id="senha" onchange="validatePassword()" type="password" minlength="8" placeholder="Senha" required/>
-            <input name="senhaconf" id="senhaConf" onkeyup="validatePassword()" type="password" minlength="8" placeholder="Confirmar senha" required/>
+            <input name="usuario" id="usuario" onkeydown="validateUsuario()" value="<?php echo $_SESSION['usuario']?>" placeholder="Usuário" required/>
+            <br> 
+            <input name="senha" id="senha" onchange="validatePassword()" type="password" minlength="8" placeholder="Senha" autocomplete="nope" required><img src="./public/open-iconic/svg/eye.svg" id="eye" class="icon" alt="eye"/></input>
+            
+            <input name="senhaconf" id="senhaConf" onkeyup="validatePassword()" type="password" minlength="8" placeholder="Confirmar senha" autocomplete="nope" required><img src="./public/open-iconic/svg/check.svg" id="checked" class="icon" alt="check"/></input>
             <br>
             <input  placeholder="País" value="<?php echo $_SESSION['pais']?>" name="pais" required></input>
             <input  placeholder="Estado" value="<?php echo $_SESSION['estado']?>" name="estado" required></input>
@@ -155,18 +156,65 @@
           $("#tel1").mask("(+99) 99 99999-9999");
           $("#tel2").mask("(+99) 99 99999-9999");
         });
+        $( "#eye" ).mousedown(function() {
+          $("#senha").attr("type", "text");
+        });
 
-        senha1 = document.getElementById('senha');
-        senha2 = document.getElementById('senhaConf');
+        $( "#eye" ).mouseup(function() {
+          $("#senha").attr("type", "password");
+        });
+        $( "#eye" ).mouseout(function() { 
+          $("#senha").attr("type", "password");
+        });
+        var senha1 = document.getElementById('senha');
+        var senha2 = document.getElementById('senhaConf');
 
         function validatePassword(){
+          senha1 = document.getElementById('senha');
+          senha2 = document.getElementById('senhaConf');
+          ckecked = document.getElementById('checked');
           if(senha1.value != senha2.value) {
             senha2.setCustomValidity("Senhas diferentes!");
           } else {
             senha2.setCustomValidity('');
+            senha2.style.backgroundColor = "white";
+            senha2.style.color = "green";
+            checked.style.filter = "invert(0.4) sepia(1) saturate(20) hue-rotate(97.2deg) brightness(1)"; 
           }
         }
 
+        var tel1 = document.getElementById('tel1');
+        function validateTel1(){
+          tel1 = document.getElementById('tel1');
+          if (tel1.value.indexOf('_') > -1){
+          tel1.setCustomValidity("Telefone inválido");
+          } 
+          else {
+            tel1.setCustomValidity('');
+          }
+        }
+
+        var tel2 = document.getElementById('tel2');
+        function validateTel2(){
+          tel2 = document.getElementById('tel2');
+          if (tel2.value.indexOf('_') > -1){
+          tel2.setCustomValidity("Telefone inválido");
+          } 
+          else {
+            tel2.setCustomValidity('');
+          }
+        }
+
+        var usuario = document.getElementById('usuario');
+        function validateUsuario(){
+          usuario = document.getElementById('usuario');
+          if (usuario.value.indexOf('@') > -1){
+          usuario.setCustomValidity("@ inválido");
+          } 
+          else {
+            usuario.setCustomValidity('');
+          }
+        }
 
        $(document).ready(function(){
             $('.toggle').click(function(){

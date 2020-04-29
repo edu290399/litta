@@ -16,11 +16,11 @@ if($btnCadastra){
 	$estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_STRING);
 	$cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
 	$senha = password_hash($senha, PASSWORD_DEFAULT);
-	$sql = "INSERT INTO `usuarios`( `nome`, `sobrenome`, `sexo`, `datanas`, `telefone1`, `telefone2`, `email`, `usuario`, `senha`, `pais`, `estado`, `cidade`) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, 'Brasil', 'Goias', 'Goiania')";
+	$sql = "INSERT INTO `usuarios`( `nome`, `sobrenome`, `sexo`, `datanas`, `telefone1`, `telefone2`, `email`, `usuario`, `senha`, `pais`, `estado`, `cidade`) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?,?,?)";
 	$sqlUsuario = "SELECT id FROM usuarios where usuario = ? LIMIT 1";
 	$sqlEmail = "SELECT id FROM usuarios where email = ? LIMIT 1";
 	if( ($stmt = mysqli_prepare($conn, $sql)) && ($stmtUsuario = mysqli_prepare($conn, $sqlUsuario)) && ($stmtEmail = mysqli_prepare($conn,$sqlEmail)) ){
-		mysqli_stmt_bind_param($stmt, "sssssssss", $nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha);
+		mysqli_stmt_bind_param($stmt, "ssssssssssss", $nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade);
 		mysqli_stmt_bind_param($stmtEmail, "s", $email);
 		mysqli_stmt_bind_param($stmtUsuario, "s", $usuario);
 

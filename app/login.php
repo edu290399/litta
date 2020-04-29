@@ -78,9 +78,9 @@ session_start();
 
           <?php if(isset($_SESSION['msgErro'])){ ?>
           <div class="alert alert-danger">
-            <strong><?php echo $_SESSION['msgDanger']?></strong>
+            <strong><?php echo $_SESSION['msgErro']?></strong>
           </div>
-            <?php unset($_SESSION['msgDanger']);
+            <?php unset($_SESSION['msgErro']);
           } ?>
 
         <form method="POST" action="./dataBaseManager/valida.php">

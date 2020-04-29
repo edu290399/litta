@@ -24,9 +24,8 @@ if($btnLogin){
 			header("Location: administrativo.php");
 		}
 		else{
-			$_SESSION['msg'] = "Login e senha incorreto 1! \n";
-			$_SESSION['nome'] = $nome;
-			header("Location: login.php");
+			$_SESSION['msgErro'] = "Senha incorreta";
+			header("Location: ../login.php");
 		}
 		// Close statement
 		mysqli_stmt_close($stmt);
@@ -54,18 +53,13 @@ if($btnLogin){
 				header("Location: administrativo.php");
 			}
 			else{
-				$_SESSION['msg'] = "Login e senha incorreto 2!";
-				$_SESSION['nome'] = $nome;
-				$_SESSION['total'] = total;
-				header("Location: login.php");
+				$_SESSION['msgErro'] = "Senha incorreta";
+				header("Location: ../login.php");
 			}				
 		}
 		else{
-			echo "dentro do else";
-			$_SESSION['msg'] = "Login e senha incorreto 2!";
-			$_SESSION['nome'] = $row_usuario['nome'];
-			$_SESSION['total'] = total;
-			header("Location: login.php");
+			$_SESSION['msgErro'] = "Cadastro inexistente";
+			header("Location: ../login.php");
 		}
 		// Close statement
 		mysqli_stmt_close($stmt);
