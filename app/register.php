@@ -166,6 +166,16 @@
         $( "#eye" ).mouseout(function() { 
           $("#senha").attr("type", "password");
         });
+        
+        
+        $( "#eye" ).on("touchstart",function() {
+          $("#senha").attr("type", "text");
+        });
+
+        $( "#eye" ).on("touchend",function() {
+          $("#senha").attr("type", "text");
+        });
+
         var senha1 = document.getElementById('senha');
         var senha2 = document.getElementById('senhaConf');
 
@@ -175,6 +185,8 @@
           ckecked = document.getElementById('checked');
           if(senha1.value != senha2.value) {
             senha2.setCustomValidity("Senhas diferentes!");
+            senha2.style.color = "black";
+            checked.style.filter = "invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5)"; 
           } else {
             senha2.setCustomValidity('');
             senha2.style.backgroundColor = "white";
