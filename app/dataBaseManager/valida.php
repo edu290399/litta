@@ -5,11 +5,11 @@ $btnLogin = filter_has_var(INPUT_POST, 'btnLogin');
 if($btnLogin){
 	$usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
 	$senhahtml = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
-	$sql = "SELECT  id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade FROM usuarios WHERE usuario = ? LIMIT 1";
+	$sql = "SELECT  id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil FROM usuarios WHERE usuario = ? LIMIT 1";
 	if($stmt = mysqli_prepare($conn, $sql)){
 		mysqli_stmt_bind_param($stmt, "s", $usuario);
 	    if(mysqli_stmt_execute($stmt)){
-			mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade);
+			mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil);
 		} else{
 			echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
 		}
@@ -30,6 +30,7 @@ if($btnLogin){
 			$_SESSION['pais'] = $pais;
 			$_SESSION['estado'] = $estado;
 			$_SESSION['cidade'] = $cidade;
+			$_SESSION['imgPerfil'] = $imgPerfil;
 			header("Location: ../perfil.php");
 		}
 		else{
@@ -43,11 +44,11 @@ if($btnLogin){
 		mysqli_close($link);
 	}
 	else{
-		$sql = "SELECT id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade FROM usuarios WHERE email = ? LIMIT 1";
+		$sql = "SELECT id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil FROM usuarios WHERE email = ? LIMIT 1";
 		if($stmt = mysqli_prepare($conn, $sql)){
 			mysqli_stmt_bind_param($stmt, "s", $usuario);
 			if(mysqli_stmt_execute($stmt)){
-				mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade);
+				mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil);
 			} else{
 				echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
 			}
@@ -68,6 +69,7 @@ if($btnLogin){
 				$_SESSION['pais'] = $pais;
 				$_SESSION['estado'] = $estado;
 				$_SESSION['cidade'] = $cidade;
+				$_SESSION['imgPerfil'] = $imgPerfil;
 				header("Location: ../perfil.php");
 			}
 			else{

@@ -72,7 +72,7 @@ session_start();
 
         <div class="col-md-2 col-3 ml-2">
             <div class="row" >
-                <img src="./public/appThemes/carouselPics/residencial/esmeralda/esmeralda1.JPG" alt="profile" class="img-thumbnail">
+                <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail">
             </div>
             <div class="row" >
                 <strong><?php echo $_SESSION['name']?></strong>
