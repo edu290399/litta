@@ -218,6 +218,7 @@ input{
     background-color:rgb(190, 187, 187);
 }
 #btcadastrar:hover{
+    background-color: white;
     transition: .4s;
     -webkit-transition: 400ms;
 }

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html translate="no">
 <head>
@@ -39,9 +42,15 @@
             </a>
             <br>
             <br>
-            <a  href="login" >
-                <span class="option" id="option3" translate="no"> LOGIN <span>
+            <?php if(!empty($_SESSION['id'])){ ?>
+            <a  href="perfil" >
+                <span class="option" id="option3" translate="no">PERFIL<span>
             </a>
+            <?php } else{ ?>
+              <a  href="login" >
+                <span class="option" id="option3" translate="no"> LOGIN <span>
+              </a>
+            <?php }?>
     </ul>
     </div>
     <div class="modal fade" id="myModal" >
@@ -55,9 +64,15 @@
                     <a  href="index" >
                         <span class="modalOption" translate="no"> QUIZ <span>
                     </a>
-                    <a  href="login" >
-                        <span class="modalOption" translate="no"> LOGIN <span>
-                    </a>
+                    <?php if(!empty($_SESSION['id'])){ ?>
+                        <a  href="perfil" >
+                            <span class="modalOption"  translate="no">PERFIL<span>
+                        </a>
+                      <?php } else{ ?>
+                          <a  href="login" >
+                            <span class="modalOption" translate="no"> LOGIN <span>
+                          </a>
+                      <?php }?>
             </ul>
             </div>              
           </div>
