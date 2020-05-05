@@ -126,8 +126,12 @@ session_start();
                         <strong><?php echo $_SESSION['nome']." ".$_SESSION['sobrenome']?></strong>
                     </div>
                     <div class="row" >
-                        <p>Data de Nascimento </p>
+                        <p>Data de Nascimento: </p>
                         <strong><?php echo $_SESSION['datanas']?></strong>
+                    </div>
+                    <div class="row" >
+                        <p>Idade: </p>
+                        <strong><?php echo $_SESSION['idade']?></strong>
                     </div>
                     <div class="row" >
                         <p>Gênero: </p>

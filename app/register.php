@@ -148,10 +148,6 @@
   //           if (T.length == 13) e.value += "-";
   //       }
       
-3
-4
-5
-6
         jQuery(function($){
           $("#data").mask("99/99/9999");
           $("#tel1").mask("(+99) 99 99999-9999");

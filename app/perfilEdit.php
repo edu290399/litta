@@ -99,7 +99,11 @@ session_start();
                     </div>
                     <div class="row" >
                         <p>Data de Nascimento </p>
-                        <strong><?php echo $_SESSION['datanas']?></strong>
+                        <input  name="datanas" id="data"  value="<?php echo $_SESSION['datanas']?>" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required/>
+                    </div>
+                    <div class="row" >
+                        <p>Idade: </p>
+                        <strong><?php echo $_SESSION['idade']?></strong>
                     </div>
                     <div class="row" >
                         <p>Gênero: </p>
@@ -110,11 +114,11 @@ session_start();
                 <div class="col-md-5">
                     <div class="row" >
                         <p>Telefone: </p>
-                        <input  name="telefone1" value="<?php echo $_SESSION['telefone1']?>" required/>
+                        <input  name="telefone1" onload="validateTel1()" onfocus="validateTel1()" onkeydown="validateTel1()" id="tel1" value="<?php echo $_SESSION['telefone1']?>" required/>
                     </div>
                     <div class="row" >
                         <p>Telefone 2: </p>
-                        <input name="telefone2" value="<?php echo $_SESSION['telefone2']?>" required/>
+                        <input name="telefone2" onload="validateTel2()" onfocus="validateTel2()" onkeydown="validateTel2()" id="tel2" value="<?php echo $_SESSION['telefone2']?>" required/>
                     </div>
                     <div class="row" >
                         <p>País: </p>
@@ -131,20 +135,49 @@ session_start();
                 </div> 
             </div>
         </div>  
-        
+     
     </div>
 </div>
 </form>    
 </body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        jQuery(function($){
+          $("#data").mask("99/99/9999");
+          $("#tel1").mask("(+99) 99 99999-9999");
+          $("#tel2").mask("(+99) 99 99999-9999");
+        });
 
+        var tel1 = document.getElementById('tel1');
+        function validateTel1(){
+          tel1 = document.getElementById('tel1');
+          if (tel1.value.indexOf('_') > -1){
+          tel1.setCustomValidity("Telefone inválido");
+          } 
+          else {
+            tel1.setCustomValidity('');
+          }
+        }
+
+        var tel2 = document.getElementById('tel2');
+        function validateTel2(){
+          tel2 = document.getElementById('tel2');
+          if (tel2.value.indexOf('_') > -1){
+          tel2.setCustomValidity("Telefone inválido");
+          } 
+          else {
+            tel2.setCustomValidity('');
+          }
+        }
+    </script>
 </html>
 
-
+    
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
 	header("Location: ../login.php");	
