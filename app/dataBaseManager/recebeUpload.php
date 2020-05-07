@@ -30,11 +30,32 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
         if ( @move_uploaded_file ( $arquivo_tmp, $destino ) ) {
             session_start();
             include_once("conexao.php");
-            $sql = "UPDATE usuarios SET imgPerfil = ? WHERE id = ?";
-            if($stmt = mysqli_prepare($conn, $sql)){
+            $sql = "SELECT imgPerfil FROM usuarios WHERE id = ?";
+
+            if( $stmt = mysqli_prepare($conn, $sql) ){
                 $id = $_SESSION['id'];
+                mysqli_stmt_bind_param($stmt, "s",$id);
+                if(mysqli_stmt_execute($stmt)){
+                    mysqli_stmt_bind_result($stmt,$imgPerfilOld);
+                    if(mysqli_stmt_fetch($stmt)){
+                        mysqli_stmt_close($stmt);
+                    }
+                } 
+                else{
+                    echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
+                }
+            }
+            else{
+                echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
+            }
+
+
+            $sql = "UPDATE usuarios SET imgPerfil = ? WHERE id= ?";
+            
+            if( $stmt = mysqli_prepare($conn, $sql) ){
                 mysqli_stmt_bind_param($stmt, "ss",$destino, $id);
                 if(mysqli_stmt_execute($stmt)){
+                    unlink($imgPerfilOld);
                     $_SESSION['msgOk'] = "Imagem alterada com sucesso";
                     $_SESSION['imgPerfil'] = $destino;
                     header("Location: ../perfil.php");
