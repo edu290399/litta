@@ -118,7 +118,7 @@ session_start();
                     </div>
                     <div class="row" >
                         <p>Telefone 2: </p>
-                        <input name="telefone2" onload="validateTel2()" onfocus="validateTel2()" onkeydown="validateTel2()" id="tel2" value="<?php echo $_SESSION['telefone2']?>" required/>
+                        <input name="telefone2" onload="validateTel2()" onfocus="validateTel2()" onkeydown="validateTel2()" id="tel2" value="<?php echo $_SESSION['telefone2']?>"/>
                     </div>
                     <div class="row" >
                         <p>País: </p>

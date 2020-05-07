@@ -79,15 +79,15 @@ session_start();
           </div>
 <?php unset($_SESSION['msgErro']);} ?>
 
-<div class="container-fluid">
-    <div class="row" >
+<div class="container-fluid" >
+    <div class="row" style="margin-left:2vw">
 
-        <div class="col-md-2 col-5 ml-2">
+        <div class="col-md-2 col-5">
             <div class="row">
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail">
+                            <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail" style="width:150px;height:180px">
                             <div class="carousel-caption">
                             <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Editar<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></button>
                             </div>   
@@ -95,24 +95,19 @@ session_start();
                     </div>  
                 </div>  
             </div>
-            <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUpload.php">
-                <input id="arquivo" name="arquivo" onchange="document.getElementById('salvar').click()" multiple accept='image/*' type="file"  style="display:none" />
+            <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUpload.php" style="display:none" >
+                <input id="arquivo" name="arquivo" onchange="document.getElementById('salvar').click()" multiple accept='image/*' type="file" />
                 <br />
-                <input type="submit" id="salvar" value="Salvar" style="display:none" />
+                <input type="submit" id="salvar" value="Salvar"/>
             </form>
-            <div class="row" >
-                <strong style="margin-left:15px"><?php echo $_SESSION['nome']?></strong>
-            </div>
-            <div class="row" >
-                <form method="POST" action="./perfilEdit.php">
-                    <button id="bteditar"name="btnEdita" type="submit">Editar<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
-                </form>    
+            <div class="row my-2" style="margin-left:-20px">
+                <strong><?php echo $_SESSION['nome']?></strong>
             </div>
         </div>  
                 
-        <div class="col-md-10 col-7">
+        <div class="col-md-9 col-12 ml-md-4" >
             <div class="row" >
-                <div class="col-md-5 ml-3">
+                <div class="col-md-6">
                     <div class="row" >
                         <p>Usuário: </p>
                         <strong><?php echo $_SESSION['usuario']?></strong>
@@ -139,7 +134,7 @@ session_start();
                     </div>
                 </div> 
 
-                <div class="col-md-5 ml-3">
+                <div class="col-md-6 ">
                     <div class="row" >
                         <p>Telefone: </p>
                         <strong><?php echo $_SESSION['telefone1']?></strong>
@@ -159,6 +154,11 @@ session_start();
                     <div class="row" >
                         <p>Cidade: </p>
                         <strong><?php echo $_SESSION['cidade']?></strong>
+                    </div>
+                    <div class="row" >
+                        <form method="POST" action="./perfilEdit.php">
+                            <button id="bteditar"name="btnEdita" type="submit">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
+                        </form>    
                     </div>
                 </div> 
             </div>
