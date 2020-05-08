@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="google" content="notranslate" />
+  <title>Mode de Rue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="./public/css/index.css"> -->
+  
+  <style>
+    body {
+      background: #fff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 500px;
+      height: 500px;
+      padding: 50px;
+    }
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 300px;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        color: black;
+    }
+
+    @font-face {
+      font-family: bigJohn;
+      src: url('./public/appThemes/fonts/BigJohnPRO-Regular.otf');
+    }
+
+  </style>
+</head>
+<body>
+  <div id="spinner" class="text-center" style="position: absolute; top: 50%; left: 50%;">
+    <div class="spinner-border text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <!-- Swiper -->
+    <h1 style="text-align: center; font-family: bigJohn; color: #000; margin-top: 3%; margin-bottom: -1%;">Mode de Rue</h1>
+    <div class="swiper-container" id="corpo" style="opacity:0">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image:url(./public/appThemes/carouselPics/tenisClaire.jpg);background-size: 80% 100%;background-repeat: no-repeat;"></div>
+            <div class="swiper-slide" style="background-image:url(./public/appThemes/carouselPics/jaquetaClaire.jpg);background-size: 100% 100%;"></div>
+            <div class="swiper-slide" style="background-image:url(./public/appThemes/carouselPics/camisaClaire.jpg);background-size: 100% 100%;"></div>
+            <div class="swiper-slide" style="background-image:url(./public/appThemes/carouselPics/oculosClaire.jpg);background-size: 100% 100%;"></div>
+            <div class="swiper-slide" style="background-image:url(./public/appThemes/carouselPics/bolsaClaire.jpg);background-size: 100% 100%;"></div>
+        </div>
+
+        <!-- Add Arrows -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+      <form method="POST" action="./modeDeRue">
+        <button style="background-color: transparent; border-color:black; border-width: thick; color: black; border-radius: 100%; position: absolute; top: 8%;left: 5%;z-index:10" type="submit"> <img src="./public/open-iconic/svg/action-undo.svg" class="icon" alt="action-undo" style="width: 15px;"></button>
+      </form>    
+      <h1 style="text-align: center; font-family: bigJohn; position: absolute; top: 85% ;left: 47%; z-index:10">Claire</h1>
+    
+
+
+  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'flip',
+      grabCursor: true,
+      cubeEffect: {
+        shadow: true,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    $(window).on("load", function(){
+        console.log("Carregado")
+        document.getElementById("spinner").style.display = "none";
+        document.getElementById("corpo").style.opacity = "1";
+      });
+</script>
+</body>
+</html>

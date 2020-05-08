@@ -47,11 +47,11 @@ if($btnLogin){
 			$_SESSION['estado'] = $estado;
 			$_SESSION['cidade'] = $cidade;
 			$_SESSION['imgPerfil'] = $imgPerfil;
-			header("Location: ../perfil.php");
+			header("Location: ../perfil");
 		}
 		else{
 			$_SESSION['msgErro'] = "Senha incorreta";
-			header("Location: ../login.php");
+			header("Location: ../login");
 		}
 		// Close statement
 		mysqli_stmt_close($stmt);
@@ -106,12 +106,12 @@ if($btnLogin){
 		}
 			else{
 				$_SESSION['msgErro'] = "Senha incorreta";
-				header("Location: ../login.php");
+				header("Location: ../login");
 			}				
 		}
 		else{
 			$_SESSION['msgErro'] = "Cadastro inexistente";
-			header("Location: ../login.php");
+			header("Location: ../login");
 		}
 		// Close statement
 		mysqli_stmt_close($stmt);
@@ -122,7 +122,7 @@ if($btnLogin){
 }
 else{
 	$_SESSION['msg'] = "Página não encontrada fim";
-	header("Location: login.php");
+	header("Location: login");
 }
 ?>
 

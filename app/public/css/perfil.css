@@ -158,11 +158,10 @@ strong{
     background-color:rgb(190, 187, 187);
 }
 #bteditar:hover{
-    color:black;
-    background-color: white;
-    transition: .4s;
-    -webkit-transition: 400ms;
+border-width: thick;
+border-color: black;
 }
+
 button, input {
     overflow: visible;
     height: 25px;
@@ -188,10 +187,6 @@ button, input {
     transition:650ms ease-in-out;
   }
   
-  img {
-      -webkit-filter: brightness(100%);
-      filter: brightness(100%);
-  }
  #photoEdit{
      border: none;
      background-color: transparent;

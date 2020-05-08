@@ -56,7 +56,6 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
                 mysqli_stmt_bind_param($stmt, "ss",$destino, $id);
                 if(mysqli_stmt_execute($stmt)){
                     unlink($imgPerfilOld);
-                    $_SESSION['msgOk'] = "Imagem alterada com sucesso";
                     $_SESSION['imgPerfil'] = $destino;
                     header("Location: ../perfil.php");
                 } else{

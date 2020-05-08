@@ -68,21 +68,25 @@ session_start();
 </nav>
 <form method="POST" action="./dataBaseManager/editar.php">
 <div class="container-fluid">
-    <div class="row" >
+    <div class="row" style="margin-left:2vw">
 
-        <div class="col-md-2 col-3 ml-2">
-            <div class="row" >
-                <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail">
+    <div class="col-md-2 col-5">
+            <div class="row">
+                <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail" style="width:150px;height:180px"> 
+                        </div>
+                    </div>  
+                </div>  
             </div>
-            <div class="row" >
-                <strong><?php echo $_SESSION['name']?></strong>
-            </div>
-            <div class="row" >
-                <button id="bteditar"name="btnEdita" type="submit">Confirmar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
+
+            <div class="row my-2" style="margin-left:-20px">
+                <strong><?php echo $_SESSION['nome']?></strong>
             </div>
         </div>  
                 
-        <div class="col-md-9 col-8  ml-3">
+        <div class="col-md-9 col-12  ml-md-4">
             <div class="row" >
                 <div class="col-md-6">
                     <div class="row" >
@@ -131,6 +135,9 @@ session_start();
                     <div class="row" >
                         <p>Cidade: </p>
                         <input name="cidade" value="<?php echo $_SESSION['cidade']?>" required/>
+                    </div>
+                    <div class="row" >
+                        <button id="bteditar"name="btnEdita" type="submit">Confirmar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
                     </div>
                 </div> 
             </div>

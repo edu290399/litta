@@ -67,19 +67,26 @@ session_start();
 
 </nav>
 
-<?php if(isset($_SESSION['msgOk'])){ ?>
-          <div class="alert alert-success">
-            <strong><?php echo $_SESSION['msgOk']?></strong>
-          </div>
-<?php unset($_SESSION['msgOk']); } ?>
 
-<?php if(isset($_SESSION['msgErro'])){ ?>
-          <div class="alert alert-danger">
-            <strong><?php echo $_SESSION['msgErro']?></strong>
-          </div>
-<?php unset($_SESSION['msgErro']);} ?>
 
 <div class="container-fluid" >
+    <?php if(isset($_SESSION['msgOk'])){ ?>
+            <div class="alert alert-success alert-dismissible mx-auto fade show" style="height:50px;width:250px" role="alert">
+                <strong style="color:black;text-align:center">  <?php echo $_SESSION['msgOk']?></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    <?php unset($_SESSION['msgOk']); } ?>
+
+    <?php if(isset($_SESSION['msgErro'])){ ?>
+            <div class="alert alert-danger alert-dismissible mx-auto fade show" style="height:50px;width:250px" role="alert">
+                <strong style="color:black;text-align:center"><?php echo $_SESSION['msgErro']?></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    <?php unset($_SESSION['msgErro']);} ?>
     <div class="row" style="margin-left:2vw">
 
         <div class="col-md-2 col-5">
