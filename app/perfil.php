@@ -102,15 +102,23 @@ session_start();
                     </div>  
                 </div>  
             </div>
-            <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUpload.php" style="display:none" >
+            <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadPerfil.php" style="display:none" >
                 <input id="arquivo" name="arquivo" onchange="document.getElementById('salvar').click()" multiple accept='image/*' type="file" />
                 <br />
                 <input type="submit" id="salvar" value="Salvar"/>
             </form>
+            
             <div class="row my-2" style="margin-left:-20px">
                 <strong><?php echo $_SESSION['nome']?></strong>
             </div>
-        </div>  
+
+            <div class="row my-2" style="margin-left:-20px">
+                <form method="POST" action="./galeria">
+                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Visitar Galeria<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
+                </form>
+            </div>
+        </div> 
+
                 
         <div class="col-md-9 col-12 ml-md-4" >
             <div class="row" >
@@ -163,8 +171,8 @@ session_start();
                         <strong><?php echo $_SESSION['cidade']?></strong>
                     </div>
                     <div class="row" >
-                        <form method="POST" action="./perfilEdit.php">
-                            <button id="bteditar"name="btnEdita" type="submit">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
+                        <form method="POST" action="./perfilEdit">
+                            <button class="btEstilo"name="btnEdita" type="submit">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
                         </form>    
                     </div>
                 </div> 
@@ -190,5 +198,5 @@ session_start();
 
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login.php");	
+	header("Location: ../login");	
 }?>
