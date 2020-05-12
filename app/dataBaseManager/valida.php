@@ -102,7 +102,7 @@ if($btnLogin){
 			$_SESSION['estado'] = $estado;
 			$_SESSION['cidade'] = $cidade;
 			$_SESSION['imgPerfil'] = $imgPerfil;
-			header("Location: ../perfil.php");
+			header("Location: ../perfil");
 		}
 			else{
 				$_SESSION['msgErro'] = "Senha incorreta";

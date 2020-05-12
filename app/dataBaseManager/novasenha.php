@@ -11,7 +11,7 @@ if($btnConfirma){
 		mysqli_stmt_bind_param($stmt, "ss",$senha, $email);
 	    if(mysqli_stmt_execute($stmt)){
             $_SESSION['msgOk'] = "Senha alterada com sucesso";
-            header("Location: ../login.php");
+            header("Location: ../login");
 		} else{
 			echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
 		}
@@ -21,6 +21,6 @@ if($btnConfirma){
 }
 else{
 	$_SESSION['msgErro'] = "Página não encontrada";
-	header("Location: ../login.php");
+	header("Location: ../login");
 }
 ?>

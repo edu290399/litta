@@ -137,7 +137,7 @@ session_start();
                         <input name="cidade" value="<?php echo $_SESSION['cidade']?>" required/>
                     </div>
                     <div class="row" >
-                        <button id="bteditar"name="btnEdita" type="submit">Confirmar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
+                        <button class="btEstilo"name="btnEdita" type="submit">Confirmar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
                     </div>
                 </div> 
             </div>
@@ -187,5 +187,5 @@ session_start();
     
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login.php");	
+	header("Location: ../login");	
 }?>

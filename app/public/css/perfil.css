@@ -147,7 +147,7 @@ strong,p{
 strong{
    margin-left: 5px;
 }
-#bteditar{
+.btEstilo{
     margin-left: -5px;
     font-size: 15px;
     padding-right: 5px;
@@ -157,10 +157,7 @@ strong{
     border:none;
     background-color:rgb(190, 187, 187);
 }
-#bteditar:hover{
-border-width: thick;
-border-color: black;
-}
+
 
 button, input {
     overflow: visible;

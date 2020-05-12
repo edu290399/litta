@@ -25,7 +25,7 @@
         // guardar este par de valores na tabela para confirmar mais tarde
         if( mysqli_stmt_execute($stmtInsert)){
   
-          $link = "https://littadesign.com/recuperacao.php?utilizador=$email&confirmacao=$chave";
+          $link = "https://littadesign.com/recuperacao?utilizador=$email&confirmacao=$chave";
   
           if( mail($email, 'Recuperação de password', 'Olá '.$email.', visite este link '.$link) ){
             $_SESSION['msgOk'] ="Verifique a caixa de entrada de <br> <strong> $email </strong> <br>Onde poderá encontrar um link único para alterar sua senha. <br>Caso não encontre, verifique seus spams.";

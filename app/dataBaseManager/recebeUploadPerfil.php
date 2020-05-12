@@ -24,7 +24,7 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
         $novoNome = uniqid ( time () ) . '.' . $extensao;
  
         // Concatena a pasta com o nome
-        $destino = '../public/imagens/ ' . $novoNome;
+        $destino = '../public/imagens/perfil ' . $novoNome;
  
         // tenta mover o arquivo para o destino
         if ( @move_uploaded_file ( $arquivo_tmp, $destino ) ) {
@@ -57,7 +57,7 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
                 if(mysqli_stmt_execute($stmt)){
                     unlink($imgPerfilOld);
                     $_SESSION['imgPerfil'] = $destino;
-                    header("Location: ../perfil.php");
+                    header("Location: ../perfil");
                 } else{
                     echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
                 }

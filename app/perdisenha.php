@@ -78,7 +78,7 @@ unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email']);
             <?php unset($_SESSION['msgErro']);
           } ?>
 
-        <form method="POST" action="./dataBaseManager/passo1rec.php">
+        <form method="POST" action="./dataBaseManager/passo1rec">
             <h2 style="margin-left:40px">Esqueci a Senha</h2>
             <button disabled="true" class="btIcon"><img src="./public/open-iconic/svg/envelope-closed.svg" class="iconLogin" alt="check" style="margin-bottom:1px ; width:18px"></button>
             <input name="email" class="inputLogin" placeholder="E-mail"/>

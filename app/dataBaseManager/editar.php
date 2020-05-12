@@ -40,11 +40,11 @@ if($btnEdita){
 			$_SESSION['pais'] = $pais;
 			$_SESSION['estado'] = $estado;
 			$_SESSION['cidade'] = $cidade;
-			header("Location: ../perfil.php");	
+			header("Location: ../perfil");	
 		}
 		else{
             $_SESSION['msgErro'] = "Um erro ocorreu, tente novamente";
-			header("Location: ../perfil.php");	
+			header("Location: ../perfil");	
 		}
 	} 
 	else{
@@ -53,5 +53,5 @@ if($btnEdita){
 }
 else{
     $_SESSION['msgErro'] = "Página não encontrada";
-	header("Location: ../register.php");
+	header("Location: ../register");
 }

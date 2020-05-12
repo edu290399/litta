@@ -43,7 +43,7 @@ if($btnCadastra){
 			$_SESSION['estado'] = $estado;
 			$_SESSION['cidade'] = $cidade;
 
-			header("Location: ../register.php");
+			header("Location: ../register");
 		}
 		else{
 			if(mysqli_stmt_execute($stmtUsuario) ){
@@ -64,15 +64,15 @@ if($btnCadastra){
 				$_SESSION['pais'] = $pais;
 				$_SESSION['estado'] = $estado;
 				$_SESSION['cidade'] = $cidade;
-				header("Location: ../register.php");				
+				header("Location: ../register");				
 			}
 			else{
 				if(mysqli_stmt_execute($stmt)){
 					$_SESSION['msgOk'] = "Cadastro realizado! Olá $nome";
-					header("Location: ../login.php");
+					header("Location: ../login");
 				} else{
 					$_SESSION['msgErro'] = "Erro no Cadastro! \n";
-					header("Location: ../register.php");
+					header("Location: ../register");
 				}
 			}
 		}
@@ -83,5 +83,5 @@ if($btnCadastra){
 }
 else{
     $_SESSION['msgErro'] = "Página não encontrada";
-	header("Location: ../register.php");
+	header("Location: ../register");
 }
