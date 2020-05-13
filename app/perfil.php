@@ -94,7 +94,7 @@ session_start();
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail" style="width:150px;height:180px">
+                            <img src="<?php echo $_SESSION['imgPerfil']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:150px;height:180px">
                             <div class="carousel-caption">
                             <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Editar<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></button>
                             </div>   
@@ -111,12 +111,21 @@ session_start();
             <div class="row my-2" style="margin-left:-20px">
                 <strong><?php echo $_SESSION['nome']?></strong>
             </div>
+            
+            <?php if( ($_SESSION['id']) == 75 ||  ($_SESSION['id']) == 73){ ?>
 
+            <div class="row my-2" style="margin-left:-20px">
+                <form method="POST" action="./administrativo">
+                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Sessão Admnistrativa<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
+                </form>
+            </div>
+            <?php } else{ ?>
             <div class="row my-2" style="margin-left:-20px">
                 <form method="POST" action="./galeria">
                         <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Visitar Galeria<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
                 </form>
             </div>
+            <?php } ?>
         </div> 
 
                 
@@ -192,6 +201,24 @@ session_start();
         function submitForm() {
             document.getElementById("myForm").submit();
         }
+
+        $(document).ready(function(){
+            $('.toggle').click(function(){
+              $('.toggle').toggleClass('active');
+              $('.navbar-brand').toggleClass('active');
+              $('.navbar').toggleClass('active');
+            });
+            $('.modal').click(function(){
+              $('.toggle').toggleClass('active');
+              $('.navbar-brand').toggleClass('active');
+              $('.navbar').toggleClass('active');
+            });
+            $('.suboption').click(function(){
+              $('.suboption').removeClass('active');
+              $(this).addClass('active');
+            });
+
+        });
     </script>
 </html>
 

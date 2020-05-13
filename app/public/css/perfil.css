@@ -189,7 +189,7 @@ button, input {
      background-color: transparent;
      width: 100%;
  }
-  .carousel-item:hover img{
+  .carousel-item:hover #profilePic{
       -webkit-filter: brightness(40%);
       filter: brightness(40%);
       -webkit-transition: all 0.5s ease;

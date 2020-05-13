@@ -119,8 +119,8 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="./dataBaseManager/sair.php">
-                <span class="option align-baseline" id="option3"> SAIR <span>
+            <a href="perfil">
+                <span class="option align-baseline" id="option3"> PERFIL<span>
             </a>
     </ul>
 
@@ -137,8 +137,8 @@ session_start();
                     <a  href="index" >
                         <span class="modalOption"> QUIZ <span>
                     </a>
-                    <a  href="./dataBaseManager/sair.php" >
-                        <span class="modalOption"> SAIR <span>
+                    <a  href="perfil" >
+                        <span class="modalOption"> PERFIL <span>
                     </a>
                 </ul>
         </div>
@@ -153,11 +153,11 @@ session_start();
     <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Imagem<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
 
     <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
-                  <input id="arquivo" name="arquivo" onchange="document.getElementById('salvar').click()" multiple accept='image/*' type="file" />
-                  <br />
-                  <input type="submit" id="salvar" value="Salvar"/>
+      <input id="arquivo" name="arquivo" onchange="document.getElementById('salvar').click()" multiple accept='image/*' type="file" />
+      <br/>
+      <input type="submit" id="salvar" value="Salvar"/>
     </form>
-    
+
     <div class="swiper-container">
       <div class="swiper-wrapper">
       <?php
@@ -167,7 +167,14 @@ session_start();
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { $endereco = $row["endereco"]; ?>
-             <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%"></div>
+            <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
+              <div class="inside">
+                <span class="legenda" id="textoLegenda">
+                  teste de tamanhasdasdsajdas dasroeteça das dasodsaiodasdasdlkdas
+                </span>
+                <button class="legenda" id="legendaBt" onclick="document.getElementById('arquivo').click()" style="-webkit-filter: brightness(100%);filter: brightness(100%);">Adicionar Legenda</button>
+              </div>
+            </div>
         <?php
           } 
         }else {
@@ -232,6 +239,24 @@ session_start();
       console.log("reloading...");
       return location.reload();
     }
+
+    $(document).ready(function(){
+            $('.toggle').click(function(){
+              $('.toggle').toggleClass('active');
+              $('.navbar-brand').toggleClass('active');
+              $('.navbar').toggleClass('active');
+            });
+            $('.modal').click(function(){
+              $('.toggle').toggleClass('active');
+              $('.navbar-brand').toggleClass('active');
+              $('.navbar').toggleClass('active');
+            });
+            $('.suboption').click(function(){
+              $('.suboption').removeClass('active');
+              $(this).addClass('active');
+            });
+
+        });
   </script>
 </body>
 </html>

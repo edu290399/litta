@@ -130,8 +130,7 @@ a:link
     display: block;
     top: 7vw;
     left:10px;
-    color:black;
-    z-index:10 ;
+    z-index:5 ;
     background-color: black;
     border-radius: 5%;
     color: white;
@@ -139,31 +138,49 @@ a:link
     padding: 8px;
 }
 
+.legenda{
+    position: absolute;
+    opacity:0;
+    bottom: 0;
+    z-index:5 ;
+    color: white;
+    font-family: bigJohn;
+    text-align:center;
+    width:100%;
+}
+#legendaBt{
+    background-color: black;
+    border-radius: 5%;
+    padding: 8px;
+    height:30px;
+    padding-top:2px;
+}
+.swiper-slide-active:hover #textoLegenda{
+    top: 0;
+    background-size: 100% 100%;
+    background-color: rgb(0, 0, 0,0.85);
+    background-blend-mode:overlay;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.swiper-slide-active:hover .legenda{
+    opacity:1;
+    transition:650ms ease-in-out;
+  }
+
 .icon{
     filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);
     width: 13px;
     margin-left: 10px;
 }
 
-.carousel-caption{
-    opacity:0;
-    bottom: -15px;
-  }
-  
-  .carousel-item:hover .carousel-caption{
-    opacity:1;
-    transition:650ms ease-in-out;
-  }
-  
-  .carousel-item:hover img{
-      -webkit-filter: brightness(40%);
-      filter: brightness(40%);
-      -webkit-transition: all 0.5s ease;
-      -moz-transition: all 0.5s ease;
-      -o-transition: all 0.5s ease;
-      -ms-transition: all 0.5s ease;
-      transition: all 0.5s ease;
-  }
+
+
+
+
 /* >>>>>>>>>>>>> TOGGLE ICON <<<<<<<<<<<  */
 
 .toggle{

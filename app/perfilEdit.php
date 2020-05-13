@@ -181,6 +181,24 @@ session_start();
             tel2.setCustomValidity('');
           }
         }
+
+        $(document).ready(function(){
+            $('.toggle').click(function(){
+              $('.toggle').toggleClass('active');
+              $('.navbar-brand').toggleClass('active');
+              $('.navbar').toggleClass('active');
+            });
+            $('.modal').click(function(){
+              $('.toggle').toggleClass('active');
+              $('.navbar-brand').toggleClass('active');
+              $('.navbar').toggleClass('active');
+            });
+            $('.suboption').click(function(){
+              $('.suboption').removeClass('active');
+              $(this).addClass('active');
+            });
+
+        });
     </script>
 </html>
 
