@@ -92,7 +92,7 @@ session_start();
 
   </style>
 </head>
-<body onresize="reload()">
+<body>
 <nav id="navTest" class="navbar navbar-expand-md bg-white navbar-light fixed-top mb-5 ">
 
     <a class="navbar-brand" href="index" id="logoLitta">LITTA</a>
@@ -166,14 +166,15 @@ session_start();
         $sql = "SELECT * FROM galeria WHERE idUsuario = $id ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $endereco = $row["endereco"]; ?>
+          while($row = mysqli_fetch_assoc($result)) { $endereco = $row["endereco"]; $idImage = $row["id"] ; $legenda = $row["legenda"] ?>
             <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
               <div class="inside">
-                <span class="legenda" id="textoLegenda">
-                  teste de tamanhasdasdsajdas dasroeteça das dasodsaiodasdasdlkdas
-                </span>
-                <button class="legenda" id="legendaBt" onclick="document.getElementById('arquivo').click()" style="-webkit-filter: brightness(100%);filter: brightness(100%);">Adicionar Legenda</button>
-              </div>
+                  <form method="POST" action="./dataBaseManager/alteraLegenda.php"> 
+                    <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
+                    <textarea name="legenda" class="legenda" id="textoLegenda"><?php echo $legenda ?></textarea>
+                    <button type="submit" class="legenda" id="legendaBt" style="-webkit-filter: brightness(100%);filter: brightness(100%);">Adicionar Legenda</button>
+                  </form>
+                </div>
             </div>
         <?php
           } 
@@ -196,6 +197,7 @@ session_start();
     var swiper = new Swiper('.swiper-container', {
       effect: 'coverflow',
       speed: 700,
+      updateOnWindowResize: true,
       direction: getDirection(),
       touchRatio: 0.35,
       touchReleaseOnEdges: true,
@@ -227,7 +229,7 @@ session_start();
 
     function getDirection() {
       var windowWidth = window.innerWidth;
-      var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+      var direction = ( (window.innerWidth / window.innerHeight ) <= 1 ? 'vertical' : 'horizontal' );
       return direction;
     }
     function getNumber() {
@@ -255,7 +257,9 @@ session_start();
               $('.suboption').removeClass('active');
               $(this).addClass('active');
             });
-
+            window.addEventListener("orientationchange", function() {
+              reload();
+            });
         });
   </script>
 </body>

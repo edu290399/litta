@@ -10,6 +10,7 @@ body{
     font-family: bigJohn;
 }
 h2{
+    margin-bottom: 60px;
     color: rgb(255, 255, 255);
     font-family: pierSansBold;   
 }
