@@ -1,12 +1,12 @@
 <?php
 session_start();
 ?>
-<?php if(!empty($_SESSION['id'])){ ?>
+<?php if($_SESSION['boss'] == '1'){ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Perfil</title>
+  <title>Consulta</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/perfil.css">
@@ -39,8 +39,8 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="./dataBaseManager/sair.php">
-                <span class="option align-baseline" id="option3"> SAIR <span>
+            <a href="adiministrativo">
+                <span class="option align-baseline" id="option3"> VOLTAR <span>
             </a>
     </ul>
 
@@ -57,8 +57,8 @@ session_start();
                     <a  href="index" >
                         <span class="modalOption"> QUIZ <span>
                     </a>
-                    <a  href="./dataBaseManager/sair.php" >
-                        <span class="modalOption"> SAIR <span>
+                    <a  href="adiministrativo" >
+                        <span class="modalOption"> VOLTAR <span>
                     </a>
                 </ul>
         </div>
@@ -94,44 +94,23 @@ session_start();
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $_SESSION['imgPerfil']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:150px;height:180px">
-                            <div class="carousel-caption">
-                            <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Editar<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></button>
-                            </div>   
+                            <img src="<?php echo $_SESSION['imgPerfilConsulta']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:150px;height:180px">
                         </div>
                     </div>  
                 </div>  
             </div>
-            <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadPerfil.php" style="display:none" >
-                <input id="arquivo" name="arquivo" onchange="document.getElementById('salvar').click()" multiple accept='image/*' type="file" />
-                <br />
-                <input type="submit" id="salvar" value="Salvar"/>
-            </form>
-            
+
             <div class="row my-2" style="margin-left:-20px">
-                <strong><?php echo $_SESSION['nome']?></strong>
+                <strong><?php echo $_SESSION['nomeConsulta']?></strong>
             </div>
-            
-            <?php if( ($_SESSION['boss']) == '1' ) {?>
-            
+        
             <div class="row my-2" style="margin-left:-20px">
-                <form method="POST" action="./adiministrativo">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Sessão Admnistrativa<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
-                </form>
-            </div>
-            <div class="row my-2" style="margin-left:-20px">
-                <form method="POST" action="./galeria">
+                <form method="POST" action="./galeriaConsulta">
                         <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Visitar Galeria<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
                 </form>
             </div>
-            <?php } else{ ?>
-            <div class="row my-2" style="margin-left:-20px">
-                <form method="POST" action="./galeria">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Visitar Galeria<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
-                </form>
-            </div>
-            <?php } ?>
-        </div> 
+         
+        </div>
 
                 
         <div class="col-md-9 col-12 ml-md-4" >
@@ -139,62 +118,57 @@ session_start();
                 <div class="col-md-6">
                     <div class="row" >
                         <p>Usuário: </p>
-                        <strong><?php echo $_SESSION['usuario']?></strong>
+                        <strong><?php echo $_SESSION['usuarioConsulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Email: </p>
-                        <strong><?php echo $_SESSION['email']?></strong>
+                        <strong><?php echo $_SESSION['emailConsulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Nome: </p>
-                        <strong><?php echo $_SESSION['nome']." ".$_SESSION['sobrenome']?></strong>
+                        <strong><?php echo $_SESSION['nomeConsulta']." ".$_SESSION['sobrenomeConsulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Data de Nascimento: </p>
-                        <strong><?php echo $_SESSION['datanas']?></strong>
+                        <strong><?php echo $_SESSION['datanasConsulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Idade: </p>
-                        <strong><?php echo $_SESSION['idade']?></strong>
+                        <strong><?php echo $_SESSION['idadeConsulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Gênero: </p>
-                        <strong><?php echo $_SESSION['sexo']?></strong>
+                        <strong><?php echo $_SESSION['sexoConsulta']?></strong>
                     </div>
                 </div> 
 
                 <div class="col-md-6 ">
                     <div class="row" >
                         <p>Telefone: </p>
-                        <strong><?php echo $_SESSION['telefone1']?></strong>
+                        <strong><?php echo $_SESSION['telefone1Consulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Telefone 2: </p>
-                        <strong><?php echo $_SESSION['telefone2']?></strong>
+                        <strong><?php echo $_SESSION['telefone2Consulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>País: </p>
-                        <strong><?php echo $_SESSION['pais']?></strong>
+                        <strong><?php echo $_SESSION['paisConsulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Estado: </p>
-                        <strong><?php echo $_SESSION['estado']?></strong>
+                        <strong><?php echo $_SESSION['estadoConsulta']?></strong>
                     </div>
                     <div class="row" >
                         <p>Cidade: </p>
-                        <strong><?php echo $_SESSION['cidade']?></strong>
+                        <strong><?php echo $_SESSION['cidadeConsulta']?></strong>
                     </div>
-                    <?php if($_SESSION['boss'] == '1'){ ?>
-                        <div class="row" >
-                            <p>Data de Cadastro: </p>
-                            <strong><?php echo $_SESSION['dataCadastro']?></strong>
-                         </div>
-                    <?php } ?>
+                 
                     <div class="row" >
-                        <form method="POST" action="./perfilEdit">
-                            <button class="btEstilo"name="btnEdita" type="submit">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
-                        </form>    
+                        <p>Data de Cadastro: </p>
+                        <strong><?php echo $_SESSION['dataCadastroConsulta']?></strong>
                     </div>
+
                 </div> 
             </div>
         </div>  
@@ -235,6 +209,6 @@ session_start();
 
 
 <?php }else{
-	$_SESSION['msgErro'] = "Faça login para continuar";
+	$_SESSION['msgErro'] = "Endereço restrito";
 	header("Location: ../login");	
 }?>
