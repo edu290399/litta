@@ -4,12 +4,16 @@ $idImage = filter_input(INPUT_POST, 'idImage', FILTER_SANITIZE_STRING);
 session_start();
 include_once("conexao.php");
 $idUsuario = $_SESSION['id'];
-$sql = "INSERT INTO galeria (idUsuario,endereco,legenda) VALUES (?, ?,?)";
-$sql = "UPDATE galeria SET legenda = ? WHERE idUsuario = ? AND id = ?";
+$usuario =  $_SESSION['usuario'];
+$sql = "INSERT INTO legendas (idUsuario,usuario,idImagem,texto) VALUES (?,?,?,?)";
             if( $stmt = mysqli_prepare($conn, $sql) ){
-                mysqli_stmt_bind_param($stmt, "sss", $legenda,$idUsuario,$idImage);
+                mysqli_stmt_bind_param($stmt, "ssss", $idUsuario,$usuario,$idImage,$legenda);
                 if(mysqli_stmt_execute($stmt)){
-                    header("Location: ../galeria");
+                    if(!isset($_SESSION['idConsulta'])){
+                        header("Location: ../galeria");
+                    }else{
+                        header("Location: ../galeriaConsulta");
+                    }
                 } else{
                     echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
                 }

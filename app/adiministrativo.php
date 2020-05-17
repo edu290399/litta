@@ -1,7 +1,7 @@
 <?php
 session_start();
 ?>
-<?php if(!empty($_SESSION['id'])){ ?>
+<?php if(!empty($_SESSION['id'])){  unset($_SESSION['idConsulta']);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

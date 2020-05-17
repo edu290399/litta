@@ -45,21 +45,66 @@ session_start();
           opacity: 1 !important;
         }
 
+        ::-webkit-input-placeholder {
+          position:relative;
+          color: white;  
+          text-align:center;
+          top:45%;
+        }
+        
+        textarea:-moz-placeholder { /* Firefox 18- */
+          position:absolute;
+          color: white;  
+          text-align:center;
+          top:45%;
+          line-height: 250px;
+        }
+        
+        textarea::-moz-placeholder {  /* Firefox 19+ */
+          position:absolute;
+          color: white;  
+          text-align:center;
+          top:45%;
+          line-height: 250px;
 
-    
+        }
+        
+        :-ms-input-placeholder {  
+          position:relative;
+          color: white;  
+          text-align:center;
+          top:45%;
+        }
+
+        input:-moz-placeholder{
+          position:relative;
+          color: white;  
+          text-align:center;
+          top:45%;
+        }
+
+        textarea:-moz-placeholder {
+          position:relative;
+          color: white;  
+          text-align:center;
+          top:45%;
+        }
+     
     @media only screen and (max-width: 760px) {
 
         .swiper-wraper{
           width:100%;
+          position:fixed;
         }
         .swiper-pagination{
           margin-left:50px; 
-          margin-top: -30%; 
+          margin-top: -120px; 
 
         }    
         .swiper-container {
           padding-top: 15vh;
-          
+          margin-top: -50px;
+
         }
         #photoEdit{
             top: 60px;
@@ -67,15 +112,16 @@ session_start();
         }
         .swiper-slide {
           margin-top:-275px;
-          transform:  rotateX(90deg) rotateY(0deg)   !important;
+          transform:  rotateX(90deg) rotateY(0deg)  !important;
           transition: transform;
           transition-duration: .5s; 
-          transition: transform;
         }
+
+
         .swiper-slide-active{
-          margin-bottom: 140px;
-          margin-top:-80px;
-          transform:  rotateX(0deg) rotateY(0deg) !important;
+          margin-bottom: 50px;
+          margin-top:-50px;
+          transform:  rotateX(0deg) rotateY(0deg) translate(0%, -100px)!important;
           opacity: 1 !important;
           transition: transform;
           transition-duration: .5s;
@@ -153,7 +199,7 @@ session_start();
     <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Amostra<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
 
     <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
-      <input id="arquivo" name="arquivo" onchange="document.getElementById('salvar').click()" multiple accept='image/*' type="file" />
+      <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" accept='image/*' type="file" />
       <br/>
       <input type="submit" id="salvar" value="Salvar"/>
     </form>
@@ -166,13 +212,22 @@ session_start();
         $sql = "SELECT * FROM galeria WHERE idUsuario = $idConsulta ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $endereco = $row["endereco"]; $idImage = $row["id"] ; $legenda = $row["legenda"] ?>
+          while($row = mysqli_fetch_assoc($result)) { 
+            $endereco = $row["endereco"]; $idImage = $row["id"] ;   
+            $sqlLegenda = "SELECT * FROM legendas WHERE idImagem = $idImage ORDER BY id ASC";
+            ?>
+          
             <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
               <div class="inside">
                   <form method="POST" action="./dataBaseManager/alteraLegenda.php"> 
                     <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                    <textarea name="legenda" class="legenda" id="textoLegenda"><?php echo $legenda ?></textarea>
-                    <button type="submit" class="legenda" id="legendaBt" style="-webkit-filter: brightness(100%);filter: brightness(100%);">Adicionar Legenda</button>
+                    <textarea name="legenda" class="legenda" placeholder="Adicione um comentário aqui..." id="textoLegenda" <?php 
+                      $resultLegenda = mysqli_query($conn, $sqlLegenda);
+                      if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
+                        while($row = mysqli_fetch_assoc($resultLegenda)) {
+                          $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
+                          echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
+                    <button type="submit" class="legenda" id="legendaBt" style="-webkit-filter: brightness(100%);filter: brightness(100%);">Adicionar Comentário</button>
                   </form>
                 </div>
             </div>
