@@ -1,12 +1,12 @@
 <?php
 session_start();
 ?>
-<?php if(!empty($_SESSION['idConsulta'])){ ?>
+<?php if(!empty($_SESSION['id'])){ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Consulta Galeria</title>
+  <title>Galeria</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="./public/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
@@ -113,8 +113,8 @@ session_start();
 
         }
         #photoEdit{
-            top: 60px;
-            left:7vw ;
+            top: 10px;
+            left:23vw ;
         }
         .swiper-slide {
           margin-top:-275px;
@@ -171,8 +171,8 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="adiministrativo">
-                <span class="option align-baseline" id="option3"> VOLTAR <span>
+            <a href="perfil">
+                <span class="option align-baseline" id="option3"> PERFIL<span>
             </a>
     </ul>
 
@@ -189,8 +189,8 @@ session_start();
                     <a  href="index" >
                         <span class="modalOption"> QUIZ <span>
                     </a>
-                    <a  href="adiministrativo" >
-                        <span class="modalOption"> VOLTAR <span>
+                    <a  href="perfil" >
+                        <span class="modalOption"> PERFIL <span>
                     </a>
                 </ul>
         </div>
@@ -199,18 +199,27 @@ session_start();
 
 </nav>
 
-  <!-- Swiper -->
+
   <div class="containerGeral">
 
-
-
     <div class="swiper-container">
+            <div class="mx-auto mt-n5" style="width:50px">
+              <div class="row" style="margin-bottom:50px">
+
+                <a href="galeria">
+                  <span class="option"  style="margin-left:-60px">SUAS <span>
+                </a>
+
+                <a href="galeriaLitta">
+                  <span class="option active" style="margin-left:60px"> LITTA <span>
+                </a>
+              </div>
+            </div>
       <div class="swiper-wrapper">
       <?php
-        session_start();
         include_once("./dataBaseManager/conexao.php");
-        $idConsulta = $_SESSION['idConsulta'];
-        $sql = "SELECT * FROM galeria WHERE idUsuario = $idConsulta ORDER BY id DESC";
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM galeria WHERE idUsuario = $id AND deletada = 0 AND indicacao = 1 ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         $cont = 0;
         if (mysqli_query($conn, $sql)) {
@@ -220,24 +229,24 @@ session_start();
             ?>
           
           <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
-            <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
-                  <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                  <button type="submit" id="closeBt" style="position: absolute; top:-8px;right:-8px;background-color:#414040; border-radius:100%;width:35px;height:35px;border:none;z-index:10"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
-                </form>
-              <div class="inside">
-                      <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
-                      <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
-                        if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
-                          while($row = mysqli_fetch_assoc($resultLegenda)) {
-                            $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
-                            echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
-                    <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
-                      <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                      <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario"></input>
-                      <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
-                    </form>
-                </div>
+              <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
+                <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
+                <button type="submit" id="closeBt" style="position: absolute; top:-8px;right:-8px;background-color:#414040; border-radius:100%;width:35px;height:35px;border:none;z-index:10"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
+              </form>
+            <div class="inside">
+                    <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
+                    <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
+                      if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
+                        while($row = mysqli_fetch_assoc($resultLegenda)) {
+                          $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
+                          echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
+                  <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
+                    <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
+                    <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario"></input>
+                    <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
+                  </form>
             </div>
+          </div>
         <?php
           $cont++;
           } 
@@ -247,14 +256,17 @@ session_start();
       </div>
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
     </div>
-    <div class="container-fluid">
-      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Amostra<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
-    </div>
-    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadAmostra.php" style="display:none" > 
+
+    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
       <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" accept='image/*' type="file" />
       <br/>
       <input type="submit" id="salvar" value="Salvar"/>
     </form>
+    
+  </div>
+
+  <div class="container-fluid">
+      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Imagem<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
   </div>
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -334,6 +346,7 @@ session_start();
       xhttp.open("POST", "./dataBaseManager/alteraLegenda.php", true);
       xhttp.send(formData);
     }
+
     $(document).ready(function(){
             $('.toggle').click(function(){
               $('.toggle').toggleClass('active');
@@ -352,6 +365,8 @@ session_start();
             window.addEventListener("orientationchange", function() {
               reload();
             });
+
+
         });
   </script>
 </body>

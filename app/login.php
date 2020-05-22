@@ -1,6 +1,6 @@
 <?php
 session_start();
-unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email']);
+unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email'],$_SESSION['idConsulta'],$_SESSION['boss']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

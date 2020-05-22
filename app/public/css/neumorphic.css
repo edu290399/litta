@@ -81,7 +81,7 @@
     }
     #checked
     {
-        /* white */
+        /* green */
         filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);
         transform: translate(-10vw, 0%);
         z-index: 10;

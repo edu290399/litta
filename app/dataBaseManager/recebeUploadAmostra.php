@@ -1,5 +1,6 @@
 <?php
-    session_start();
+session_start();
+if( $_SESSION['boss'] == '1' ){
     $arquivo = isset($_FILES['arquivo']) ? $_FILES['arquivo'] : FALSE;  
 
     for ($controle = 0; $controle < count($arquivo['name']); $controle++){
@@ -21,12 +22,12 @@
             if ( @move_uploaded_file ( $arquivo_tmp, $destino ) ) {
                 session_start();
                 include_once("conexao.php");
-                $id = $_SESSION['id'];
-                $sql = "INSERT INTO galeria (idUsuario,endereco) VALUES (?, ?)";
+                $id = $_SESSION['idConsulta'];
+                $sql = "INSERT INTO galeria (idUsuario,endereco,indicacao) VALUES (?, ?, '1')";
                 if( $stmt = mysqli_prepare($conn, $sql) ){
                     mysqli_stmt_bind_param($stmt, "ss", $id,$destino);
                     if(mysqli_stmt_execute($stmt)){
-
+                        
                     } else{
                         echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
                     }
@@ -41,7 +42,10 @@
         else{
             echo 'Você poderá enviar apenas arquivos "*.jpg;*.jpeg;*.png"<br />';
         }
-    }    
-    header("Location: ../galeria");
-
-        
+    }
+    header("Location: ../galeriaConsulta");    
+}
+else{
+    $_SESSION['msgErro'] = "Página restrita";
+	header("Location: ../login");
+}

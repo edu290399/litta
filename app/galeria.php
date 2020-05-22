@@ -9,6 +9,7 @@ session_start();
   <title>Galeria</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="./public/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./public/css/galeria.css">
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
@@ -20,18 +21,23 @@ session_start();
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 14px;
       color:#000;
-      margin: 0;
-      padding: 0;
       overflow:hidden;
     }
     .swiper-pagination-bullet:focus{
         outline:none; 
     }
+    #closeBt{
+      display:none;
+    }
 
+    .swiper-slide-active #closeBt{
+         display: block;
+    }
+        
     .swiper-container {
       width: 100%;
       height:100%;
-      padding-top: 30vh;
+      padding-top: 150px;
       padding-bottom: 50px;    
     }
     .swiper-slide {
@@ -107,8 +113,8 @@ session_start();
 
         }
         #photoEdit{
-            top: 60px;
-            left:7vw ;
+            top: 10px;
+            left:23vw ;
         }
         .swiper-slide {
           margin-top:-275px;
@@ -121,7 +127,7 @@ session_start();
         .swiper-slide-active{
           margin-bottom: 50px;
           margin-top:-50px;
-          transform:  rotateX(0deg) rotateY(0deg) translate(0%, -100px)!important;
+          transform:  rotateX(0deg) rotateY(0deg) translate(0%, 0px)!important;
           opacity: 1 !important;
           transition: transform;
           transition-duration: .5s;
@@ -193,45 +199,56 @@ session_start();
 
 </nav>
 
-  <!-- Swiper -->
+
   <div class="containerGeral">
 
-    <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Imagem<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
-
-    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
-      <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" accept='image/*' type="file" />
-      <br/>
-      <input type="submit" id="salvar" value="Salvar"/>
-    </form>
-
     <div class="swiper-container">
+            <div class="mx-auto mt-n5" style="width:50px">
+              <div class="row" style="margin-bottom:50px">
+
+                <a href="galeria">
+                  <span class="option active"  style="margin-left:-60px">SUAS <span>
+                </a>
+
+                <a href="galeriaLitta">
+                  <span class="option" style="margin-left:60px"> LITTA <span>
+                </a>
+              </div>
+            </div>
       <div class="swiper-wrapper">
       <?php
         include_once("./dataBaseManager/conexao.php");
         $id = $_SESSION['id'];
-        $sql = "SELECT * FROM galeria WHERE idUsuario = $id ORDER BY id DESC";
+        $sql = "SELECT * FROM galeria WHERE idUsuario = $id AND deletada = 0 AND indicacao = 0 ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
+        $cont = 0;
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { 
             $endereco = $row["endereco"]; $idImage = $row["id"] ;   
             $sqlLegenda = "SELECT * FROM legendas WHERE idImagem = $idImage ORDER BY id ASC";
             ?>
           
-            <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
-              <div class="inside">
-                  <form method="POST" action="./dataBaseManager/alteraLegenda.php"> 
-                    <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                    <textarea name="legenda" class="legenda" placeholder="Adicione um comentário aqui..." id="textoLegenda" <?php 
-                      $resultLegenda = mysqli_query($conn, $sqlLegenda);
+          <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
+              <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
+                <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
+                <button type="submit" id="closeBt" style="position: absolute; top:-8px;right:-8px;background-color:#414040; border-radius:100%;width:35px;height:35px;border:none;z-index:10"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
+              </form>
+            <div class="inside">
+                    <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
+                    <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
                       if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
                         while($row = mysqli_fetch_assoc($resultLegenda)) {
                           $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
                           echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
-                    <button type="submit" class="legenda" id="legendaBt" style="-webkit-filter: brightness(100%);filter: brightness(100%);">Adicionar Comentário</button>
+                  <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
+                    <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
+                    <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario"></input>
+                    <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
                   </form>
-                </div>
             </div>
+          </div>
         <?php
+          $cont++;
           } 
         }else {
           echo "mysqli_error($conn)";
@@ -239,6 +256,17 @@ session_start();
       </div>
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
     </div>
+
+    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
+      <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" accept='image/*' type="file" />
+      <br/>
+      <input type="submit" id="salvar" value="Salvar"/>
+    </form>
+    
+  </div>
+
+  <div class="container-fluid">
+      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Imagem<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
   </div>
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -296,6 +324,28 @@ session_start();
       console.log("reloading...");
       return location.reload();
     }
+    var text = document.getElementsByClassName('legenda');
+    var formularios = document.getElementsByClassName('formulario');
+    var comentarios = document.getElementsByClassName('comentario');
+
+     function insereLegenda(e,cont){
+      var form = document.querySelector('form');
+      e.preventDefault(); // <--- isto pára o envio da form
+      var url = form.action;
+      var formData = new FormData(formularios[cont]); // <--- os dados da form
+      console.log(form);
+      var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        // document.getElementById("txtHint").innerHTML = this.responseText;
+        text[cont].value += this.responseText;
+        comentarios[cont].value = "";
+        }
+      };
+      xhttp.open("POST", "./dataBaseManager/alteraLegenda.php", true);
+      xhttp.send(formData);
+    }
 
     $(document).ready(function(){
             $('.toggle').click(function(){
@@ -315,6 +365,8 @@ session_start();
             window.addEventListener("orientationchange", function() {
               reload();
             });
+
+
         });
   </script>
 </body>
