@@ -71,8 +71,11 @@ unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email'],$_SESSION['idConsul
         <div id="containerLogin">
 
         <?php if(isset($_SESSION['msgOk'])){ ?>
-          <div class="alert alert-success">
+          <div class="alert alert-success alert-dismissible mx-auto fade show">
             <strong><?php echo $_SESSION['msgOk']?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
             <?php unset($_SESSION['msgOk']);
           } ?>
