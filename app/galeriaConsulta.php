@@ -215,13 +215,23 @@ session_start();
         $cont = 0;
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { 
-            $endereco = $row["endereco"]; $idImage = $row["id"];$indicacao = $row["indicacao"];   
+            $endereco = $row["endereco"]; $idImage = $row["id"];$indicacao = $row["indicacao"]; $deletadaEm = $row["deletadaEm"]; $deletada = $row["deletada"];   
             $sqlLegenda = "SELECT * FROM legendas WHERE idImagem = $idImage ORDER BY id ASC";
             ?>
           
           <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
             <?php if($indicacao == '1'){?>
-              <span style="top: -20px!important;position: relative;text-align:center;float:center;font-family:bigJohn;font-weight:bold">Esta imagem é uma indicação</span>
+              <span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold">Esta imagem é uma indicação</span>
+            <?}?>
+            <?php if($deletada == '1'){
+              			$ano = substr($deletadaEm, 0, 4);
+                    $mes = substr($deletadaEm, 5, 2);
+                    $dia = substr($deletadaEm, 8, 2);
+                    $hora = substr($deletadaEm, 11, 2);
+                    $minuto = substr($deletadaEm, 14, 2);
+                    $segundo = substr($deletadaEm, 17, 2);
+                    $dataDeletada = "$dia/$mes/$ano   $hora:$minuto:$segundo"; ?>
+              <br><span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold">Deletada em: <strong style="letter-spacing:2px"> <?php echo $dataDeletada ?> </strong> </span>
             <?}?>
             <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
                   <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>

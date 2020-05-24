@@ -9,7 +9,7 @@ if($botao){
 	if($stmt = mysqli_prepare($conn, $sql)){
 		mysqli_stmt_bind_param($stmt, "s", $usuario);
 	    if(mysqli_stmt_execute($stmt)){
-			mysqli_stmt_bind_result($stmt, $idConsulta,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil,$dataCadastro,$boss);
+			mysqli_stmt_bind_result($stmt, $idConsulta,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil,$dataCadastro,$boss,$confirmado);
 		} else{
 			echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
 		}
