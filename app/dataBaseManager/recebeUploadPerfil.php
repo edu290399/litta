@@ -55,7 +55,8 @@ if ( isset( $_FILES[ 'arquivo' ][ 'name' ] ) && $_FILES[ 'arquivo' ][ 'error' ] 
             if( $stmt = mysqli_prepare($conn, $sql) ){
                 mysqli_stmt_bind_param($stmt, "ss",$destino, $id);
                 if(mysqli_stmt_execute($stmt)){
-                    unlink($imgPerfilOld);
+                    if($imgPerfilOld != "./public/imagens/default.png")
+                        unlink($imgPerfilOld);
                     $_SESSION['imgPerfil'] = $destino;
                     header("Location: ../perfil");
                 } else{
