@@ -215,15 +215,19 @@ session_start();
         $cont = 0;
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { 
-            $endereco = $row["endereco"]; $idImage = $row["id"] ;   
+            $endereco = $row["endereco"]; $idImage = $row["id"];$indicacao = $row["indicacao"];   
             $sqlLegenda = "SELECT * FROM legendas WHERE idImagem = $idImage ORDER BY id ASC";
             ?>
           
           <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
+            <?php if($indicacao == '1'){?>
+              <span style="top: -20px!important;position: relative;text-align:center;float:center;font-family:bigJohn;font-weight:bold">Esta imagem é uma indicação</span>
+            <?}?>
             <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
                   <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
                   <button type="submit" id="closeBt" style="position: absolute; top:-8px;right:-8px;background-color:#414040; border-radius:100%;width:35px;height:35px;border:none;z-index:10"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
                 </form>
+                
               <div class="inside">
                       <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
                       <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
@@ -237,14 +241,16 @@ session_start();
                       <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
                     </form>
                 </div>
+                
             </div>
-        <?php
-          $cont++;
-          } 
-        }else {
-          echo "mysqli_error($conn)";
-        }?>
-      </div>
+            <?php
+              $cont++;
+              } 
+            }else {
+              echo "mysqli_error($conn)";
+            }?>
+            
+          </div>
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
     </div>
     <div class="container-fluid">
