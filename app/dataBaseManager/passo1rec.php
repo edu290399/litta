@@ -4,7 +4,7 @@
     // processar o pedido
     include_once("conexao.php");
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-    $sqlEmail = "SELECT email FROM usuarios where email = ? AND confimado = '1' LIMIT 1";
+    $sqlEmail = "SELECT email FROM usuarios where email = ? AND confirmado = '1' LIMIT 1";
     $sqlInsert = "INSERT INTO recuperacao (utilizador,confirmacao) VALUES (?, ?)";
     if ( ($stmtEmail = mysqli_prepare($conn, $sqlEmail)) && ($stmtInsert = mysqli_prepare($conn, $sqlInsert)) ){
 
