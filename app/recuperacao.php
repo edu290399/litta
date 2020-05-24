@@ -100,10 +100,10 @@ unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email']);
                   <form method="POST" action="./dataBaseManager/novasenha.php">
                       <h2>Alterar password</h2>
                       <button type="button" disabled="true" class="btIcon"><img src="./public/open-iconic/svg/lock-locked.svg" class="iconLogin" alt="check" style="margin-bottom:1px ; width:18px"></button>
-                      <input name="senha" id="senha" onchange="validatePassword()" type="password" minlength="8" placeholder="Nova senha" required/>
+                      <input name="senha" id="senha" onchange="validatePassword()" type="password" minlength="8" placeholder="Senha" autocomplete="nope" style="transform: translate(0vw, 0%) !important;" required><img src="./public/open-iconic/svg/eye.svg" id="eye" class="icon" alt="eye" style=" transform: translate(-4vw, 0%); !important"/></input>
                       <br>
                       <button type="button" disabled="true" class="btIcon"><img src="./public/open-iconic/svg/loop-circular.svg" class="iconLogin" alt="check" style="width:20px"></button>
-                      <input name="senhaconf" id="senhaConf" onkeyup="validatePassword()" type="password" minlength="8" placeholder="Repetir nova senha" required/>
+                      <input name="senhaconf" id="senhaConf" onkeyup="validatePassword()" type="password" minlength="8" placeholder="Confirmar senha" autocomplete="nope" required><img src="./public/open-iconic/svg/check.svg" id="checked" class="icon" alt="check"/></input>
                       <br>
                       <button id="btcadastrar" name="btnConfirma" type="submit">Confirmar</button>
                       <br>
@@ -148,14 +148,40 @@ unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email']);
               $('.navbar').toggleClass('active');
             });
         });
+        $( "#eye" ).mousedown(function() {
+          $("#senha").attr("type", "text");
+        });
 
-        senha1 = document.getElementById('senha');
-        senha2 = document.getElementById('senhaConf');
+        $( "#eye" ).mouseup(function() {
+          $("#senha").attr("type", "password");
+        });
+        $( "#eye" ).mouseout(function() { 
+          $("#senha").attr("type", "password");
+        });
+        
+        
+        $( "#eye" ).on("touchstart",function() {
+          $("#senha").attr("type", "text");
+        });
+
+        $( "#eye" ).on("touchend",function() {
+          $("#senha").attr("type", "text");
+        });
+       var senha1 = document.getElementById('senha');
+       var senha2 = document.getElementById('senhaConf');
         function validatePassword(){
+          senha1 = document.getElementById('senha');
+          senha2 = document.getElementById('senhaConf');
+          ckecked = document.getElementById('checked');
           if(senha1.value != senha2.value) {
             senha2.setCustomValidity("Senhas diferentes!");
+            senha2.style.color = "black";
+            checked.style.filter = "invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5)"; 
           } else {
             senha2.setCustomValidity('');
+            senha2.style.backgroundColor = "white";
+            senha2.style.color = "green";
+            checked.style.filter = "invert(0.4) sepia(1) saturate(20) hue-rotate(97.2deg) brightness(1)"; 
           }
         }
   </script>

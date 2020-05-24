@@ -4,7 +4,7 @@
     // processar o pedido
     include_once("conexao.php");
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-    $sqlEmail = "SELECT email FROM usuarios where email = ? LIMIT 1";
+    $sqlEmail = "SELECT email FROM usuarios where email = ? AND confimado = '1' LIMIT 1";
     $sqlInsert = "INSERT INTO recuperacao (utilizador,confirmacao) VALUES (?, ?)";
     if ( ($stmtEmail = mysqli_prepare($conn, $sqlEmail)) && ($stmtInsert = mysqli_prepare($conn, $sqlInsert)) ){
 
@@ -32,14 +32,13 @@
             header("Location: ../resultadoSol.php");  
           } else {
             echo '<p>Houve um erro ao enviar o email (o servidor suporta a função mail?)</p>';
-  
           }
         } else {
           echo "ERROR: Could not execute query: Consulta no BD de usuario \n" .  mysqli_stmt_error($stmtInsert) . "\n"  .mysqli_error($conn);
         }
       }
       else {
-        $_SESSION['msgErro'] = "Esse utilizador não existe";
+        $_SESSION['msgErro'] = "Esse utilizador não existe ou não foi confirmado";
         header("Location: ../perdisenha.php");
       }
       

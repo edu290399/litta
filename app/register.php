@@ -153,6 +153,8 @@
           $("#tel1").mask("(+99) 99 99999-9999");
           $("#tel2").mask("(+99) 99 99999-9999");
         });
+
+        
         $( "#eye" ).mousedown(function() {
           $("#senha").attr("type", "text");
         });

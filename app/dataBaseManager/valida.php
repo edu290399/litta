@@ -5,7 +5,7 @@ $btnLogin = filter_has_var(INPUT_POST, 'btnLogin');
 if($btnLogin){
 	$usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
 	$senhahtml = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
-	$sql = "SELECT  id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE usuario = ? LIMIT 1";
+	$sql = "SELECT  id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE usuario = ? AND confirmado = '1' LIMIT 1";
 	if($stmt = mysqli_prepare($conn, $sql)){
 		mysqli_stmt_bind_param($stmt, "s", $usuario);
 	    if(mysqli_stmt_execute($stmt)){
@@ -61,7 +61,7 @@ if($btnLogin){
 		mysqli_close($conn);
 	}
 	else{
-		$sql = "SELECT id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil FROM usuarios WHERE email = ? LIMIT 1";
+		$sql = "SELECT id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE email = ? AND confirmado = '1' LIMIT 1";
 		if($stmt = mysqli_prepare($conn, $sql)){
 			mysqli_stmt_bind_param($stmt, "s", $usuario);
 			if(mysqli_stmt_execute($stmt)){
@@ -112,7 +112,7 @@ if($btnLogin){
 			}				
 		}
 		else{
-			$_SESSION['msgErro'] = "Cadastro inexistente";
+			$_SESSION['msgErro'] = "Cadastro inexistente ou Não confirmado";
 			header("Location: ../login");
 		}
 		// Close statement
