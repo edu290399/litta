@@ -151,6 +151,7 @@ strong{
 .btEstilo{
     margin-left: -5px;
     font-size: 15px;
+    width:150px !important;
     padding-right: 5px;
     padding-left: 5px ;
     height: 40px;
