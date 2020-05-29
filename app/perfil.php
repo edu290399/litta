@@ -116,21 +116,21 @@ session_start();
             
             <div class="row my-2" style="margin-left:-20px">
                 <form method="POST" action="./adiministrativo">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Sessão Admnistrativa<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
-                </form>
-            </div>
-            <div class="row my-2" style="margin-left:-20px">
-                <form method="POST" action="./galeria">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Visitar Galeria<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
-                </form>
-            </div>
-            <?php } else{ ?>
-            <div class="row my-2" style="margin-left:-20px">
-                <form method="POST" action="./galeria">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Visitar Galeria<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
+                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Admnistrativo<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="external-link"></button>
                 </form>
             </div>
             <?php } ?>
+            <div class="row my-2" style="margin-left:-20px">
+                <form method="POST" action="./galeria">
+                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Galeria<img src="./public/open-iconic/svg/aperture.svg" class="icon" alt="aperture"></button>
+                </form>
+            </div>
+
+            <div class="row my-2" style="margin-left:-20px">
+                <form method="POST" action="./documentos">
+                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
+                </form>
+            </div>
         </div> 
 
                 
@@ -168,10 +168,12 @@ session_start();
                         <p>Telefone: </p>
                         <strong><?php echo $_SESSION['telefone1']?></strong>
                     </div>
-                    <div class="row" >
-                        <p>Telefone 2: </p>
-                        <strong><?php echo $_SESSION['telefone2']?></strong>
-                    </div>
+                    <?php if ($_SESSION['telefone2'] != "" ) {?>
+                        <div class="row" >
+                            <p>Telefone 2: </p>
+                            <strong><?php echo $_SESSION['telefone2']?></strong>
+                        </div>
+                    <?php }?>
                     <div class="row" >
                         <p>País: </p>
                         <strong><?php echo $_SESSION['pais']?></strong>

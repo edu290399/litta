@@ -106,7 +106,13 @@ session_start();
         
             <div class="row my-2" style="margin-left:-20px">
                 <form method="POST" action="./galeriaConsulta">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Visitar Galeria<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
+                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Galeria<img src="./public/open-iconic/svg/aperture.svg" class="icon" alt="aperture"></button>
+                </form>
+            </div>
+
+            <div class="row my-2" style="margin-left:-20px">
+                <form method="POST" action="./documentosConsulta">
+                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
                 </form>
             </div>
          
@@ -147,10 +153,12 @@ session_start();
                         <p>Telefone: </p>
                         <strong><?php echo $_SESSION['telefone1Consulta']?></strong>
                     </div>
-                    <div class="row" >
-                        <p>Telefone 2: </p>
-                        <strong><?php echo $_SESSION['telefone2Consulta']?></strong>
-                    </div>
+                    <?php if ($_SESSION['telefone2Consulta'] != "" ) {?>
+                        <div class="row" >
+                            <p>Telefone 2: </p>
+                            <strong><?php echo $_SESSION['telefone2Consulta']?></strong>
+                        </div>
+                    <?php }?>
                     <div class="row" >
                         <p>País: </p>
                         <strong><?php echo $_SESSION['paisConsulta']?></strong>
@@ -166,7 +174,16 @@ session_start();
                  
                     <div class="row" >
                         <p>Data de Cadastro: </p>
-                        <strong><?php echo $_SESSION['dataCadastroConsulta']?></strong>
+                        <strong><?php 
+                        $dataCriacao = $_SESSION['dataCadastroConsulta'];
+                        $ano = substr($dataCriacao, 0, 4);
+                        $mes = substr($dataCriacao, 5, 2);
+                        $dia = substr($dataCriacao, 8, 2);
+                        $hora = substr($dataCriacao, 11, 2);
+                        $minuto = substr($dataCriacao, 14, 2);
+                        $segundo = substr($dataCriacao, 17, 2);
+                        $dataCriacao = "$dia/$mes/$ano "; 
+                        echo $dataCriacao?></strong>
                     </div>
 
                 </div> 
