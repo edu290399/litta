@@ -48,7 +48,10 @@ if($btnLogin){
 			$_SESSION['estado'] = $estado;
 			$_SESSION['cidade'] = $cidade;
 			$_SESSION['imgPerfil'] = $imgPerfil;
-			header("Location: ../perfil");
+			if($boss== '0')
+				header("Location: ../galeria");
+			else
+				header("Location: ../adiministrativo");
 		}
 		else{
 			$_SESSION['msgErro'] = "Senha incorreta";
@@ -104,7 +107,10 @@ if($btnLogin){
 			$_SESSION['estado'] = $estado;
 			$_SESSION['cidade'] = $cidade;
 			$_SESSION['imgPerfil'] = $imgPerfil;
-			header("Location: ../perfil");
+			if($boss=='0')
+				header("Location: ../galeria");
+			else
+				header("Location: ../adiministrativo");
 		}
 			else{
 				$_SESSION['msgErro'] = "Senha incorreta";
