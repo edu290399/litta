@@ -160,6 +160,21 @@ a:link
     background-color: #414040;
     padding: 5px;
 }
+#deletadaPor{
+    position: absolute;
+    opacity:1;
+    bottom: 0;
+    left:0;
+    border:none;
+    z-index:2 ;
+    color: white;
+    font-family: bigJohn;
+    text-align:center;
+    width:100%;
+    float:left;
+    background-color: #414040;
+    padding: 5px;
+}
 #legendaBt{
     position: absolute;
     opacity:0;
@@ -193,6 +208,10 @@ a:link
   }
   .swiper-slide-active:hover #comentario{
     opacity:1;
+    transition:650ms ease-in-out;
+  }
+  .swiper-slide-active:hover #deletadaPor{
+    opacity:0;
     transition:650ms ease-in-out;
   }
   .swiper-slide-active:hover #legendaBt{
