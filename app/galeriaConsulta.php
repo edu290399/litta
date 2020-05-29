@@ -171,7 +171,7 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="adiministrativo">
+            <a href="perfilConsulta">
                 <span class="option align-baseline" id="option3"> VOLTAR <span>
             </a>
     </ul>
@@ -189,7 +189,7 @@ session_start();
                     <a  href="index" >
                         <span class="modalOption"> QUIZ <span>
                     </a>
-                    <a  href="adiministrativo" >
+                    <a  href="perfilConsulta" >
                         <span class="modalOption"> VOLTAR <span>
                     </a>
                 </ul>
@@ -205,34 +205,39 @@ session_start();
 
 
     <div class="swiper-container">
+            <div class="mx-auto mt-n5" style="width:50px">
+              <div class="row" style="margin-bottom:70px">
+
+                <a href="galeriaConsulta">
+                  <span class="option active"  style="margin-left:-60px">ATIVAS <span>
+                </a>
+
+                <a href="galeriaDeletada">
+                  <span class="option" style="margin-left:60px"> DELETADAS <span>
+                </a>
+              </div>
+            </div>
       <div class="swiper-wrapper">
       <?php
         session_start();
         include_once("./dataBaseManager/conexao.php");
         $idConsulta = $_SESSION['idConsulta'];
-        $sql = "SELECT * FROM galeria WHERE idUsuario = $idConsulta ORDER BY id DESC";
+        $sql = "SELECT * FROM galeria WHERE idUsuario = $idConsulta AND deletada = '0' ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         $cont = 0;
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { 
-            $endereco = $row["endereco"]; $idImage = $row["id"];$indicacao = $row["indicacao"]; $deletadaEm = $row["deletadaEm"]; $deletada = $row["deletada"];   
+            $endereco = $row["endereco"]; $idImage = $row["id"];$indicacao = $row["indicacao"];    
             $sqlLegenda = "SELECT * FROM legendas WHERE idImagem = $idImage ORDER BY id ASC";
             ?>
           
           <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
-            <?php if($indicacao == '1'){?>
-              <span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold">Esta imagem é uma indicação</span>
+          <?php if($indicacao == '1'){?>
+              <span style="bottom: 25px!important;position: relative;font-family:bigJohn;font-weight:bold">LITTA</span>
+            <?}else{?>
+                <span style="bottom: 25px!important;position: relative;font-family:bigJohn;font-weight:bold">Imagem por: <?php echo $_SESSION['usuarioConsulta'] ?></span>
             <?}?>
-            <?php if($deletada == '1'){
-              			$ano = substr($deletadaEm, 0, 4);
-                    $mes = substr($deletadaEm, 5, 2);
-                    $dia = substr($deletadaEm, 8, 2);
-                    $hora = substr($deletadaEm, 11, 2);
-                    $minuto = substr($deletadaEm, 14, 2);
-                    $segundo = substr($deletadaEm, 17, 2);
-                    $dataDeletada = "$dia/$mes/$ano   $hora:$minuto:$segundo"; ?>
-              <br><span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold">Deletada em: <strong style="letter-spacing:2px"> <?php echo $dataDeletada ?> </strong> </span>
-            <?}?>
+  
             <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
                   <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
                   <button type="submit" id="closeBt" style="position: absolute; top:-8px;right:-8px;background-color:#414040; border-radius:100%;width:35px;height:35px;border:none;z-index:10"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
@@ -247,7 +252,7 @@ session_start();
                             echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
                     <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
                       <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                      <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario"></input>
+                      <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off"></input>
                       <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
                     </form>
                 </div>
