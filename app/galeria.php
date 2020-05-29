@@ -242,7 +242,7 @@ session_start();
                           echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
                   <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
                     <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                    <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario"></input>
+                    <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off"></input>
                     <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
                   </form>
             </div>
