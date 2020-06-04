@@ -87,14 +87,49 @@ session_start();
                 </button>
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
-    <div class="row" style="margin-left:2vw">
+    <div class="row" id="rowGeral" >
 
-        <div class="col-md-2 col-5">
+
+
+                
+        <div class="col-md-4 col-12 align-self-top"  >
+
+                    <div class="row my-2" style="margin-left:-20px">
+                        <form method="POST" action="./documentos">
+                                <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
+                        </form>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Usuário: </p>
+                        <strong><?php echo $_SESSION['usuario']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Email: </p>
+                        <strong><?php echo $_SESSION['email']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Nome: </p>
+                        <strong><?php echo $_SESSION['nome']." ".$_SESSION['sobrenome']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Data de Nascimento: </p>
+                        <strong><?php echo $_SESSION['datanas']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Idade: </p>
+                        <strong><?php echo $_SESSION['idade']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Gênero: </p>
+                        <strong><?php echo $_SESSION['sexo']?></strong>
+                    </div>
+        </div>
+        <div class="col-md-4 col-5 align-self-center">
             <div class="row">
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $_SESSION['imgPerfil']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:150px;height:180px">
+                            <img src="<?php echo $_SESSION['imgPerfil']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:200px;height:250px">
                             <div class="carousel-caption">
                             <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Editar<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></button>
                             </div>   
@@ -109,7 +144,7 @@ session_start();
             </form>
             
             <div class="row my-2" style="margin-left:-20px">
-                <strong><?php echo $_SESSION['nome']?></strong>
+                <strong style="color:white"><?php echo $_SESSION['nome']?></strong>
             </div>
             
             <?php if( ($_SESSION['boss']) == '1' ) {?>
@@ -126,81 +161,42 @@ session_start();
                 </form>
             </div>
 
-            <div class="row my-2" style="margin-left:-20px">
-                <form method="POST" action="./documentos">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
-                </form>
-            </div>
+
         </div> 
-
-                
-        <div class="col-md-9 col-12 ml-md-4" >
-            <div class="row" >
-                <div class="col-md-6">
-                    <div class="row" >
-                        <p>Usuário: </p>
-                        <strong><?php echo $_SESSION['usuario']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Email: </p>
-                        <strong><?php echo $_SESSION['email']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Nome: </p>
-                        <strong><?php echo $_SESSION['nome']." ".$_SESSION['sobrenome']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Data de Nascimento: </p>
-                        <strong><?php echo $_SESSION['datanas']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Idade: </p>
-                        <strong><?php echo $_SESSION['idade']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Gênero: </p>
-                        <strong><?php echo $_SESSION['sexo']?></strong>
-                    </div>
-                </div> 
-
-                <div class="col-md-6 ">
-                    <div class="row" >
-                        <p>Telefone: </p>
-                        <strong><?php echo $_SESSION['telefone1']?></strong>
-                    </div>
-                    <?php if ($_SESSION['telefone2'] != "" ) {?>
-                        <div class="row" >
-                            <p>Telefone 2: </p>
-                            <strong><?php echo $_SESSION['telefone2']?></strong>
-                        </div>
-                    <?php }?>
-                    <div class="row" >
-                        <p>País: </p>
-                        <strong><?php echo $_SESSION['pais']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Estado: </p>
-                        <strong><?php echo $_SESSION['estado']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Cidade: </p>
-                        <strong><?php echo $_SESSION['cidade']?></strong>
-                    </div>
-                    <?php if($_SESSION['boss'] == '1'){ ?>
-                        <div class="row" >
-                            <p>Data de Cadastro: </p>
-                            <strong><?php echo $_SESSION['dataCadastro']?></strong>
-                         </div>
-                    <?php } ?>
-                    <div class="row" >
+        <div class="col-md-4 col-12 align-self-top" >
+        
+                    <div class="row my-2" >
                         <form method="POST" action="./perfilEdit">
                             <button class="btEstilo"name="btnEdita" type="submit">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
                         </form>    
                     </div>
-                </div> 
+                    <div class="row mx-auto" >
+                        <p>Telefone: </p>
+                        <strong><?php echo $_SESSION['telefone1']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Telefone 2: </p>
+                        <strong><?php echo $_SESSION['telefone2']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>País: </p>
+                        <strong><?php echo $_SESSION['pais']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Estado: </p>
+                        <strong><?php echo $_SESSION['estado']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Cidade: </p>
+                        <strong><?php echo $_SESSION['cidade']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Data de Cadastro: </p>
+                        <strong><?php echo $_SESSION['dataCadastro']?></strong>
+                    </div>
+
             </div>
         </div>  
-        
     </div>
 </div>
 

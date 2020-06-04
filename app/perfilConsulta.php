@@ -87,109 +87,101 @@ session_start();
                 </button>
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
-    <div class="row" style="margin-left:2vw">
+    <div class="row" id="rowGeral" >
 
-        <div class="col-md-2 col-5">
+
+
+                
+        <div class="col-md-4 col-12 align-self-top"  >
+
+                    <div class="row my-2" style="margin-left:-20px">
+                        <form method="POST" action="./documentosConsulta">
+                                <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
+                        </form>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Usuário: </p>
+                        <strong><?php echo $_SESSION['usuarioConsulta']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Email: </p>
+                        <strong><?php echo $_SESSION['emailConsulta']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Nome: </p>
+                        <strong><?php echo $_SESSION['nomeConsulta']." ".$_SESSION['sobrenomeConsulta']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Data de Nascimento: </p>
+                        <strong><?php echo $_SESSION['datanasConsulta']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Idade: </p>
+                        <strong><?php echo $_SESSION['idadeConsulta']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
+                        <p>Gênero: </p>
+                        <strong><?php echo $_SESSION['sexoConsulta']?></strong>
+                    </div>
+        </div>
+        <div class="col-md-4 col-5 align-self-center">
             <div class="row">
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $_SESSION['imgPerfilConsulta']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:150px;height:180px">
+                            <img src="<?php echo $_SESSION['imgPerfil']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:200px;height:250px">  
                         </div>
                     </div>  
                 </div>  
             </div>
 
+            
             <div class="row my-2" style="margin-left:-20px">
-                <strong><?php echo $_SESSION['nomeConsulta']?></strong>
+                <strong style="color:white"><?php echo $_SESSION['nomeConsulta']?></strong>
             </div>
-        
+            
             <div class="row my-2" style="margin-left:-20px">
                 <form method="POST" action="./galeriaConsulta">
                         <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Galeria<img src="./public/open-iconic/svg/aperture.svg" class="icon" alt="aperture"></button>
                 </form>
             </div>
 
-            <div class="row my-2" style="margin-left:-20px">
-                <form method="POST" action="./documentosConsulta">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
-                </form>
-            </div>
-         
-        </div>
 
-                
-        <div class="col-md-9 col-12 ml-md-4" >
-            <div class="row" >
-                <div class="col-md-6">
-                    <div class="row" >
-                        <p>Usuário: </p>
-                        <strong><?php echo $_SESSION['usuarioConsulta']?></strong>
+        </div> 
+        <div class="col-md-4 col-12 align-self-top" >
+        
+                    <div class="row my-2" >
+                        <form method="POST" action="./perfilEdit">
+                            <button class="btEstilo"name="btnEdita" type="submit" disabled="true">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
+                        </form>    
                     </div>
-                    <div class="row" >
-                        <p>Email: </p>
-                        <strong><?php echo $_SESSION['emailConsulta']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Nome: </p>
-                        <strong><?php echo $_SESSION['nomeConsulta']." ".$_SESSION['sobrenomeConsulta']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Data de Nascimento: </p>
-                        <strong><?php echo $_SESSION['datanasConsulta']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Idade: </p>
-                        <strong><?php echo $_SESSION['idadeConsulta']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Gênero: </p>
-                        <strong><?php echo $_SESSION['sexoConsulta']?></strong>
-                    </div>
-                </div> 
-
-                <div class="col-md-6 ">
-                    <div class="row" >
+                    <div class="row mx-auto" >
                         <p>Telefone: </p>
                         <strong><?php echo $_SESSION['telefone1Consulta']?></strong>
                     </div>
-                    <?php if ($_SESSION['telefone2Consulta'] != "" ) {?>
-                        <div class="row" >
-                            <p>Telefone 2: </p>
-                            <strong><?php echo $_SESSION['telefone2Consulta']?></strong>
-                        </div>
-                    <?php }?>
-                    <div class="row" >
+                    <div class="row mx-auto" >
+                        <p>Telefone 2: </p>
+                        <strong><?php echo $_SESSION['telefone2Consulta']?></strong>
+                    </div>
+                    <div class="row mx-auto" >
                         <p>País: </p>
                         <strong><?php echo $_SESSION['paisConsulta']?></strong>
                     </div>
-                    <div class="row" >
+                    <div class="row mx-auto" >
                         <p>Estado: </p>
                         <strong><?php echo $_SESSION['estadoConsulta']?></strong>
                     </div>
-                    <div class="row" >
+                    <div class="row mx-auto" >
                         <p>Cidade: </p>
                         <strong><?php echo $_SESSION['cidadeConsulta']?></strong>
                     </div>
-                 
-                    <div class="row" >
+                    <div class="row mx-auto" >
                         <p>Data de Cadastro: </p>
-                        <strong><?php 
-                        $dataCriacao = $_SESSION['dataCadastroConsulta'];
-                        $ano = substr($dataCriacao, 0, 4);
-                        $mes = substr($dataCriacao, 5, 2);
-                        $dia = substr($dataCriacao, 8, 2);
-                        $hora = substr($dataCriacao, 11, 2);
-                        $minuto = substr($dataCriacao, 14, 2);
-                        $segundo = substr($dataCriacao, 17, 2);
-                        $dataCriacao = "$dia/$mes/$ano "; 
-                        echo $dataCriacao?></strong>
+                        <strong><?php echo $_SESSION['dataCadastroConsulta']?></strong>
                     </div>
 
-                </div> 
             </div>
         </div>  
-        
     </div>
 </div>
 
