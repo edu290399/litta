@@ -9,7 +9,7 @@ session_start();
   <title>LiitaDocs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="./public/css/perfil.css">
+  <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
   <style>
     @media only screen and (min-width: 990px) {
             .ml-lg-n5 {
@@ -100,9 +100,16 @@ session_start();
     <h2>Documentos p/ <?php echo $_SESSION['nomeConsulta']?></h2>
     
     <div class="container-fluid">
-      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Documento<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
+      <button id="addDoc" onclick="document.getElementById('arquivo').click();">Adicionar Documento<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
     </div>
-    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadDocumento.php" style="display:none" > 
+
+    <div id="spinner" class="text-center" style="display:none">
+      <div class="spinner-border text-light" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <form method="post" onsubmit="carregando();" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadDocumento.php" style="display:none" > 
       <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" type="file" />
       <br/>
       <input type="submit" id="salvar" value="Salvar"/>
@@ -148,11 +155,16 @@ session_start();
         </div>
         
         <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-        
-            <form method="POST" action="./documentos/<?php echo $endereco?>">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:120px;margin-left:2px">Download<img src="./public/open-iconic/svg/data-transfer-download.svg" class="icon" alt="pencil"></button>
-            </form>    
+            <div class="row" style="text-align:left" >
+                <form method="POST" action="./documentos/<?php echo $endereco?>">
+                    <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:120px;margin-left:2px">Download<img src="./public/open-iconic/svg/data-transfer-download.svg" class="icon" alt="pencil"></button>
+                </form>    
 
+                <form method="POST" onsubmit="return confirm('O documento será deletado, tem certeza?');" action="./dataBaseManager/deletaDocumento.php">
+                    <input value = "<?php echo $idDoc?>" name="idDoc" style="display:none"/>
+                    <button type="submit" style="border:none!important"> <img src="./public/open-iconic/svg/x.svg" class="icon" alt="close" style="margin-top:10px !important"></button>
+                </form>    
+            </div>
 
         </div>  
        
@@ -176,6 +188,11 @@ session_start();
     <script>
         function submitForm() {
             document.getElementById("myForm").submit();
+        }
+
+        function carregando() {
+            document.getElementById("addDoc").style.display = "none";
+            document.getElementById("spinner").style.display = "block";
         }
 
         $(document).ready(function(){
