@@ -5,11 +5,11 @@ $btnLogin = filter_has_var(INPUT_POST, 'btnLogin');
 if($btnLogin){
 	$usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
 	$senhahtml = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
-	$sql = "SELECT  id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE usuario = ? AND confirmado = '1' LIMIT 1";
+	$sql = "SELECT  id,nome,sobrenome,sexo,datanas,dataCadastro,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE usuario = ? AND confirmado = '1' LIMIT 1";
 	if($stmt = mysqli_prepare($conn, $sql)){
 		mysqli_stmt_bind_param($stmt, "s", $usuario);
 	    if(mysqli_stmt_execute($stmt)){
-			mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil,$boss);
+			mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$dataCadastro,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil,$boss);
 		} else{
 			echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
 		}
@@ -33,6 +33,13 @@ if($btnLogin){
 				echo mysqli_error($conn);
 			}
 		if(password_verify($senhahtml, $senha)){
+			$ano = substr($dataCadastro, 0, 4);
+			$mes = substr($dataCadastro, 5, 2);
+			$dia = substr($dataCadastro, 8, 2);
+			$hora = substr($dataCadastro, 11, 2);
+			$minuto = substr($dataCadastro, 14, 2);
+			$segundo = substr($dataCadastro, 17, 2);
+			$dataCadastro = "$dia/$mes/$ano "; 
 			$_SESSION['id'] = $id;
 			$_SESSION['boss'] = $boss;
 			$_SESSION['nome'] = $nome;
@@ -64,11 +71,11 @@ if($btnLogin){
 		mysqli_close($conn);
 	}
 	else{
-		$sql = "SELECT id,nome,sobrenome,sexo,datanas,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE email = ? AND confirmado = '1' LIMIT 1";
+		$sql = "SELECT id,nome,sobrenome,sexo,datanas,dataCadastro,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE email = ? AND confirmado = '1' LIMIT 1";
 		if($stmt = mysqli_prepare($conn, $sql)){
 			mysqli_stmt_bind_param($stmt, "s", $usuario);
 			if(mysqli_stmt_execute($stmt)){
-				mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil,$boss);
+				mysqli_stmt_bind_result($stmt, $id,$nome,$sobrenome,$sexo,$datanas,$dataCadastro,$telefone1,$telefone2,$email,$usuario,$senha,$pais,$estado,$cidade,$imgPerfil,$boss);
 			} else{
 				echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
 			}
@@ -92,6 +99,13 @@ if($btnLogin){
 				echo mysqli_error($conn);
 			}
 		if(password_verify($senhahtml, $senha)){
+			$ano = substr($dataCadastro, 0, 4);
+			$mes = substr($dataCadastro, 5, 2);
+			$dia = substr($dataCadastro, 8, 2);
+			$hora = substr($dataCadastro, 11, 2);
+			$minuto = substr($dataCadastro, 14, 2);
+			$segundo = substr($dataCadastro, 17, 2);
+			$dataCadastro = "$dia/$mes/$ano "; 
 			$_SESSION['id'] = $id;
 			$_SESSION['boss'] = $boss;
 			$_SESSION['nome'] = $nome;

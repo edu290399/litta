@@ -32,6 +32,13 @@ if($botao){
 			} else {
 				echo mysqli_error($conn);
 			}
+			$ano = substr($dataCadastro, 0, 4);
+			$mes = substr($dataCadastro, 5, 2);
+			$dia = substr($dataCadastro, 8, 2);
+			$hora = substr($dataCadastro, 11, 2);
+			$minuto = substr($dataCadastro, 14, 2);
+			$segundo = substr($dataCadastro, 17, 2);
+			$dataCadastro = "$dia/$mes/$ano "; 
 			$_SESSION['idConsulta'] = $idConsulta;
 			$_SESSION['nomeConsulta'] = $nome;
 			$_SESSION['sobrenomeConsulta'] = $sobrenome;
