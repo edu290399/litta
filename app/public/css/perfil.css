@@ -141,8 +141,7 @@ a:link
 
 
 strong,p{
-    color:white;
-    float:left;
+    color: black;
 }
 
 strong{
@@ -160,7 +159,22 @@ strong{
     background-color:rgb(190, 187, 187);
 }
 
+.row{
+    justify-content: center; 
+} 
 
+.mx-auto{
+    background-color: white;
+    border-radius: 41px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+
+
+
+#rowGeral{
+    background-color: #414040 !important;
+}
 button, input {
     overflow: visible;
     height: 25px;
