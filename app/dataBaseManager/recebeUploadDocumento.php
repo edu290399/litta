@@ -40,7 +40,7 @@ if( $_SESSION['boss'] == '1' ){
             }
 
     }
-    header("Location: ../documentos");    
+    header("Location: ../documentosConsulta");    
 }
 else{
     $_SESSION['msgErro'] = "Página restrita";
