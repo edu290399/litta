@@ -257,7 +257,17 @@ session_start();
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
     </div>
 
-    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
+    <div class="container-fluid">
+      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Imagem<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
+    </div>
+
+    <div id="spinner" class="text-center" style="display:none">
+        <div class="spinner-border text-dark" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" onsubmit="carregando()" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
       <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" accept='image/*' type="file" />
       <br/>
       <input type="submit" id="salvar" value="Salvar"/>
@@ -265,9 +275,8 @@ session_start();
     
   </div>
 
-  <div class="container-fluid">
-      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Imagem<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
-  </div>
+
+
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -324,6 +333,12 @@ session_start();
       console.log("reloading...");
       return location.reload();
     }
+
+    function carregando() {
+      document.getElementById("photoEdit").style.display = "none";
+      document.getElementById("spinner").style.display = "block";
+    }
+    
     var text = document.getElementsByClassName('legenda');
     var formularios = document.getElementsByClassName('formulario');
     var comentarios = document.getElementsByClassName('comentario');
