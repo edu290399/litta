@@ -36,8 +36,7 @@ session_start();
         
     .swiper-container {
       width: 100%;
-      height:100%;
-      padding-top: 150px;
+      padding-top: 26vh;
       padding-bottom: 50px;    
     }
     .swiper-slide {
@@ -98,45 +97,25 @@ session_start();
      
     @media only screen and (max-width: 760px) {
 
-        .swiper-wraper{
-          width:100%;
-          position:fixed;
-        }
-        .swiper-pagination{
-          margin-left:50px; 
-          margin-top: -120px; 
-
-        }    
-        .swiper-container {
-          padding-top: 15vh;
-          margin-top: -50px;
-
-        }
-        #photoEdit{
-            top: 10px;
-            left:23vw ;
-        }
-        .swiper-slide {
-          margin-top:-275px;
-          transform:  rotateX(90deg) rotateY(0deg)  !important;
-          transition: transform;
-          transition-duration: .5s; 
+      .swiper-slide {
+          opacity: 0;
+          transition: opacity; 
+          transition-timing-function: ease-in;
+          transition-duration: .5s !important; 
         }
 
-
-        .swiper-slide-active{
-          margin-bottom: 50px;
-          margin-top:-50px;
-          transform:  rotateX(0deg) rotateY(0deg) translate(0%, 0px)!important;
-          opacity: 1 !important;
-          transition: transform;
-          transition-duration: .5s;
+        .swiper-slide-active {
+          opacity: 1;
+          transition: opacity; 
+          transition-timing-function: ease-in;
+          transition-duration: .5s !important; 
         }
+
         .containerGeral{
-          margin-left:8%;
-          margin-top:15%;
-          width:90vw;
+
+          width:100vw;
         }
+
         body {
         position:fixed;
       }
@@ -203,15 +182,17 @@ session_start();
   <div class="containerGeral">
 
     <div class="swiper-container">
-            <div class="mx-auto mt-n5" style="width:50px">
-              <div class="row" style="margin-bottom:50px">
+            <div class="centered mt-n5">
+              <div class="row" id="cabecalhoRow"style="margin-bottom:70px;margin-top:-70px">
 
                 <a href="galeria">
-                  <span class="option"  style="margin-left:-60px">SUAS <span>
+                  <span class="option" id="option4">MINHAS<span>
                 </a>
 
+                <span class="option" id="separator"> I <span>
+
                 <a href="galeriaLitta">
-                  <span class="option active" style="margin-left:60px"> LITTA <span>
+                  <span class="option  active"  id="option5"> LITTA <span>
                 </a>
               </div>
             </div>
@@ -242,13 +223,19 @@ session_start();
                           echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
                   <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
                     <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                    <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off"></input>
+                    <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off" required></input>
                     <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
                   </form>
             </div>
           </div>
         <?php
           $cont++;
+          }
+          if($cont == 0){
+            ?> 
+            <span class="mx-auto my-5" style="text-align:center; font-family:bigJohn;width:300px;font-size:16px;font-weight:bold">As imagens selecionadas pela LITTA para você ficarão aqui</span>
+            <?php
+
           } 
         }else {
           echo "mysqli_error($conn)";
@@ -256,18 +243,6 @@ session_start();
       </div>
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
     </div>
-
-    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadGaleria.php" style="display:none" > 
-      <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" accept='image/*' type="file" />
-      <br/>
-      <input type="submit" id="salvar" value="Salvar"/>
-    </form>
-    
-  </div>
-
-  <div class="container-fluid">
-      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Imagem<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
-  </div>
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -280,8 +255,8 @@ session_start();
     var swiper = new Swiper('.swiper-container', {
       effect: 'coverflow',
       speed: 700,
-      updateOnWindowResize: true,
-      direction: getDirection(),
+      updateOnWindowResize: false,
+      direction: 'horizontal',      
       touchRatio: 0.35,
       touchReleaseOnEdges: true,
       centeredSlides: true,
@@ -290,7 +265,7 @@ session_start();
         rotate: 50,
         stretch: 0,
         depth: 100,
-        modifier: 1,
+        modifier: getModifier(),
         slideShadows : false,
       },
       pagination: {
@@ -320,6 +295,13 @@ session_start();
       var number = window.innerWidth <= 760 ? 'auto' : 4;
       return number;
     }
+
+    function getModifier() {
+      var windowWidth = window.innerWidth;
+      var number = window.innerWidth <= 760 ? 0 : 1;
+      return number;
+    }
+    
     function reload() {
       console.log("reloading...");
       return location.reload();

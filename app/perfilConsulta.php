@@ -92,9 +92,9 @@ session_start();
 
 
                 
-        <div class="col-md-4 col-12 align-self-top"  >
+        <div class="col-md-4 col-12 order-2 order-md-1 align-self-top"  >
 
-                    <div class="row my-2" style="margin-left:-20px">
+                    <div class="row my-2 mx-1" >
                         <form method="POST" action="./documentosConsulta">
                                 <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
                         </form>
@@ -124,66 +124,89 @@ session_start();
                         <strong><?php echo $_SESSION['sexoConsulta']?></strong>
                     </div>
         </div>
-        <div class="col-md-4 col-5 align-self-center">
-            <div class="row">
+        <div class="col-md-4 col-12 order-1 order-md-2 align-self-center">
+            <div class="row mx-1">
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $_SESSION['imgPerfil']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:200px;height:250px">  
+                            <img src="<?php echo $_SESSION['imgPerfilConsulta']?>" id="profilePic" alt="profile" class="img-thumbnail" style="width:200px;height:250px">  
                         </div>
                     </div>  
                 </div>  
             </div>
 
             
-            <div class="row my-2" style="margin-left:-20px">
+            <div class="row my-2 " >
                 <strong style="color:white"><?php echo $_SESSION['nomeConsulta']?></strong>
             </div>
             
-            <div class="row my-2" style="margin-left:-20px">
+            <div class="row my-2" >
                 <form method="POST" action="./galeriaConsulta">
-                        <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Galeria<img src="./public/open-iconic/svg/aperture.svg" class="icon" alt="aperture"></button>
+                        <button class="btEstilo "name="btnGaleria" id="btGaleria" type="submit" style="margin-left:5px" >Galeria<img src="./public/open-iconic/svg/aperture.svg" class="icon" alt="aperture"></button>
                 </form>
             </div>
 
 
         </div> 
-        <div class="col-md-4 col-12 align-self-top" >
+        <div class="col-md-4 col-12 order-last align-self-top" >
         
-                    <div class="row my-2" >
-                        <form method="POST" action="./perfilEdit">
-                            <button class="btEstilo"name="btnEdita" type="submit" disabled="true">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
-                        </form>    
-                    </div>
-                    <div class="row mx-auto" >
+            <div class="row " >
+
+                <div class="col-12" >
+                    <div class="row mx-auto " >
                         <p>Telefone: </p>
                         <strong><?php echo $_SESSION['telefone1Consulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                </div>
+
+                <div class="col-12" >
+                    <div class="row mx-auto " >
                         <p>Telefone 2: </p>
                         <strong><?php echo $_SESSION['telefone2Consulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                </div>
+
+                <div class="col-12" >
+                    <div class="row mx-auto " >
                         <p>País: </p>
                         <strong><?php echo $_SESSION['paisConsulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                </div>
+
+                <div class="col-12" >
+                    <div class="row mx-auto " >
                         <p>Estado: </p>
                         <strong><?php echo $_SESSION['estadoConsulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                </div>
+
+                <div class="col-12" >
+                    <div class="row mx-auto " >
                         <p>Cidade: </p>
                         <strong><?php echo $_SESSION['cidadeConsulta']?></strong>
                     </div>
+                </div>
+
+                <div class="col-12" >
                     <div class="row mx-auto" >
                         <p>Data de Cadastro: </p>
                         <strong><?php echo $_SESSION['dataCadastroConsulta']?></strong>
                     </div>
+                </div>
 
-            </div>
-        </div>  
+                <div class="col-12 my-2 order-last order-md-first" >
+                    <div class="row" >
+                        <form method="POST" action="./perfilEdit">
+                            <button class="btEstilo"name="btnEdita" type="submit">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
+                        </form>    
+                    </div>
+                </div>
+
+                
+                
+            </div>  
+        </div>
     </div>
-</div>
 
 </body>
     <!-- Optional JavaScript -->

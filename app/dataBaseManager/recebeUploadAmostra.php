@@ -43,7 +43,7 @@ if( $_SESSION['boss'] == '1' ){
             echo 'Você poderá enviar apenas arquivos "*.jpg;*.jpeg;*.png"<br />';
         }
     }
-    header("Location: ../galeriaConsulta");    
+    header("Location: ../galeriaLittaConsulta");    
 }
 else{
     $_SESSION['msgErro'] = "Página restrita";

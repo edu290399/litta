@@ -36,8 +36,7 @@ session_start();
         
     .swiper-container {
       width: 100%;
-      height:100%;
-      padding-top: 150px;
+      padding-top: 26vh;
       padding-bottom: 50px;    
     }
     .swiper-slide {
@@ -98,44 +97,23 @@ session_start();
      
     @media only screen and (max-width: 760px) {
 
-        .swiper-wraper{
-          width:100%;
-          position:fixed;
-        }
-        .swiper-pagination{
-          margin-left:50px; 
-          margin-top: -120px; 
-
-        }    
-        .swiper-container {
-          padding-top: 15vh;
-          margin-top: -50px;
-
-        }
-        #photoEdit{
-            top: 60px;
-            left:7vw ;
-        }
-        .swiper-slide {
-          margin-top:-275px;
-          transform:  rotateX(90deg) rotateY(0deg)  !important;
-          transition: transform;
-          transition-duration: .5s; 
+      .swiper-slide {
+          opacity: 0;
+          transition: opacity; 
+          transition-timing-function: ease-in;
+          transition-duration: .5s !important; 
         }
 
-
-        .swiper-slide-active{
-          margin-bottom: 50px;
-          margin-top:-50px;
-          transform:  rotateX(0deg) rotateY(0deg) translate(0%, 0px)!important;
-          opacity: 1 !important;
-          transition: transform;
-          transition-duration: .5s;
+        .swiper-slide-active {
+          opacity: 1;
+          transition: opacity; 
+          transition-timing-function: ease-in;
+          transition-duration: .5s !important; 
         }
+
         .containerGeral{
-          margin-left:8%;
-          margin-top:15%;
-          width:90vw;
+
+          width:100vw;
         }
         body {
         position:fixed;
@@ -205,19 +183,21 @@ session_start();
 
 
     <div class="swiper-container">
-            <div class="mx-auto mt-n5" style="width:50px">
-              <div class="row" style="margin-bottom:70px">
+            <div class="centered mt-n5">
+              <div class="row" id="cabecalhoRow"style="margin-bottom:70px;margin-top:-70px">
 
                 <a href="galeriaConsulta">
-                  <span class="option "  style="margin-left:-60px">ATIVAS <span>
+                  <span class="option" id="option4">ATIVAS<span>
                 </a>
 
+                <span class="option" id="separator"> I <span>
+
                 <a href="galeriaDeletada">
-                  <span class="option active" style="margin-left:60px"> DELETADAS <span>
+                  <span class="option active"  id="option5"> DELETADAS<span>
                 </a>
               </div>
             </div>
-      <div class="swiper-wrapper">
+      <div class="swiper-wrapper" style="margin-top:30px">
       <?php
         session_start();
         include_once("./dataBaseManager/conexao.php");
@@ -255,10 +235,17 @@ session_start();
                         if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
                           while($row = mysqli_fetch_assoc($resultLegenda)) {
                             $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
-                            echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
+                            $ano = substr($feitaEm, 0, 4);
+                            $mes = substr($feitaEm, 5, 2);
+                            $dia = substr($feitaEm, 8, 2);
+                            $hora = substr($feitaEm, 11, 2);
+                            $minuto = substr($feitaEm, 14, 2);
+                            $segundo = substr($feitaEm, 17, 2);
+                            $feitaEm = "$dia/$mes/$ano   $hora:$minuto:$segundo"; 
+                            echo $usuario.' - '.$legenda. "\n".'[ '.$feitaEm.' ]'. "\n" ;} } ?></textarea>
                     <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
                       <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                      <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off"></input>
+                      <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off" required></input>
                       <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
                     </form>
                 </div>
@@ -275,14 +262,7 @@ session_start();
           </div>
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
     </div>
-    <div class="container-fluid">
-      <button id="photoEdit" onclick="document.getElementById('arquivo').click()">Adicionar Amostra<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
-    </div>
-    <form method="post" enctype="multipart/form-data" action="./dataBaseManager/recebeUploadAmostra.php" style="display:none" > 
-      <input id="arquivo" name="arquivo[]" onchange="document.getElementById('salvar').click()" multiple="multiple" accept='image/*' type="file" />
-      <br/>
-      <input type="submit" id="salvar" value="Salvar"/>
-    </form>
+    
   </div>
   <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -294,10 +274,11 @@ session_start();
   <!-- Initialize Swiper -->
   <script>
     var swiper = new Swiper('.swiper-container', {
+
       effect: 'coverflow',
       speed: 700,
-      updateOnWindowResize: true,
-      direction: getDirection(),
+      updateOnWindowResize: false,
+      direction: 'horizontal',
       touchRatio: 0.35,
       touchReleaseOnEdges: true,
       centeredSlides: true,
@@ -306,7 +287,7 @@ session_start();
         rotate: 50,
         stretch: 0,
         depth: 100,
-        modifier: 1,
+        modifier: getModifier(),
         slideShadows : false,
       },
       pagination: {
@@ -324,6 +305,8 @@ session_start();
             swiper.changeDirection(getDirection());
           }
         }
+
+
     });
 
     function getDirection() {
@@ -331,15 +314,33 @@ session_start();
       var direction = ( (window.innerWidth / window.innerHeight ) <= 1 ? 'vertical' : 'horizontal' );
       return direction;
     }
+
+    function getWidth() {
+      return window.innerWidth;
+    } 
+
     function getNumber() {
       var windowWidth = window.innerWidth;
       var number = window.innerWidth <= 760 ? 'auto' : 4;
       return number;
     }
+
+    function getModifier() {
+      var windowWidth = window.innerWidth;
+      var number = window.innerWidth <= 760 ? 0 : 1;
+      return number;
+    }
+    
     function reload() {
       console.log("reloading...");
       return location.reload();
     }
+
+    function carregando() {
+      document.getElementById("photoEdit").style.display = "none";
+      document.getElementById("spinner").style.display = "block";
+    }
+    
     var text = document.getElementsByClassName('legenda');
     var formularios = document.getElementsByClassName('formulario');
     var comentarios = document.getElementsByClassName('comentario');
@@ -362,6 +363,7 @@ session_start();
       xhttp.open("POST", "./dataBaseManager/alteraLegenda.php", true);
       xhttp.send(formData);
     }
+
     $(document).ready(function(){
             $('.toggle').click(function(){
               $('.toggle').toggleClass('active');
@@ -380,6 +382,8 @@ session_start();
             window.addEventListener("orientationchange", function() {
               reload();
             });
+
+
         });
   </script>
 </body>

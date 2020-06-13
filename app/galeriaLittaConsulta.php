@@ -39,7 +39,6 @@ session_start();
       padding-top: 26vh;
       padding-bottom: 50px;    
     }
-
     .swiper-slide {
       background-position: center;
       background-size: cover;
@@ -188,13 +187,13 @@ session_start();
               <div class="row" id="cabecalhoRow"style="margin-bottom:70px;margin-top:-70px">
 
                 <a href="galeriaConsulta">
-                  <span class="option active" id="option4"><?php echo $_SESSION['nomeConsulta']?><span>
+                  <span class="option" id="option4"><?php echo $_SESSION['nomeConsulta']?><span>
                 </a>
 
                 <span class="option" id="separator"> I <span>
 
                 <a href="galeriaLittaConsulta">
-                  <span class="option"  id="option5"> LITTA <span>
+                  <span class="option active"  id="option5"> LITTA <span>
                 </a>
               </div>
             </div>
@@ -203,7 +202,7 @@ session_start();
         session_start();
         include_once("./dataBaseManager/conexao.php");
         $idConsulta = $_SESSION['idConsulta'];
-        $sql = "SELECT * FROM galeria WHERE idUsuario = $idConsulta AND deletada = '0' AND indicacao='0' ORDER BY id DESC";
+        $sql = "SELECT * FROM galeria WHERE idUsuario = $idConsulta AND deletada = '0' AND indicacao='1' ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         $cont = 0;
         if (mysqli_query($conn, $sql)) {
@@ -266,8 +265,6 @@ session_start();
         <button type="submit" id="deletadas">Deletadas</button>
       </form>
     </div>
-    
-
 
     <div id="spinner" class="text-center" style="display:none">
       <div class="spinner-border text-dark" role="status">

@@ -82,61 +82,40 @@ session_start();
             </div>
 
             <div class="row my-2" style="margin-left:-20px">
-                <strong><?php echo $_SESSION['nome']?></strong>
+                <strong style="color:white"><?php echo $_SESSION['nome']?></strong>
             </div>
         </div>  
                 
         <div class="col-md-9 col-12  ml-md-4">
             <div class="row" >
                 <div class="col-md-6">
-                    <div class="row" >
-                        <p>Usuário: </p>
-                        <strong><?php echo $_SESSION['usuario']?></strong>
+                    <div class="row mx-auto" >
+                        <input  name="datanas" placeholder="Data de nascimento" id="data"  value="<?php echo $_SESSION['datanas']?>" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required/>
                     </div>
-                    <div class="row" >
-                        <p>Email: </p>
-                        <strong><?php echo $_SESSION['email']?></strong>
+                    <div class="row mx-auto" >
+                        <input name="sexo" placeholder="Sexo" value="<?php echo $_SESSION['sexo']?>" required/>
                     </div>
-                    <div class="row" >
-                        <p>Nome: </p>
-                        <strong><?php echo $_SESSION['nome']." ".$_SESSION['sobrenome']?></strong>
+
+                    <div class="row mx-auto" >
+                        <input  name="telefone1" placeholder="Telefone" onload="validateTel1()" onfocus="validateTel1()" onkeydown="validateTel1()" id="tel1" value="<?php echo $_SESSION['telefone1']?>" required/>
                     </div>
-                    <div class="row" >
-                        <p>Data de Nascimento </p>
-                        <input  name="datanas" id="data"  value="<?php echo $_SESSION['datanas']?>" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required/>
+                    <div class="row mx-auto" >
+                        <input name="telefone2" placeholder="Telefone 02" onload="validateTel2()" onfocus="validateTel2()" onkeydown="validateTel2()" id="tel2" value="<?php echo $_SESSION['telefone2']?>"/>
                     </div>
-                    <div class="row" >
-                        <p>Idade: </p>
-                        <strong><?php echo $_SESSION['idade']?></strong>
-                    </div>
-                    <div class="row" >
-                        <p>Gênero: </p>
-                        <input name="sexo" value="<?php echo $_SESSION['sexo']?>" required/>
-                    </div>
+
                 </div> 
 
                 <div class="col-md-5">
-                    <div class="row" >
-                        <p>Telefone: </p>
-                        <input  name="telefone1" onload="validateTel1()" onfocus="validateTel1()" onkeydown="validateTel1()" id="tel1" value="<?php echo $_SESSION['telefone1']?>" required/>
+                    <div class="row mx-auto" >
+                        <input name="pais" placeholder="País" value="<?php echo $_SESSION['pais']?>" required/>
                     </div>
-                    <div class="row" >
-                        <p>Telefone 2: </p>
-                        <input name="telefone2" onload="validateTel2()" onfocus="validateTel2()" onkeydown="validateTel2()" id="tel2" value="<?php echo $_SESSION['telefone2']?>"/>
+                    <div class="row mx-auto" >
+                        <input name="estado" placeholder="Estado" value="<?php echo $_SESSION['estado']?>" required/>
                     </div>
-                    <div class="row" >
-                        <p>País: </p>
-                        <input name="pais" value="<?php echo $_SESSION['pais']?>" required/>
+                    <div class="row mx-auto" >
+                        <input name="cidade" placeholder="Cidade" value="<?php echo $_SESSION['cidade']?>" required/>
                     </div>
-                    <div class="row" >
-                        <p>Estado: </p>
-                        <input name="estado" value="<?php echo $_SESSION['estado']?>" required/>
-                    </div>
-                    <div class="row" >
-                        <p>Cidade: </p>
-                        <input name="cidade" value="<?php echo $_SESSION['cidade']?>" required/>
-                    </div>
-                    <div class="row" >
+                    <div class="row" style="margin-top:20px" >
                         <button class="btEstilo"name="btnEdita" type="submit">Confirmar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
                     </div>
                 </div> 

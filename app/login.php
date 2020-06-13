@@ -87,20 +87,21 @@ unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email'],$_SESSION['idConsul
             <?php unset($_SESSION['msgErro']);
           } ?>
 
-        <form method="POST" action="./dataBaseManager/valida.php">
+        <form method="POST" action="./dataBaseManager/valida.php" id="loginForm">
             <h2 style="margin-left:10px">LOGIN</h2>
             <button disabled="true" class="btIcon"><img src="./public/open-iconic/svg/person.svg" class="iconLogin" alt="check" style="margin-bottom:1px ; width:18px"></button>
-            <input name="usuario" class="inputLogin" placeholder="Usuário ou E-mail"/>
+            <input name="usuario" class="inputLogin" placeholder="Usuário ou E-mail" required/>
             <br>
             <button disabled="true" class="btIcon"><img src="./public/open-iconic/svg/lock-locked.svg" class="iconLogin" alt="check" style="width:20px"></button>
-            <input name="senha" class="inputLogin" type="password" placeholder="Senha"/>
+            <input name="senha" class="inputLogin" type="password" placeholder="Senha" autocomplete="off" onKeyPress="return submitenter(this,event)" required/>
             <br>
             <button id="btcadastrar" name="btnLogin" type="submit" style="margin-left:10px">Entrar</button>
+            </form>
+            
             <br>
             <br>
             <a href="register"><span id="dica" style="float:left;margin-left:2%">CADASTRAR</span></a>
             <a href="perdisenha"><span id="dica"style="float:right;margin-right:2%" >Esqueceu a senha?</span></a>
-        </form>
 
         </div>
         
@@ -121,7 +122,21 @@ unset($_SESSION['id'], $_SESSION['nome'], $_SESSION['email'],$_SESSION['idConsul
               $('.navbar').toggleClass('active');
             });
         });
+        function submitenter(myfield,e){
+          var keycode;
+          if (window.event) keycode = window.event.keyCode;
+          else if (e) keycode = e.which;
+          else return true;
 
+          if (keycode == 13)
+          {
+          document.getElementById("loginForm").submit();
+          // myfield.form.submit();
+          return false;
+          }
+          else
+          return true;
+        }
   </script>
 
   </html>

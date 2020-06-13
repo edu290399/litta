@@ -1,8 +1,7 @@
 <?php
 session_start();
 include_once("conexao.php");
-$btnLogin = filter_has_var(INPUT_POST, 'btnLogin');
-if($btnLogin){
+
 	$usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
 	$senhahtml = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
 	$sql = "SELECT  id,nome,sobrenome,sexo,datanas,dataCadastro,telefone1,telefone2,email,usuario, senha, pais,estado,cidade,imgPerfil,boss FROM usuarios WHERE usuario = ? AND confirmado = '1' LIMIT 1";
@@ -141,11 +140,7 @@ if($btnLogin){
 		// Close connection
 		mysqli_close($conn);
 	}
-}
-else{
-	$_SESSION['msg'] = "Página não encontrada fim";
-	header("Location: login");
-}
+
 ?>
 
  

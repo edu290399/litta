@@ -97,7 +97,7 @@ session_start();
                 </button>
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
-    <h2>Documentos p/ <?php echo $_SESSION['nomeConsulta']?></h2>
+    <h2 class="ml-sm-0 ml-md-3">Documentos p/ <?php echo $_SESSION['nomeConsulta']?></h2>
     
     <div class="container-fluid">
       <button id="addDoc" onclick="document.getElementById('arquivo').click();">Adicionar Documento<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="pencil" style="margin-bottom:3px" ></button>
@@ -133,12 +133,12 @@ session_start();
         ?>
     <div class="row pl-lg-2 py-3 border-bottom border-white">
 
-        <div class="col-md-5 col-lg-5 col-12">
-            <div class="row">
+        <div class="col-md-5 col-lg-5 col-12" >
+            <div class="row ml-0">
                 <p>Nome: </p>
                 <strong style="  max-width: 25ch;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><?php echo $nome?></strong>
             </div>
-            <div class="row">
+            <div class="row ml-0" >
                 <form method="POST" action="./dataBaseManager/visibilidadeDocumento.php">
           <input type="checkbox" name="visivel" onclick="this.form.submit()"  <?php if ($visivel == '1') {?> checked  <?php } ?> ><img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye" style="margin-top:-26px"></button>
                     <input value = "<?php echo $idDoc?>" name="idDoc" style="display:none"/>
@@ -147,14 +147,14 @@ session_start();
         </div> 
 
                 
-        <div class="col-md-5 col-lg-5 col-12" >
+        <div class="col-md-5 col-lg-5 col-12 " >
 
             <p>Upload em: </p>
             <strong style="letter-spacing:2px"><?php echo $dataCriacao?></strong>
  
         </div>
         
-        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
+        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 ml-3 col-12" style="text-align:left" >
             <div class="row" style="text-align:left" >
                 <form method="POST" action="./documentos/<?php echo $endereco?>">
                     <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:120px;margin-left:2px">Download<img src="./public/open-iconic/svg/data-transfer-download.svg" class="icon" alt="pencil"></button>
