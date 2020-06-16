@@ -215,7 +215,7 @@ session_start();
             <?php if($indicacao == '1'){?>
               <span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold">LITTA</span>
             <?}else{?>
-                <span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold">Imagem por: <?php echo $_SESSION['usuarioConsulta'] ?></span>
+                <span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold;background-color:white;z-index:3">Imagem por: <?php echo $_SESSION['usuarioConsulta'] ?></span>
             <?}?>
             <?php
               			$ano = substr($deletadaEm, 0, 4);
@@ -225,7 +225,7 @@ session_start();
                     $minuto = substr($deletadaEm, 14, 2);
                     $segundo = substr($deletadaEm, 17, 2);
                     $dataDeletada = "$dia/$mes/$ano   $hora:$minuto:$segundo"; ?>
-              <br><span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold">Deletada em: <strong style="letter-spacing:2px"> <?php echo $dataDeletada ?> </strong> </span>
+              <br><span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold;background-color:white;z-index:3">Deletada em: <strong style="letter-spacing:2px"> <?php echo $dataDeletada ?> </strong> </span>
             
 
                 
@@ -246,7 +246,7 @@ session_start();
                     <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
                       <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
                       <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off" required></input>
-                      <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
+                      <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-chevron-right" style="margin-left:2px"></span></button>
                     </form>
                 </div>
                 <input value="Deletada por: <?php echo $deletadaPor ?> " name="naoEnvia" class="comentario" id="deletadaPor" disabled="true"></input>
@@ -342,10 +342,12 @@ session_start();
     }
     
     var text = document.getElementsByClassName('legenda');
+    var botao = document.getElementsByClassName('legendaBt');
     var formularios = document.getElementsByClassName('formulario');
     var comentarios = document.getElementsByClassName('comentario');
 
      function insereLegenda(e,cont){
+      botao[cont].disabled = true;
       var form = document.querySelector('form');
       e.preventDefault(); // <--- isto pára o envio da form
       var url = form.action;
@@ -357,11 +359,14 @@ session_start();
         if (this.readyState == 4 && this.status == 200) {
         // document.getElementById("txtHint").innerHTML = this.responseText;
         text[cont].value += this.responseText;
-        comentarios[cont].value = "";
+        text[cont].scrollTop = text[cont].scrollHeight;
         }
       };
       xhttp.open("POST", "./dataBaseManager/alteraLegenda.php", true);
       xhttp.send(formData);
+      comentarios[cont].value = "";
+      botao[cont].disabled = false;
+
     }
 
     $(document).ready(function(){

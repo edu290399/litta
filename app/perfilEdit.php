@@ -39,8 +39,8 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="./dataBaseManager/sair.php">
-                <span class="option align-baseline" id="option3"> SAIR <span>
+            <a href="perfil">
+                <span class="option align-baseline" id="option3"> VOLTAR <span>
             </a>
     </ul>
 
@@ -57,8 +57,8 @@ session_start();
                     <a  href="index" >
                         <span class="modalOption"> QUIZ <span>
                     </a>
-                    <a  href="./dataBaseManager/sair.php" >
-                        <span class="modalOption"> SAIR <span>
+                    <a  href="perfil" >
+                        <span class="modalOption"> VOLTAR <span>
                     </a>
                 </ul>
         </div>
@@ -68,14 +68,14 @@ session_start();
 </nav>
 <form method="POST" action="./dataBaseManager/editar.php">
 <div class="container-fluid">
-    <div class="row" style="margin-left:2vw">
+    <div class="row" style="margin-left:1vw;height:70vh">
 
-    <div class="col-md-2 col-5">
+    <div class="col-md-2 col-12 align-self-center" >
             <div class="row">
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail" style="width:150px;height:180px"> 
+                            <img src="<?php echo $_SESSION['imgPerfil']?>" alt="profile" class="img-thumbnail" style="width:250px;height:250px"> 
                         </div>
                     </div>  
                 </div>  
@@ -86,7 +86,7 @@ session_start();
             </div>
         </div>  
                 
-        <div class="col-md-9 col-12  ml-md-4">
+        <div class="col-md-9 col-12  ml-md-4 align-self-center">
             <div class="row" >
                 <div class="col-md-6">
                     <div class="row mx-auto" >
@@ -105,7 +105,7 @@ session_start();
 
                 </div> 
 
-                <div class="col-md-5">
+                <div class="col-md-5 align-self-center">
                     <div class="row mx-auto" >
                         <input name="pais" placeholder="País" value="<?php echo $_SESSION['pais']?>" required/>
                     </div>

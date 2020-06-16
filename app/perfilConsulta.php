@@ -92,30 +92,26 @@ session_start();
 
 
                 
-        <div class="col-md-4 col-12 order-2 order-md-1 align-self-top"  >
+        <div class="col-md-4 col-12 order-2 order-md-1  align-self-center"  >
 
-                    <div class="row my-2 mx-1" >
-                        <form method="POST" action="./documentosConsulta">
-                                <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
-                        </form>
-                    </div>
+
                     <div class="row mx-auto" >
                         <p>Usuário: </p>
                         <strong><?php echo $_SESSION['usuarioConsulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                    <div class="row mx-auto my-4" >
                         <p>Email: </p>
                         <strong><?php echo $_SESSION['emailConsulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                    <div class="row mx-auto my-4" >
                         <p>Nome: </p>
                         <strong><?php echo $_SESSION['nomeConsulta']." ".$_SESSION['sobrenomeConsulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                    <div class="row mx-auto my-4" >
                         <p>Data de Nascimento: </p>
                         <strong><?php echo $_SESSION['datanasConsulta']?></strong>
                     </div>
-                    <div class="row mx-auto" >
+                    <div class="row mx-auto my-4" >
                         <p>Idade: </p>
                         <strong><?php echo $_SESSION['idadeConsulta']?></strong>
                     </div>
@@ -124,8 +120,8 @@ session_start();
                         <strong><?php echo $_SESSION['sexoConsulta']?></strong>
                     </div>
         </div>
-        <div class="col-md-4 col-12 order-1 order-md-2 align-self-center">
-            <div class="row mx-1">
+        <div class="col-md-3 col-12 order-1 order-md-2 align-self-center">
+            <div class="row mx-1 mb-1">
                 <div class="carousel slide carousel-fade" data-pause="hover" data-interval="6000" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -135,76 +131,58 @@ session_start();
                 </div>  
             </div>
 
-            
-            <div class="row my-2 " >
-                <strong style="color:white"><?php echo $_SESSION['nomeConsulta']?></strong>
+            <div class="row my-2 mx-1" >
+                <form method="POST" action="./documentosConsulta">
+                    <button class="btEstilo "name="btnGaleria" type="submit" style="margin-left:5px" >Documentos<img src="./public/open-iconic/svg/document.svg" class="icon" alt="document"></button>
+                </form>
             </div>
-            
-            <div class="row my-2" >
+
+            <div class="row mb-3 mb-md-0" >
                 <form method="POST" action="./galeriaConsulta">
-                        <button class="btEstilo "name="btnGaleria" id="btGaleria" type="submit" style="margin-left:5px" >Galeria<img src="./public/open-iconic/svg/aperture.svg" class="icon" alt="aperture"></button>
+                    <button class="btEstilo "name="btnGaleria" id="btGaleria" type="submit" >Galeria</button>
+                    <img src="./public/open-iconic/svg/aperture.svg" class="icon" alt="aperture" id="galeriaIcone">
                 </form>
             </div>
 
 
         </div> 
-        <div class="col-md-4 col-12 order-last align-self-top" >
+        <div class="col-md-4 col-12 order-last align-self-center" >
         
-            <div class="row " >
 
-                <div class="col-12" >
                     <div class="row mx-auto " >
                         <p>Telefone: </p>
                         <strong><?php echo $_SESSION['telefone1Consulta']?></strong>
                     </div>
-                </div>
 
-                <div class="col-12" >
-                    <div class="row mx-auto " >
+                    <div class="row mx-auto my-4" >
                         <p>Telefone 2: </p>
                         <strong><?php echo $_SESSION['telefone2Consulta']?></strong>
                     </div>
-                </div>
 
-                <div class="col-12" >
-                    <div class="row mx-auto " >
+                    <div class="row mx-auto my-4" >
                         <p>País: </p>
                         <strong><?php echo $_SESSION['paisConsulta']?></strong>
                     </div>
-                </div>
 
-                <div class="col-12" >
-                    <div class="row mx-auto " >
+                    <div class="row mx-auto my-4" >
                         <p>Estado: </p>
                         <strong><?php echo $_SESSION['estadoConsulta']?></strong>
                     </div>
-                </div>
 
-                <div class="col-12" >
-                    <div class="row mx-auto " >
+                    <div class="row mx-auto my-4" >
                         <p>Cidade: </p>
                         <strong><?php echo $_SESSION['cidadeConsulta']?></strong>
                     </div>
-                </div>
 
-                <div class="col-12" >
                     <div class="row mx-auto" >
                         <p>Data de Cadastro: </p>
                         <strong><?php echo $_SESSION['dataCadastroConsulta']?></strong>
                     </div>
-                </div>
 
-                <div class="col-12 my-2 order-last order-md-first" >
-                    <div class="row" >
-                        <form method="POST" action="./perfilEdit">
-                            <button class="btEstilo"name="btnEdita" type="submit">Editar campos<img src="./public/open-iconic/svg/pencil.svg" class="icon" alt="pencil"></button>
-                        </form>    
-                    </div>
-                </div>
+
 
                 
                 
-            </div>  
         </div>
     </div>
 

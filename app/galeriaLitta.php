@@ -210,10 +210,7 @@ session_start();
             ?>
           
           <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
-              <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
-                <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                <button type="submit" id="closeBt" style="position: absolute; top:-8px;right:-8px;background-color:#414040; border-radius:100%;width:35px;height:35px;border:none;z-index:10"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
-              </form>
+
             <div class="inside">
                     <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
                     <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
@@ -224,7 +221,7 @@ session_start();
                   <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
                     <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
                     <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off" required></input>
-                    <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-arrow-thick-right"></span></button>
+                    <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-chevron-right"style="margin-left:2px"></span></button>
                   </form>
             </div>
           </div>
@@ -307,10 +304,12 @@ session_start();
       return location.reload();
     }
     var text = document.getElementsByClassName('legenda');
+    var botao = document.getElementsByClassName('legendaBt');
     var formularios = document.getElementsByClassName('formulario');
     var comentarios = document.getElementsByClassName('comentario');
 
      function insereLegenda(e,cont){
+      botao[cont].disabled = true;
       var form = document.querySelector('form');
       e.preventDefault(); // <--- isto pára o envio da form
       var url = form.action;
@@ -322,11 +321,14 @@ session_start();
         if (this.readyState == 4 && this.status == 200) {
         // document.getElementById("txtHint").innerHTML = this.responseText;
         text[cont].value += this.responseText;
-        comentarios[cont].value = "";
+        text[cont].scrollTop = text[cont].scrollHeight;
         }
       };
       xhttp.open("POST", "./dataBaseManager/alteraLegenda.php", true);
       xhttp.send(formData);
+      comentarios[cont].value = "";
+      botao[cont].disabled = false;
+
     }
 
     $(document).ready(function(){

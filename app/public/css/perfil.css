@@ -149,19 +149,43 @@ strong{
 }
 .btEstilo{
     font-size: 15px;
-    width:150px !important;
+    width:150px;
     padding-right: 5px;
     padding-left: 5px ;
     height: 40px;
-    border-radius: 5px;
+    border-radius: 41px;
     border:none;
     background-color:rgb(190, 187, 187);
 }
+#editarPerfil{
+    background-color: #cfcfcf !important;
+    color: white;
+    width:120px !important;
+    height: 30px !important;
+    border-radius: 30px;
+    font-size:15px !important;
+    padding: 0 0 0 0 !important;
+    border:none !important;
+    
+}
 #btGaleria{
+    background-color:transparent;
+    margin-left:-1.5px;
+    margin-top:-5px;
+    color:rgb(190, 187, 187);
+    position:absolute;
+    font-weight:bold;
+    z-index:3;
+    width:150px;
+    height:120px;
     border-radius:50%;
     padding: 0;
-    width:100px;
+
+}
+#galeriaIcone{
+    width: 130px;
     height: 100px;
+    filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.75);
 }
 
 .row{
@@ -196,6 +220,7 @@ input{
     margin-bottom: 10px;
     width:100%;
     text-align: center;
+    background-color: transparent;
     border-radius: 41px;
 
 }
