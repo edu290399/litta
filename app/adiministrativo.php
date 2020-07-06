@@ -102,10 +102,10 @@ session_start();
     <?php
         include_once("./dataBaseManager/conexao.php");
         
-        $sql = "SELECT id,nome,sobrenome,email FROM usuarios WHERE boss = '0' ORDER BY nome";
+        $sql = "SELECT id,nome,sobrenome,email,notificacao FROM usuarios WHERE boss = '0' ORDER BY notificacao = 1 DESC,dataCadastro DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $sobrenome = $row["sobrenome"]; $email = $row["email"] ?>
+          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $sobrenome = $row["sobrenome"]; $email = $row["email"];$notificacao = $row["notificacao"] ?>
             
 
 
@@ -129,7 +129,7 @@ session_start();
         <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
         
             <form method="POST" action="./dataBaseManager/adiministrativo.php">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Visitar<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
+                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px; <?php if ($notificacao == '1'){ ?> background-color:green; <?php } ?>">Visitar<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
             </form>    
 
         </div>  

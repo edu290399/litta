@@ -23,6 +23,17 @@
                 include_once("conexao.php");
                 $id = $_SESSION['id'];
                 $sql = "INSERT INTO galeria (idUsuario,endereco) VALUES (?, ?)";
+                $sqlNot = "UPDATE usuarios SET notificacao = '1' WHERE id = ?";
+
+                if($stmt = mysqli_prepare($conn, $sqlNot)){
+                    mysqli_stmt_bind_param($stmt, "s", $id);
+                    if(!mysqli_stmt_execute($stmt)){
+                        echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
+                    }
+                }
+                else{
+                    echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
+                }
                 if( $stmt = mysqli_prepare($conn, $sql) ){
                     mysqli_stmt_bind_param($stmt, "ss", $id,$destino);
                     if(mysqli_stmt_execute($stmt)){

@@ -5,7 +5,18 @@ $botao = filter_has_var(INPUT_POST, 'usuario');
 
 if($botao){
 	$usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
-    $sql = "SELECT * FROM usuarios WHERE id = ?";
+	$sql = "SELECT id, nome, sobrenome, sexo, datanas, telefone1, telefone2, email, usuario, senha, pais, estado, cidade, imgPerfil, dataCadastro, boss, confirmado FROM usuarios WHERE id = ?";
+	$sqlNot = "UPDATE usuarios SET notificacao = '0' WHERE id = ?";
+
+	if($stmt = mysqli_prepare($conn, $sqlNot)){
+		mysqli_stmt_bind_param($stmt, "s", $usuario);
+		if(!mysqli_stmt_execute($stmt)){
+			echo "ERROR: Could not execute query: $sql. " . mysqli_error($conn);
+		}
+	}
+	else{
+		echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
+	}
 	if($stmt = mysqli_prepare($conn, $sql)){
 		mysqli_stmt_bind_param($stmt, "s", $usuario);
 	    if(mysqli_stmt_execute($stmt)){
