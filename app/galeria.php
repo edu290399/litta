@@ -12,7 +12,7 @@ session_start();
   <link href="./public/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./public/css/galeria.css">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+  <link rel="stylesheet" href="./public/css/swiper.css">
 
   <!-- Demo styles -->
   <style>
@@ -39,6 +39,7 @@ session_start();
       padding-top: 26vh;
       padding-bottom: 50px;    
     }
+
     .swiper-slide {
       background-position: center;
       background-size: cover;
@@ -46,133 +47,145 @@ session_start();
       width: 300px;
       height: 300px;
     }
+    
     .swiper-slide-active{
       opacity: 1 !important;
     }
 
-        ::-webkit-input-placeholder {
-          position:relative;
-          color: white;  
-          text-align:center;
-          top:45%;
-        }
+    ::-webkit-input-placeholder {
+      position:relative;
+      color: white;  
+      text-align:center;
+      top:45%;
+    }
         
-        textarea:-moz-placeholder { /* Firefox 18- */
-          position:absolute;
-          color: white;  
-          text-align:center;
-          top:45%;
-          line-height: 250px;
-        }
+    textarea:-moz-placeholder { /* Firefox 18- */
+      position:absolute;
+      color: white;  
+      text-align:center;
+      top:45%;
+      line-height: 250px;
+    }
         
-        textarea::-moz-placeholder {  /* Firefox 19+ */
-          position:absolute;
-          color: white;  
-          text-align:center;
-          top:45%;
-          line-height: 250px;
-
-        }
+    textarea::-moz-placeholder {  /* Firefox 19+ */
+      position:absolute;
+      color: white;  
+      text-align:center;
+      top:45%;
+      line-height: 250px;
+    }
         
-        :-ms-input-placeholder {  
-          position:relative;
-          color: white;  
-          text-align:center;
-          top:45%;
-        }
+    :-ms-input-placeholder {  
+      position:relative;
+      color: white;  
+      text-align:center;
+      top:45%;
+    }
 
-        input:-moz-placeholder{
-          position:relative;
-          color: white;  
-          text-align:center;
-          top:45%;
-        }
+    input:-moz-placeholder{
+      position:relative;
+      color: white;  
+      text-align:center;
+      top:45%;
+    }
 
-        textarea:-moz-placeholder {
-          position:relative;
-          color: white;  
-          text-align:center;
-          top:45%;
-        }
+    textarea:-moz-placeholder {
+      position:relative;
+      color: white;  
+      text-align:center;
+      top:45%;
+    }
      
     @media only screen and (max-width: 760px) {
 
-        .swiper-slide {
-          opacity: 0;
-          transition: opacity; 
-          transition-timing-function: ease-in;
-          transition-duration: .5s !important; 
-        }
+      .swiper-slide {
+        opacity: 0;
+        transition: opacity; 
+        transition-timing-function: ease-in;
+        transition-duration: .5s !important; 
+      }
 
-        .swiper-slide-active {
-          opacity: 1;
-          transition: opacity; 
-          transition-timing-function: ease-in;
-          transition-duration: .5s !important; 
-        }
+      .swiper-slide-active {
+        opacity: 1;
+        transition: opacity; 
+        transition-timing-function: ease-in;
+        transition-duration: .5s !important; 
+      }
 
         .containerGeral{
-
           width:100vw;
         }
 
         body {
         position:fixed;
       }
+
     }
 
   </style>
 </head>
+
 <body>
 <nav id="navTest" class="navbar navbar-expand-md bg-white navbar-light fixed-top mb-5 ">
 
     <a class="navbar-brand" href="index" id="logoLitta">LITTA</a>
 
     <button id="toggleBt"  class="navbar-toggler" data-toggle="modal" data-target="#myModal">
-    <div class="toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>   
+
+      <div class="toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>  
+
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-            <a  href="work" >
-                <span class="option align-baseline" id="option1"> WORK <span>
-            </a>
-            <br>
-            <br>
-            <a href="#notJump">
-                <span class="option align-baseline" id="option2"> QUIZ <span>
-            </a>
-            <br>
-            <br>
-            <a href="perfil">
-                <span class="option align-baseline" id="option3"> PERFIL<span>
-            </a>
-    </ul>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+              <a  href="work" >
+                  <span class="option align-baseline" id="option1"> WORK <span>
+              </a>
+
+              <br>
+              <br>
+
+              <a href="#notJump">
+                  <span class="option align-baseline" id="option2"> QUIZ <span>
+              </a>
+
+              <br>
+              <br>
+
+              <a href="perfil">
+                  <span class="option align-baseline" id="option3"> PERFIL<span>
+              </a>
+              
+      </ul>
 
     </div>
 
     <div class="modal  fade" id="myModal" >
-
         <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content d-block text-centered" style="border:none !important">
-                <ul class="navbar-nav ">
-                    <a  href="work" >
-                        <span class="modalOption"> WORK <span>
-                    </a>
-                    <a  href="index" >
-                        <span class="modalOption"> QUIZ <span>
-                    </a>
-                    <a  href="perfil" >
-                        <span class="modalOption"> PERFIL <span>
-                    </a>
-                </ul>
-        </div>
+          <div class="modal-content d-block text-centered" style="border:none !important">
+
+            <ul class="navbar-nav ">
+
+              <a  href="work" >
+                <span class="modalOption"> WORK <span>
+              </a>
+              <a  href="index" >
+                <span class="modalOption"> QUIZ <span>
+              </a>
+              <a  href="perfil" >
+                <span class="modalOption"> PERFIL <span>
+              </a>
+
+              </ul>
+
+          </div>
         </div>
     </div>   
 
@@ -182,21 +195,25 @@ session_start();
   <div class="containerGeral">
 
     <div class="swiper-container">
-            <div class="centered mt-n5">
-              <div class="row" id="cabecalhoRow"style="margin-bottom:70px;margin-top:-70px">
 
-                <a href="galeria">
-                  <span class="option  active" id="option4">MINHAS<span>
-                </a>
+      <div class="centered mt-n5">
+        <div class="row" id="cabecalhoRow"style="margin-bottom:70px;margin-top:-70px">
 
-                <span class="option" id="separator"> I <span>
+          <a href="galeria">
+            <span class="option  active" id="option4">MINHAS<span>
+          </a>
 
-                <a href="galeriaLitta">
-                  <span class="option"  id="option5"> LITTA <span>
-                </a>
-              </div>
-            </div>
+          <span class="option" id="separator"> I <span>
+
+          <a href="galeriaLitta">
+            <span class="option"  id="option5"> LITTA <span>
+          </a>
+
+        </div>
+      </div>
+
       <div class="swiper-wrapper">
+
       <?php
         include_once("./dataBaseManager/conexao.php");
         $id = $_SESSION['id'];
@@ -205,41 +222,50 @@ session_start();
         $cont = 0;
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { 
-            $endereco = $row["endereco"]; $idImage = $row["id"] ;   
+            $endereco = $row["endereco"]; 
+            $idImage = $row["id"] ;   
             $sqlLegenda = "SELECT * FROM legendas WHERE idImagem = $idImage ORDER BY id ASC";
-            ?>
+      ?>
           
-          <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
-              <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
-                <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                <button type="submit" id="closeBt"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
-              </form>
-            <div class="inside">
-                    <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
-                    <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
-                      if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
-                        while($row = mysqli_fetch_assoc($resultLegenda)) {
-                          $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
-                          echo $usuario.' - '.$legenda."\n"; } } ?></textarea>
-                  <form method="POST" class="formulario"  onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
-                    <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
-                    <input placeholder = "Adicione um comentário"  name="texto" class="comentario" id="comentario" autocomplete="off" required></input>
-                    <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-chevron-right" style="margin-left:2px"></span></button>
-                  </form>
-            </div>
-          </div>
-        <?php
-          $cont++;
-          }
-          if($cont == 0){
-            ?> 
-            <span class="mx-auto my-5" style="text-align:center; font-family:bigJohn;width:300px;font-size:16px;font-weight:bold">As imagens escolhidas por você ficarão aqui</span>
-            <?php
+      <div class="swiper-slide" style="background-image:url(<?php echo $endereco ?>);background-size:100% 100%">
 
-          } 
-        }else {
-          echo "mysqli_error($conn)";
-        }?>
+        <form method="POST" onsubmit="return confirm('A imagem será deletada, tem certeza?');" action="./dataBaseManager/deletaImagem.php" > 
+          <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
+          <button type="submit" id="closeBt"><span class="oi oi-x" style="filter: invert(1) sepia(0) saturate(1) hue-rotate(0deg) brightness(1.5);"></span></button>
+        </form>
+
+        <div class="inside">
+          <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
+            <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
+              if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
+                while($row = mysqli_fetch_assoc($resultLegenda)) {
+                  $idUsuario = $row["idUsuario"]; 
+                  $usuario = $row["usuario"];  
+                  $legenda = $row["texto"]; 
+                  $feitaEm = $row["feitaEm"]; 
+                  echo $usuario.' - '.$legenda. "\n" ;} } ?></textarea>
+            <form method="POST" class="formulario"  onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
+              <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
+              <input placeholder = "Adicione um comentário"  name="texto" class="comentario" id="comentario" autocomplete="off" required></input>
+              <button type="submit" class="legendaBt" id="legendaBt" onclick=""><span class="oi oi-chevron-right" style="margin-left:2px"></span></button>
+            </form>
+        </div>
+      </div>
+
+      <?php
+        $cont++;
+      }
+      if($cont == 0){
+      ?>
+
+      <span class="mx-auto my-5" style="text-align:center; font-family:bigJohn;width:300px;font-size:16px;font-weight:bold">As imagens escolhidas por você ficarão aqui</span>
+
+      <?php
+        } 
+      }else {
+        echo "mysqli_error($conn)";
+      }?>
+      
       </div>
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
     </div>
@@ -265,8 +291,8 @@ session_start();
 
 
   <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="./public/css/swiper.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

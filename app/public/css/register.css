@@ -2,10 +2,12 @@
     margin: -5px;
     padding:0;
 }
+
 body{
     overflow: hidden;
     text-align: center;
 }
+
 img{
 width: 105vw;
 height: 105vh;
@@ -40,11 +42,12 @@ filter: brightness(55%) blur(2.5px);
     background-color: rgb(17, 16, 16,.5);
     border-radius: 10px;
 }
+
 a:link 
 { 
  text-decoration:none;
- 
 }
+
 input{
     display: block;
     margin-top: 15px;
@@ -57,6 +60,7 @@ input{
     border: none;
     font-weight: 900;
 }
+
 #btcadastrar{
     margin-top: 15px;
     width: min-content;
@@ -81,6 +85,7 @@ input{
     border:2px solid rgb(228, 229, 236);
     border-radius: 20px; 
 }
+
 .navbar{
     color: rgb(255, 255, 255,.5) !important;
     height:65px;
@@ -93,10 +98,12 @@ input{
     /* transition: 1s; */
     z-index: 3;
 }
+
 a:link 
 { 
  text-decoration:none; 
 }
+
 .navbar-toggler{
     position: relative;
     border: none !important;
@@ -121,14 +128,13 @@ a:link
     color: rgb(230, 230, 230);
     font-size: 10vh !important;
     font-family: pierSansBold;
-    
 }
 .modalOption:hover{
     transition: 0.0.5s;
     color: rgb(255, 255, 255, 0.8);
     font-family: pierSansBold;
-    
 }
+
 #logoLitta{
     position: absolute;
     display: inline; 
@@ -147,6 +153,7 @@ a:link
     color: rgb(230, 230, 230);
     transition: 1s;
 }
+
 .option{
     position: absolute;
     color: rgb(119, 117, 117);
@@ -163,7 +170,6 @@ a:link
 }
 .option:hover , .option.active{
     position: absolute;
-    /* font-size: 25px; */
     font-stretch: wider;
     font-weight: 900;
     font-family: bigJohn ;
@@ -175,7 +181,6 @@ a:link
     -webkit-transition: -webkit-transform 250ms linear;
     transition: transform 250ms linear;
 }
-
 #option1{
     top: 30%;
     right: 30%;
@@ -250,6 +255,7 @@ a:link
     background-color: rgb(0, 0, 0) !important;
     opacity: 0.9 !important;
 }
+
 #toggleBt{
     position: absolute;
 }

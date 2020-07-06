@@ -1,6 +1,7 @@
 * {
     padding:0;
 }
+
 body{
     margin-top: 75px;
     overflow-x: hidden;
@@ -9,6 +10,7 @@ body{
     background-color: #ffffff;
     font-family: bigJohn;
 }
+
 h2{
     margin-bottom: 60px;
     color: rgb(255, 255, 255);
@@ -41,10 +43,12 @@ h2{
     transition-delay: 0s;
     z-index: 3;
 }
+
 a:link 
 { 
  text-decoration:none; 
 }
+
 .navbar-toggler{
     position: relative;
     border: none !important;
@@ -77,6 +81,7 @@ a:link
     font-family: pierSansBold;
     
 }
+
 #logoLitta{
     position: absolute;
     display: inline; 
@@ -92,10 +97,12 @@ a:link
     top:10px;
     margin: -5px;
 }
+
 #logoLitta.active{
     color: rgb(230, 230, 230);
     transition: 1s;
 }
+
 .option{
     position: absolute;
     color: rgb(119, 117, 117);
@@ -111,6 +118,7 @@ a:link
     transition: transform 250ms linear;
     margin: -5px;
 }
+
 .option:hover , .option.active{
     position: absolute;
     /* font-size: 25px; */
@@ -139,7 +147,6 @@ a:link
     right: 5%;
 }
 
-
 strong,p{
     color: black;
 }
@@ -147,6 +154,7 @@ strong,p{
 strong{
    margin-left: 5px;
 }
+
 .btEstilo{
     font-size: 15px;
     width:150px;
@@ -157,6 +165,7 @@ strong{
     border:none;
     background-color:rgb(190, 187, 187);
 }
+
 #editarPerfil{
     background-color: #cfcfcf !important;
     color: white;
@@ -168,6 +177,7 @@ strong{
     border:none !important;
     
 }
+
 #btGaleria{
     background-color:transparent;
     margin-left:-1.5px;
@@ -182,6 +192,7 @@ strong{
     padding: 0;
 
 }
+
 #galeriaIcone{
     width: 130px;
     height: 100px;
@@ -198,9 +209,6 @@ strong{
     margin-bottom: 10px;
     padding-top: 10px;
 }
-
-
-
 
 button {
     overflow: visible;

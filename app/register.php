@@ -110,7 +110,7 @@
         </form>  
       </div>
       
-      
+     
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" type="text/javascript"></script>
@@ -244,13 +244,13 @@
   // $(document).ready(function () {
   //   $.getJSON('./public/places/country.json', function (data) {
   //     var items = [];
-  //     <?php if(isset($_SESSION['pais'])){ ?>
+  //     <php if(isset($_SESSION['pais'])){ ?>
   //       console.log("Pais setado!");
-	// 		  var options = '<option value="<?php echo $_SESSION['pais']?>"><?php echo $_SESSION['pais']?></option>';
-  //       <?}else{ ?>
+	// 		  var options = '<option value="<php echo $_SESSION['pais']?>"><php echo $_SESSION['pais']?></option>';
+  //       <php}else{ ?>
   //         var options = '<option value="">País</option>';
   //         console.log("Pais nao setado!");
-  //       <? } ?>
+  //       <php } ?>
 
   //     $.each(data, function (key, val) {
 	// 				options += '<option value="' + val.native + '">' + val.native + '</option>';
@@ -384,8 +384,8 @@
   //           break;
 
   //           default:
-  //             var options_subdivision  = '<input id="subdivision" placeholder="Subdivisao" class="inputLocal" value="<?php echo $_SESSION['estado']?>"  name="estado" style="width:25vw"></input>';
-  //             var options_cidades  = '<input id="cidades" placeholder="Cidade" value="<?php echo $_SESSION['cidade']?>" class="inputLocal" name="cidade" style="width:25vw";></input>';
+  //             var options_subdivision  = '<input id="subdivision" placeholder="Subdivisao" class="inputLocal" value="<php echo $_SESSION['estado']?>"  name="estado" style="width:25vw"></input>';
+  //             var options_cidades  = '<input id="cidades" placeholder="Cidade" value="<php echo $_SESSION['cidade']}?>" class="inputLocal" name="cidade" style="width:25vw";></input>';
   //             $("#subdivision").replaceWith(options_subdivision);
   //             $("#cidades").replaceWith(options_cidades);
   //         }
@@ -399,8 +399,3 @@
     </script>
   </body>
 </html>
-  
-
-
-
-

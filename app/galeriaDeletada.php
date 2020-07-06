@@ -12,7 +12,7 @@ session_start();
   <link href="./public/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./public/css/galeria.css">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+  <link rel="stylesheet" href="./public/css/swiper.css">
 
   <!-- Demo styles -->
   <style>
@@ -226,23 +226,27 @@ session_start();
                     $segundo = substr($deletadaEm, 17, 2);
                     $dataDeletada = "$dia/$mes/$ano   $hora:$minuto:$segundo"; ?>
               <br><span style="bottom: 40px!important;position: relative;font-family:bigJohn;font-weight:bold;background-color:white;z-index:3">Deletada em: <strong style="letter-spacing:2px"> <?php echo $dataDeletada ?> </strong> </span>
-            
-
-                
+          
               <div class="inside">
                       <textarea name="legenda" class="legenda" placeholder="Ainda não há comentários" id="textoLegenda" readonly  
-                      <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
-                        if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
-                          while($row = mysqli_fetch_assoc($resultLegenda)) {
-                            $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
-                            $ano = substr($feitaEm, 0, 4);
-                            $mes = substr($feitaEm, 5, 2);
-                            $dia = substr($feitaEm, 8, 2);
-                            $hora = substr($feitaEm, 11, 2);
-                            $minuto = substr($feitaEm, 14, 2);
-                            $segundo = substr($feitaEm, 17, 2);
-                            $feitaEm = "$dia/$mes/$ano   $hora:$minuto:$segundo"; 
-                            echo $usuario.' - '.$legenda. "\n".'[ '.$feitaEm.' ]'. "\n" ;} } ?></textarea>
+                        <?php $resultLegenda = mysqli_query($conn, $sqlLegenda);
+                          if (mysqli_query($conn, $sqlLegenda)) { ?>><?php 
+                            while($row = mysqli_fetch_assoc($resultLegenda)) {
+                              $idUsuario = $row["idUsuario"]; $usuario = $row["usuario"];  $legenda = $row["texto"]; $feitaEm = $row["feitaEm"]; 
+                              $ano = substr($feitaEm, 0, 4);
+                              $mes = substr($feitaEm, 5, 2);
+                              $dia = substr($feitaEm, 8, 2);
+                              $hora = substr($feitaEm, 11, 2);
+                              $minuto = substr($feitaEm, 14, 2);
+                              $segundo = substr($feitaEm, 17, 2);
+                              $feitaEm = "$dia/$mes/$ano   $hora:$minuto:$segundo"; 
+                              echo $usuario.' - '.$legenda. "\n".'[ '.$feitaEm.' ]'. "\n" ;
+                            }?></textarea>
+                    <?php }else {
+                            echo "mysqli_error($conn)";
+                          } 
+                    ?>
+                      
                     <form method="POST" class="formulario" onsubmit="insereLegenda(event , <?php echo $cont ?>)" action="./dataBaseManager/alteraLegenda.php" > 
                       <input name="idImage" style="display:none" value="<?php echo $idImage ?>"></input>
                       <input placeholder = "Adicione um comentário" name="texto" class="comentario" id="comentario" autocomplete="off" required></input>
@@ -252,12 +256,12 @@ session_start();
                 <input value="Deletada por: <?php echo $deletadaPor ?> " name="naoEnvia" class="comentario" id="deletadaPor" disabled="true"></input>
 
             </div>
-            <?php
-              $cont++;
-              } 
-            }else {
-              echo "mysqli_error($conn)";
-            }?>
+          <?php
+            $cont++;
+            } 
+        }else {
+          echo "mysqli_error($conn)";
+        }?>
             
           </div>
       <div class="swiper-pagination"style="z-index:10;filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.1)"></div>
@@ -265,7 +269,7 @@ session_start();
     
   </div>
   <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+  <script src="./public/css/swiper.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

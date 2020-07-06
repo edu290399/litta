@@ -176,28 +176,30 @@ button, input {
 .carousel-caption{
     opacity:0;
     bottom: -15px;
-  }
+}
   
-  .carousel-item:hover .carousel-caption{
+.carousel-item:hover .carousel-caption{
     opacity:1;
     transition:650ms ease-in-out;
-  }
+}
   
  #addDoc{
-     border: none;
-     background-color: transparent;
-     font-weight: bold;
-     width: 100%;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    width: 100%;
  }
-  .carousel-item:hover #profilePic{
-      -webkit-filter: brightness(40%);
-      filter: brightness(40%);
-      -webkit-transition: all 0.5s ease;
-      -moz-transition: all 0.5s ease;
-      -o-transition: all 0.5s ease;
-      -ms-transition: all 0.5s ease;
-      transition: all 0.5s ease;
-  }
+
+.carousel-item:hover #profilePic{
+    -webkit-filter: brightness(40%);
+    filter: brightness(40%);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
 /* >>>>>>>>>>>>> TOGGLE ICON <<<<<<<<<<<  */
 
 .toggle{

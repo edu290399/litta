@@ -12,13 +12,13 @@ session_start();
   <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
   <style>
     @media only screen and (min-width: 990px) {
-            .ml-lg-n5 {
-                margin-left: -90px !important;
-            }
-            .pl-lg-2 {
-                padding-left: 2vw !important;
-            }
+        .ml-lg-n5 {
+            margin-left: -90px !important;
         }
+        .pl-lg-2 {
+            padding-left: 2vw !important;
+        }
+    }
   </style>              
 </head>
 <body>
@@ -28,50 +28,60 @@ session_start();
     <a class="navbar-brand" href="index" id="logoLitta">LITTA</a>
 
     <button id="toggleBt"  class="navbar-toggler" data-toggle="modal" data-target="#myModal">
-    <div class="toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>   
+
+        <div class="toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
             <a  href="work" >
                 <span class="option align-baseline" id="option1"> WORK <span>
             </a>
+
             <br>
             <br>
+
             <a href="#notJump">
                 <span class="option align-baseline" id="option2"> QUIZ <span>
             </a>
+
             <br>
             <br>
+
             <a href="perfil">
                 <span class="option align-baseline" id="option3"> PERFIL <span>
             </a>
-    </ul>
+
+        </ul>
 
     </div>
 
     <div class="modal  fade" id="myModal" >
 
         <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content d-block text-centered" style="border:none !important">
-                <ul class="navbar-nav ">
-                    <a  href="work" >
-                        <span class="modalOption"> WORK <span>
-                    </a>
-                    <a  href="index" >
-                        <span class="modalOption"> QUIZ <span>
-                    </a>
-                    <a  href="perfil" >
-                        <span class="modalOption"> PERFIL <span>
-                    </a>
-                </ul>
-        </div>
+            <div class="modal-content d-block text-centered" style="border:none !important">
+                    <ul class="navbar-nav ">
+                        
+                        <a  href="work" >
+                            <span class="modalOption"> WORK <span>
+                        </a>
+                        <a  href="index" >
+                            <span class="modalOption"> QUIZ <span>
+                        </a>
+                        <a  href="perfil" >
+                            <span class="modalOption"> PERFIL <span>
+                        </a>
+
+                    </ul>
+            </div>
         </div>
     </div>   
 
@@ -81,22 +91,27 @@ session_start();
 
 <div class="container-fluid" >
     <?php if(isset($_SESSION['msgOk'])){ ?>
-            <div class="alert alert-success alert-dismissible mx-auto fade show" style="height:50px;width:250px" role="alert">
-                <strong style="color:black;text-align:center">  <?php echo $_SESSION['msgOk']?></strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+
+        <div class="alert alert-success alert-dismissible mx-auto fade show" style="height:50px;width:250px" role="alert">
+            <strong style="color:black;text-align:center"><?php echo $_SESSION['msgOk']?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
     <?php unset($_SESSION['msgOk']); } ?>
 
     <?php if(isset($_SESSION['msgErro'])){ ?>
-            <div class="alert alert-danger alert-dismissible mx-auto fade show" style="height:50px;width:250px" role="alert">
-                <strong style="color:black;text-align:center"><?php echo $_SESSION['msgErro']?></strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+
+        <div class="alert alert-danger alert-dismissible mx-auto fade show" style="height:50px;width:250px" role="alert">
+            <strong style="color:black;text-align:center"><?php echo $_SESSION['msgErro']?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
     <?php unset($_SESSION['msgErro']);} ?>
+
     <h2 class="ml-sm-0 ml-md-3">Documentos de <?php echo $_SESSION['nome']?></h2>
     
     <?php
@@ -105,48 +120,45 @@ session_start();
         $sql = "SELECT * FROM documentos WHERE idUsuario = $id AND visivel = '1'  ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) {  $endereco =  $row["endereco"]; $nome =  $row["nome"]; $dataCriacao = $row["dataCriacao"];  
-                    $ano = substr($dataCriacao, 0, 4);
-                    $mes = substr($dataCriacao, 5, 2);
-                    $dia = substr($dataCriacao, 8, 2);
-                    $hora = substr($dataCriacao, 11, 2);
-                    $minuto = substr($dataCriacao, 14, 2);
-                    $segundo = substr($dataCriacao, 17, 2);
-                    $dataCriacao = "$dia/$mes/$ano   $hora:$minuto:$segundo"; 
+          while($row = mysqli_fetch_assoc($result)) {  
 
-        ?>
+            $endereco =  $row["endereco"]; 
+            $nome =  $row["nome"]; 
+            $dataCriacao = $row["dataCriacao"];  
+            $ano = substr($dataCriacao, 0, 4);
+            $mes = substr($dataCriacao, 5, 2);
+            $dia = substr($dataCriacao, 8, 2);
+            $hora = substr($dataCriacao, 11, 2);
+            $minuto = substr($dataCriacao, 14, 2);
+            $segundo = substr($dataCriacao, 17, 2);
+            $dataCriacao = "$dia/$mes/$ano   $hora:$minuto:$segundo"; 
+
+    ?>
     <div class="row pl-lg-2 py-3 border-bottom border-white">
 
         <div class="col-md-5 col-lg-5 col-12 ml-0">
             <p>Nome: </p>
             <strong style="  max-width: 25ch;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><?php echo $nome?></strong>  
         </div> 
-
-                
+ 
         <div class="col-md-5 col-lg-5 col-12" >
-
             <p>Upload em: </p>
             <strong style="letter-spacing:2px"><?php echo $dataCriacao?></strong>
- 
         </div>
         
         <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 ml-0 col-12" style="text-align:left" >
-        
             <form method="POST" action="./documentos/<?php echo $endereco?>">
                 <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:120px;margin-left:2px">Download<img src="./public/open-iconic/svg/data-transfer-download.svg" class="icon" alt="pencil"></button>
             </form>    
-
-
         </div>  
        
-
     </div>
 
     <?php
-          } 
-        }else {
-          echo "mysqli_error($conn)";
-        }?>
+        } 
+    }else {
+        echo "mysqli_error($conn)";
+    }?>
         
 </div>
 
