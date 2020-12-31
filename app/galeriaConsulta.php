@@ -145,7 +145,7 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="#notJump">
+            <a href="#">
                 <span class="option align-baseline" id="option2"> QUIZ <span>
             </a>
             <br>

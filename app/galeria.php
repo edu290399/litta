@@ -152,7 +152,7 @@ session_start();
               <br>
               <br>
 
-              <a href="#notJump">
+              <a href="exibeQuiz">
                   <span class="option align-baseline" id="option2"> QUIZ <span>
               </a>
 
@@ -176,7 +176,7 @@ session_start();
               <a  href="work" >
                 <span class="modalOption"> WORK <span>
               </a>
-              <a  href="index" >
+              <a  href="exibeQuiz" >
                 <span class="modalOption"> QUIZ <span>
               </a>
               <a  href="perfil" >

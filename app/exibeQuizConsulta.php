@@ -1,12 +1,11 @@
 <?php
 session_start();
 ?>
-<?php if(!empty($_SESSION['id'])){  unset($_SESSION['idConsulta']);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ADIMIN</title>
+  <title>Quizz Consulta</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
@@ -14,6 +13,9 @@ session_start();
     @media only screen and (min-width: 990px) {
             .ml-lg-n5 {
                 margin-left: -90px !important;
+            }
+            .ml-lg-n4 {
+                margin-left: -70px !important;
             }
             .pl-lg-2 {
                 padding-left: 2vw !important;
@@ -49,8 +51,8 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="login">
-                <span class="option  align-baseline" id="option3"> SAIR <span>
+            <a href="adiministrativo">
+                <span class="option align-baseline" id="option3"> VOLTAR <span>
             </a>
     </ul>
 
@@ -67,8 +69,8 @@ session_start();
                     <a  href="criar" >
                         <span class="modalOption"> CRIAR <span>
                     </a>
-                    <a  href="login" >
-                        <span class="modalOption"> SAIR <span>
+                    <a  href="adiministrativo" >
+                        <span class="modalOption"> VOLTAR <span>
                     </a>
                 </ul>
         </div>
@@ -76,7 +78,6 @@ session_start();
     </div>   
 
 </nav>
-
 
 
 <div class="container-fluid" >
@@ -97,15 +98,20 @@ session_start();
                 </button>
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
-    <h2>Registros</h2>
+
+    <!-- ENTREVISTA -->
+    <h2 class="mb-n1">QUIZ</h2>
     
     <?php
         include_once("./dataBaseManager/conexao.php");
-        
-        $sql = "SELECT id,nome,sobrenome,email,notificacao FROM usuarios WHERE boss = '0' AND confirmado = '1' ORDER BY notificacao = 1 DESC,dataCadastro DESC";
+        $id = $_SESSION['idConsulta'];
+        $sql = "SELECT * FROM entrevistas INNER JOIN entrevistados ON entrevistas.id = entrevistados.idPergunta AND entrevistados.idUsuario =  $id AND entrevistados.respondido = '0' ";
+        $sql2 = "SELECT * FROM entrevistas INNER JOIN entrevistados ON entrevistas.id = entrevistados.idPergunta AND entrevistados.idUsuario =  $id AND entrevistados.respondido = '1' ";
+
+
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $sobrenome = $row["sobrenome"]; $email = $row["email"];$notificacao = $row["notificacao"] ?>
+          while($row = mysqli_fetch_assoc($result)) { $idPergunta = $row["idPergunta"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
             
 
 
@@ -114,22 +120,22 @@ session_start();
         <div class="col-md-5 col-lg-5 col-12">
             
             <p>Nome: </p>
-            <strong><?php echo $nome." ".$sobrenome?></strong>
+            <strong><?php echo $nome?></strong>
             
         </div> 
 
                 
         <div class="col-md-5 col-lg-5 col-12" >
 
-            <p>Email: </p>
-            <strong><?php echo $email?></strong>
+            <p>Descrição: </p>
+            <strong><?php echo $descricao?></strong>
  
         </div>
         
         <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
         
-            <form method="POST" action="./dataBaseManager/adiministrativo.php">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px; <?php if ($notificacao == '1'){ ?> background-color:green; <?php } ?>">Visitar<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
+            <form method="POST" action="visualizarEntrevista">
+                <button class="btEstilo" name="idEntrevista" value="<?php echo $idPergunta ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver entrevistas<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="external"></button>
             </form>    
 
         </div>  
@@ -142,7 +148,52 @@ session_start();
         }else {
           echo "mysqli_error($conn)";
         }?>
-</div>
+
+
+
+
+<?php
+
+$result = mysqli_query($conn, $sql2);
+        if (mysqli_query($conn, $sql2)) {
+          while($row = mysqli_fetch_assoc($result)) { $idPergunta = $row["idPergunta"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
+            
+
+
+    <div class="row pl-lg-2 py-3 border-bottom border-white">
+
+        <div class="col-md-5 col-lg-5 col-12">
+            
+            <p>Nome: </p>
+            <strong><?php echo $nome?></strong>
+            
+        </div> 
+
+                
+        <div class="col-md-5 col-lg-5 col-12" >
+
+            <p>Descrição: </p>
+            <strong><?php echo $descricao?></strong>
+ 
+        </div>
+        
+        <div class="col-md-2 col-lg-2 ml-lg-n4 col-12" style="text-align:center" >
+        
+        <form method="POST" action="visualizarResposta" >
+            <button class="btEstilo" name="idEntrevista" value="<?php echo $idPergunta ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Resposta<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
+        </form>
+
+        </div>  
+       
+
+    </div>
+
+<?php
+     } 
+}else {
+    echo "mysqli_error($conn)";
+}?>
+
 
 </body>
     <!-- Optional JavaScript -->
@@ -174,9 +225,3 @@ session_start();
         });
     </script>
 </html>
-
-
-<?php }else{
-	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login");	
-}?>

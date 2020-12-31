@@ -37,7 +37,7 @@ session_start();
             </a>
             <br>
             <br>
-            <a  href="index" >
+            <a  href="exibeQuiz" >
                 <span class="option" id="option2" translate="no"> QUIZ <span>
             </a>
             <br>
@@ -61,7 +61,7 @@ session_start();
                     <a  href="work" >
                         <span class="modalOption" translate="no"> WORK <span>
                     </a>
-                    <a  href="index" >
+                    <a  href="exibeQuiz" >
                         <span class="modalOption" translate="no"> QUIZ <span>
                     </a>
                     <?php if(!empty($_SESSION['id'])){ ?>

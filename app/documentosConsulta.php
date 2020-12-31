@@ -50,8 +50,8 @@ session_start();
             <br>
             <br>
 
-            <a href="#notJump">
-                <span class="option align-baseline" id="option2"> QUIZ <span>
+            <a href="criar">
+                <span class="option align-baseline" id="option2"> CRIAR <span>
             </a>
 
             <br>
@@ -74,8 +74,8 @@ session_start();
                     <a  href="work" >
                         <span class="modalOption"> WORK <span>
                     </a>
-                    <a  href="index" >
-                        <span class="modalOption"> QUIZ <span>
+                    <a  href="criar" >
+                        <span class="modalOption"> CRIAR <span>
                     </a>
                     <a  href="perfilConsulta" >
                         <span class="modalOption"> VOLTAR <span>

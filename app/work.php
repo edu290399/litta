@@ -38,16 +38,30 @@ session_start();
                 </a>
                 <br>
                 <br>
-                <a href="#notJump">
-                    <span class="option align-baseline" id="option2"> QUIZ <span>
-                </a>
+                <?php if($_SESSION['boss']==0){ ?>
+                          <a  href="exibeQuiz" >
+                              <span class="option align-baseline" id="option2" translate="no">QUIZ<span>
+                          </a>
+                        <?php
+                        }else{?>
+                          <a  href="criar" >
+                              <span class="option align-baseline" id="option2" translate="no">CRIAR<span>
+                          </a>
+                  <?}?>
                 <br>
                 <br>
-                <?php if(!empty($_SESSION['id'])){ ?>
-                  <a  href="perfil" >
-                      <span class="option" id="option3" translate="no">PERFIL<span>
-                  </a>
-                <?php } else{ ?>
+                <?php if(!empty($_SESSION['id'])){
+                  if($_SESSION['boss']==0){ ?>
+                    <a  href="perfil" >
+                        <span class="option align-baseline" id="option3" translate="no">PERFIL<span>
+                    </a>
+                  <?php
+                  }else{?>
+                    <a  href="adiministrativo" >
+                        <span class="option" id="option3" translate="no">ADM<span>
+                    </a>
+                  <?}
+                } else{ ?>
                     <a  href="login" >
                       <span class="option" id="option3" translate="no"> LOGIN <span>
                     </a>
@@ -83,14 +97,28 @@ session_start();
                       <a  href="work" >
                           <span class="modalOption"> WORK <span>
                       </a>
-                      <a  href="index" >
-                          <span class="modalOption"> QUIZ <span>
-                      </a>
-                      <?php if(!empty($_SESSION['id'])){ ?>
-                        <a  href="perfil" >
-                            <span class="modalOption"  translate="no">PERFIL<span>
-                        </a>
-                      <?php } else{ ?>
+                      <?php if($_SESSION['boss']==0){ ?>
+                          <a  href="exibeQuiz" >
+                              <span class="modalOption" translate="no">QUIZ<span>
+                          </a>
+                        <?php
+                        }else{?>
+                          <a  href="criar" >
+                              <span class="modalOption" translate="no">CRIAR<span>
+                          </a>
+                        <?}?>
+                      <?php if(!empty($_SESSION['id'])){
+                        if($_SESSION['boss']==0){ ?>
+                          <a  href="perfil" >
+                              <span class="modalOption" translate="no">PERFIL<span>
+                          </a>
+                        <?php
+                        }else{?>
+                          <a  href="adiministrativo" >
+                              <span class="modalOption" translate="no">ADM<span>
+                          </a>
+                        <?}
+                      } else{ ?>
                           <a  href="login" >
                             <span class="modalOption" translate="no"> LOGIN <span>
                           </a>
@@ -452,5 +480,5 @@ session_start();
             });
 
         });
-
+      
 </script>

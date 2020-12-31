@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ADIMIN</title>
+  <title>ENVIAR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
@@ -49,8 +49,8 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="login">
-                <span class="option  align-baseline" id="option3"> SAIR <span>
+            <a href="perfil">
+                <span class="option align-baseline" id="option3"> PERFIL <span>
             </a>
     </ul>
 
@@ -67,8 +67,8 @@ session_start();
                     <a  href="criar" >
                         <span class="modalOption"> CRIAR <span>
                     </a>
-                    <a  href="login" >
-                        <span class="modalOption"> SAIR <span>
+                    <a  href="perfil" >
+                        <span class="modalOption"> PERFIL <span>
                     </a>
                 </ul>
         </div>
@@ -97,15 +97,18 @@ session_start();
                 </button>
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
-    <h2>Registros</h2>
+
+    <h2>ENVIANDO</h2>
     
     <?php
         include_once("./dataBaseManager/conexao.php");
         
         $sql = "SELECT id,nome,sobrenome,email,notificacao FROM usuarios WHERE boss = '0' AND confirmado = '1' ORDER BY notificacao = 1 DESC,dataCadastro DESC";
         $result = mysqli_query($conn, $sql);
+        $idQuiz = filter_input(INPUT_POST, 'idQuiz', FILTER_SANITIZE_STRING);
+
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $sobrenome = $row["sobrenome"]; $email = $row["email"];$notificacao = $row["notificacao"] ?>
+          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $sobrenome = $row["sobrenome"]; $email = $row["email"];?>
             
 
 
@@ -128,8 +131,9 @@ session_start();
         
         <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
         
-            <form method="POST" action="./dataBaseManager/adiministrativo.php">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px; <?php if ($notificacao == '1'){ ?> background-color:green; <?php } ?>">Visitar<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
+            <form method="POST" action="./dataBaseManager/enviarQuiz.php">
+                <input name="idUsuario" value="<?php echo $id ?>" style="display:none">
+                <button class="btEstilo" name="btnEnvia" value=" <?php echo $idQuiz?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Enviar<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="pencil"></button>
             </form>    
 
         </div>  
