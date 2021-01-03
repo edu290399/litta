@@ -100,231 +100,24 @@ session_start();
     
     <div class="row mb-5" style="text-align:center">
         <div class="col-lg-4 col-12">
-            <form method="POST" action="./novaEntrevista">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+            <form method="POST" action="./temasEntrevista">
+                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Entrevista<img src="./public/open-iconic/svg/clipboard.svg" class="icon" alt="clipboard"></button>
             </form>    
         </div>
 
         <div class="col-lg-4 col-12">
-            <form method="POST" action="./novoQuiz">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Quizz<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+            <form method="POST" action="./temasQuiz">
+                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Quiz<img src="./public/open-iconic/svg/image.svg" class="icon" alt="image"></button>
             </form>    
         </div>
 
         <div class="col-lg-4 col-12">
-            <form method="POST" action="./novoCluster">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+            <form method="POST" action="./temasCluster">
+                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Cluster<img src="./public/open-iconic/svg/folder.svg" class="icon" alt="folder"></button>
             </form>    
         </div>
     </div> 
-    <!-- ENTREVISTA -->
-    <h2 class="mb-n1">ENTREVISTAS</h2>
     
-    <?php
-        include_once("./dataBaseManager/conexao.php");
-        
-        $sql = "SELECT id,nome,descricao FROM entrevistas WHERE visivel='1' ORDER BY id DESC ";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
-            
-
-
-    <div class="row pl-lg-2 py-3 border-bottom border-white">
-
-        <div class="col-md-5 col-lg-5 col-12">
-            
-            <p>Nome: </p>
-            <strong><?php echo $nome?></strong>
-            
-        </div> 
-
-                
-        <div class="col-md-5 col-lg-5 col-12" >
-
-            <p>Descrição: </p>
-            <strong><?php echo $descricao?></strong>
- 
-        </div>
-        
-        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-        
-        <div class="dropdown">
-
-            <button class="btEstilo dropdown-toggle" type="button" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                <form method="POST" action="enviarEntrevista">
-                    <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Enviar</button>
-                </form>
-                
-                <form method="POST" action="visualizarEntrevista">
-                    <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Visualizar</button>
-                </form>
-
-                <form method="POST" action="editaEntrevista">
-                    <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Editar</button>
-                </form>
-
-                <form method="POST" action="enviadosEntrevista">
-                    <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Enviados</button>
-                </form>
-
-                <form method="POST" onsubmit="return confirm('A entrevista será deletada, tem certeza?');" action="./dataBaseManager/deletarEntrevista.php">
-                    <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Deletar</button>
-                </form>
-
-            </div>
-            </div> 
-
-        </div>  
-       
-
-    </div>
-
-    <?php
-          } 
-        }else {
-          echo "mysqli_error($conn)";
-        }?>
-
-
-
-
-
-
-<!-- QUIZZ -->
-<h2 class="mt-5 mb-n1">QUIZZ</h2>
-    
-    <?php
-        include_once("./dataBaseManager/conexao.php");
-        
-        $sql = "SELECT id, nome,descricao FROM quiz WHERE visivel = 1 ORDER BY id DESC";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]?>
-            
-
-
-            <div class="row pl-lg-2 py-3 border-bottom border-white">
-
-            <div class="col-md-5 col-lg-5 col-12">
-                    
-                    <p>Nome: </p>
-                    <strong><?php echo $nome?></strong>
-                    
-                </div> 
-
-                        
-                <div class="col-md-5 col-lg-5 col-12" >
-
-                    <p>Descrição: </p>
-                    <strong><?php echo $descricao?></strong>
-        
-                </div>
-        
-        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-            <div class="dropdown">
-
-                <button class="btEstilo dropdown-toggle" name="usuario" value=" <?php echo $id?> " type="button" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                    <form method="POST" action="enviarQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Enviar</button>
-                    </form>
-                    
-                    <form method="POST" action="visualizarQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Visualizar</button>
-                    </form>
-
-                    <form method="POST" action="editaQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Editar</button>
-                    </form>
-
-                    <form method="POST" action="enviadosQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Enviados</button>
-                    </form>
-
-                    <form method="POST" onsubmit="return confirm('O quiz será deletada, tem certeza?');" action="./dataBaseManager/deletarQuiz.php">
-                        <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Deletar</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>  
-       
-
-    </div>
-
-    <?php
-            } 
-        }else {
-          echo "mysqli_error($conn)";
-        }?>
-
-<!-- CLUSTER -->
-<h2 class="mt-5 mb-n1">CLUSTER</h2>
-    
-    <?php
-        include_once("./dataBaseManager/conexao.php");
-        
-        $sql = "SELECT id, nome,descricao FROM cluster WHERE visivel = '1' ORDER BY id DESC";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $idCluster = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]?>
-            
-
-
-            <div class="row pl-lg-2 py-3 border-bottom border-white">
-
-            <div class="col-md-5 col-lg-5 col-12">
-                    
-                    <p>Nome: </p>
-                    <strong><?php echo $nome?></strong>
-                    
-                </div> 
-
-                        
-                <div class="col-md-5 col-lg-5 col-12" >
-
-                    <p>Descrição: </p>
-                    <strong><?php echo $descricao?></strong>
-        
-                </div>
-        
-        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-            <div class="dropdown">
-
-                <button class="btEstilo dropdown-toggle" name="usuario" value=" <?php echo $idCluster?> " type="button" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                
-                <form method="POST" action="visualizarCluster">
-                    <button class="btEstilo dropdown-item" name="idCluster" type="submit" value="<?php echo $idCluster ?>">Visualizar</button>
-                    <input value="<?php echo $idCluster ?>"  style="display:none" />
-                </form>
-
-                <form method="POST" action="editaCluster.php">
-                    <button class="btEstilo dropdown-item" name="idCluster" type="submit" value="<?php echo $idCluster ?>" >Editar</button>
-                    <input value="<?php echo $idCluster ?>" style="display:none"/>
-                </form>
-
-                <form method="POST"  onsubmit="return confirm('O cluster será deletado, tem certeza?');" action="./dataBaseManager/deletaCluster.php">
-                    <button class="btEstilo dropdown-item" name="idCluster" type="submit" value="<?php echo $idCluster ?>" >Deletar</button>
-                    <input value="<?php echo $idCluster ?>" style="display:none"/>
-                </form>
-                
-                </div>
-            </div>
-        </div>  
-       
-
-    </div>
-
-    <?php
-            } 
-        }else {
-          echo "mysqli_error($conn)";
-        }?>
 </div>
 
 </body>

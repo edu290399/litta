@@ -1,12 +1,12 @@
 <?php
 session_start();
 ?>
-<?php if(!empty($_SESSION['id'])){  unset($_SESSION['idConsulta']); unset($_SESSION['idCluster'])?>
+<?php if(!empty($_SESSION['id'])){  unset($_SESSION['idConsulta']);$nomeTema = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Criar</title>
+  <title>ADICIONAR AO TEMA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
@@ -44,12 +44,12 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="#">
-                <span class="option active align-baseline" id="option2"> CRIAR <span>
+            <a href="criar">
+                <span class="option align-baseline" id="option2"> CRIAR <span>
             </a>
             <br>
             <br>
-            <a href="criar">
+            <a href="temasCluster">
                 <span class="option align-baseline" id="option3"> VOLTAR <span>
             </a>
     </ul>
@@ -64,10 +64,10 @@ session_start();
                     <a  href="work" >
                         <span class="modalOption"> WORK <span>
                     </a>
-                    <a  href="#" >
+                    <a  href="criar" >
                         <span class="modalOption"> CRIAR <span>
                     </a>
-                    <a  href="criar" >
+                    <a  href="temasCluster" >
                         <span class="modalOption"> VOLTAR <span>
                     </a>
                 </ul>
@@ -98,88 +98,57 @@ session_start();
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
 
+    <h2>Adicionando ao tema <?php echo $nomeTema?> </h2>
     
-    <div class="row mb-5" style="text-align:center">
-        <div class="col-lg-4 col-12">
-            <form method="POST" action="./novoQuiz">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Quizz<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
-            </form>    
-        </div>
-    </div>
+    <form method="POST" action="./dataBaseManager/novoLinkTema.php">
 
-<!-- QUIZZ -->
-<h2 class="mt-5 mb-n1">QUIZZ</h2>
-    
-    <?php
-        include_once("./dataBaseManager/conexao.php");
-        $idTema = filter_input(INPUT_POST, 'idTema', FILTER_SANITIZE_STRING);
-
-        $sql = "SELECT id, nome,descricao FROM quiz WHERE visivel = 1 AND idTema = '$idTema'  ORDER BY id DESC";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]?>
-            
+        <?php
+            include_once("./dataBaseManager/conexao.php");
+            $idTema = filter_input(INPUT_POST, 'idTema', FILTER_SANITIZE_STRING);
+            $sql = "SELECT id,nome,descricao FROM cluster  WHERE visivel = '1' ORDER BY id";
+            $result = mysqli_query($conn, $sql);
+            $cont = 0;
+            if (mysqli_query($conn, $sql)) {
+            while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"];  ?>
+                
 
 
-            <div class="row pl-lg-2 py-3 border-bottom border-white">
+        <div class="row pl-lg-2 py-3 border-bottom border-white">
 
             <div class="col-md-5 col-lg-5 col-12">
+                
+                <p>Nome: </p>
+                <strong><?php echo $nome?></strong>
+                
+            </div> 
+
                     
-                    <p>Nome: </p>
-                    <strong><?php echo $nome?></strong>
-                    
-                </div> 
+            <div class="col-md-5 col-lg-5 col-12" >
 
-                        
-                <div class="col-md-5 col-lg-5 col-12" >
-
-                    <p>Descrição: </p>
-                    <strong><?php echo $descricao?></strong>
-        
-                </div>
-        
-        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-            <div class="dropdown">
-
-                <button class="btEstilo dropdown-toggle" name="usuario" value=" <?php echo $id?> " type="button" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                    <form method="POST" action="enviarQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Enviar</button>
-                    </form>
-                    
-                    <form method="POST" action="visualizarQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Visualizar</button>
-                    </form>
-
-                    <form method="POST" action="editaQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Editar</button>
-                    </form>
-
-                    <form method="POST" action="enviadosQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Enviados</button>
-                    </form>
-
-                    <form method="POST" onsubmit="return confirm('O quiz será deletada, tem certeza?');" action="./dataBaseManager/deletarQuiz.php">
-                        <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Deletar</button>
-                    </form>
-
-                </div>
+                <p>Descricação: </p>
+                <strong><?php echo $descricao?></strong>
+    
             </div>
-        </div>  
-       
+            
+            <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
+                <input  type="checkbox" value=" <?php echo $id?> " name="cluster[<?php echo $cont?>]"/> 
+            </div>  
+        
 
-    </div>
+        </div>
 
-    <?php
-            } 
-        }else {
-          echo "mysqli_error($conn)";
-        }?>
+        <?php
+                $cont++;
+                } 
+            }else {
+            echo "mysqli_error($conn)";
+            }?>
+        
+        <input value="2" name="switch" style="display:none"/>
+        <input value="<?php echo $cont?>" name="cont" style="display:none"/>  
+        <button type="submit" class="btEstilo" name="idTema" value=" <?php echo $idTema?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;">Adicionar</button>
 
-
-</div>
-
+    </form>
 </body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

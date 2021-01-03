@@ -78,7 +78,6 @@ session_start();
 </nav>
 
 
-
 <div class="container-fluid" >
     <?php if(isset($_SESSION['msgOk'])){ ?>
             <div class="alert alert-success alert-dismissible mx-auto fade show" style="height:50px;width:250px" role="alert">
@@ -101,72 +100,67 @@ session_start();
     
     <div class="row mb-5" style="text-align:center">
         <div class="col-lg-4 col-12">
-            <form method="POST" action="./novoQuiz">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Quizz<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
-            </form>    
-        </div>
-    </div>
+        <div class="col-lg-4 col-12">
+            <div class="row mb-5">
+                    <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar tema de Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+            </div>
+            <form method="POST" action="./dataBaseManager/novoTema.php">
 
-<!-- QUIZZ -->
-<h2 class="mt-5 mb-n1">QUIZZ</h2>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered mw-lg-85 mw-md-100" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Adicionar Tema</h5>
+                            </div>
+                            <div class="modal-body mx-0 my-0">      
+                                <div class="row mb-lg-0 mb-5">
+                                        <input name="nomeTema"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="switch" value="0" class="btEstilo">Adicionar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+            </div>
+        </form>   
+        </div>
+    </div> 
+
+
+<!-- ENTREVISTA -->
+<h2 class="mt-5 mb-n1">TEMAS DE ENTREVISTA</h2>
     
     <?php
         include_once("./dataBaseManager/conexao.php");
-        $idTema = filter_input(INPUT_POST, 'idTema', FILTER_SANITIZE_STRING);
-
-        $sql = "SELECT id, nome,descricao FROM quiz WHERE visivel = 1 AND idTema = '$idTema'  ORDER BY id DESC";
+        
+        $sql = "SELECT id, nome FROM temaEntrevista ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]?>
+          while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]?>
             
 
 
             <div class="row pl-lg-2 py-3 border-bottom border-white">
 
             <div class="col-md-5 col-lg-5 col-12">
-                    
-                    <p>Nome: </p>
-                    <strong><?php echo $nome?></strong>
-                    
-                </div> 
+                    <p>Tema: </p>
+                    <strong><?php echo $nome?></strong>        
+            </div> 
 
-                        
-                <div class="col-md-5 col-lg-5 col-12" >
+            <div class="col-md-5 col-lg-5 col-12">
+                <form method="POST" action="./linkarTemaEntrevista">
+                    <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                </form> 
+            </div> 
 
-                    <p>Descrição: </p>
-                    <strong><?php echo $descricao?></strong>
         
-                </div>
-        
-        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-            <div class="dropdown">
-
-                <button class="btEstilo dropdown-toggle" name="usuario" value=" <?php echo $id?> " type="button" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                    <form method="POST" action="enviarQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Enviar</button>
-                    </form>
-                    
-                    <form method="POST" action="visualizarQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Visualizar</button>
-                    </form>
-
-                    <form method="POST" action="editaQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Editar</button>
-                    </form>
-
-                    <form method="POST" action="enviadosQuiz">
-                        <button class="btEstilo dropdown-item" name="idQuiz" type="submit" value="<?php echo $id ?>">Enviados</button>
-                    </form>
-
-                    <form method="POST" onsubmit="return confirm('O quiz será deletada, tem certeza?');" action="./dataBaseManager/deletarQuiz.php">
-                        <button class="btEstilo dropdown-item" name="idEntrevista" type="submit" value="<?php echo $id ?>">Deletar</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>  
+            <form method="POST" action="./criarEntrevista">
+                <button class="btEstilo" type="submit" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;" >Consulta</button>
+            </form> 
        
 
     </div>
@@ -176,8 +170,6 @@ session_start();
         }else {
           echo "mysqli_error($conn)";
         }?>
-
-
 </div>
 
 </body>
