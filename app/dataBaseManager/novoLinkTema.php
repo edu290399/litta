@@ -34,7 +34,7 @@
                     if(mysqli_query($conn, $sql)){
                         $_SESSION['msgOk'] = "Tema de Cluster cadastrado";
                     }else{
-                        $_SESSION['msgErro'] = "Cluster já adicionado";
+                        $_SESSION['msgErro'] = "Um erro ocorreu, tente novamente";
                     };
                 }
             }

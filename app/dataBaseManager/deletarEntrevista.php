@@ -2,7 +2,7 @@
 session_start();
 include_once("conexao.php");
 $idEntrevista = filter_input(INPUT_POST, 'idEntrevista', FILTER_SANITIZE_STRING);
-$sqlEntrevista = "DELETE FROM entrevistas WHERE id = ?";
+$sqlEntrevista = "DELETE FROM perguntas WHERE id = ?";
 $sqlEntrevistados = "DELETE FROM entrevistados WHERE idPergunta = ?";
 
 	if( ($stmt = mysqli_prepare($conn, $sqlEntrevista))  &&  ($stmt2 = mysqli_prepare($conn, $sqlEntrevistados)) ){
