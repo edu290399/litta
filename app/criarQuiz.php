@@ -113,7 +113,6 @@ session_start();
     <?php
         include_once("./dataBaseManager/conexao.php");
         $idTema = filter_input(INPUT_POST, 'idTema', FILTER_SANITIZE_STRING);
-
         $sql = "SELECT id, nome,descricao FROM quiz WHERE visivel = 1 AND idTema = '$idTema'  ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
