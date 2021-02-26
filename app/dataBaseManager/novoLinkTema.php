@@ -8,21 +8,33 @@
 
     switch ($switch) {
         case 0:
-            $sql = "INSERT INTO temaEntrevista(nome) VALUES ('$nome')";
-            if(mysqli_query($conn, $sql)){
-                $_SESSION['msgOk'] = "Tema de Entrevista cadastrado";
-            }else{
-                $_SESSION['msgErro'] = "Um erro ocorreu, tente novamente";
-            };
+            $entrevistaArray = $_POST['entrevista'];
+            $entrevistaSelecionado = 0;
+            for($cont=0; $cont <= $contInput; $cont++){
+                if(isset($entrevistaArray[$cont])){ 
+                    $sql = "INSERT INTO linkTemaEntrevista(idTema,idEntrevista) VALUES ('$idTema','$entrevistaArray[$cont]')";
+                    if(mysqli_query($conn, $sql)){
+                        $_SESSION['msgOk'] = "Entrevista adicionada ao tema";
+                    }else{
+                        $_SESSION['msgErro'] = "Entrevista já adicionada";
+                    };
+                }
+            }
             header("Location: ../temasEntrevista");
             break;
         case 1:
-            $sql = "INSERT INTO temaQuiz(nome) VALUES ('$nome')";
-            if(mysqli_query($conn, $sql)){
-                $_SESSION['msgOk'] = "Tema de Quiz cadastrado";
-            }else{
-                $_SESSION['msgErro'] = "Um erro ocorreu, tente novamente";
-            };
+            $quizArray = $_POST['quiz'];
+            $quizSelecionado = 0;
+            for($cont=0; $cont <= $contInput; $cont++){
+                if(isset($quizArray[$cont])){ 
+                    $sql = "INSERT INTO linkTemaQuiz(idTema,idQuiz) VALUES ('$idTema','$quizsArray[$cont]')";
+                    if(mysqli_query($conn, $sql)){
+                        $_SESSION['msgOk'] = "Quiz adicionada ao tema";
+                    }else{
+                        $_SESSION['msgErro'] = "Quiz já adicionado";
+                    };
+                }
+            }
             header("Location: ../temasQuiz");
             break;
         case 2:
@@ -34,7 +46,7 @@
                     if(mysqli_query($conn, $sql)){
                         $_SESSION['msgOk'] = "Tema de Cluster cadastrado";
                     }else{
-                        $_SESSION['msgErro'] = "Um erro ocorreu, tente novamente";
+                        $_SESSION['msgErro'] = "Cluster já adicionado";
                     };
                 }
             }
