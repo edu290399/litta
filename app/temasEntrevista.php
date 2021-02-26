@@ -163,13 +163,13 @@ session_start();
             <div class="col-md-5 col-lg-5 col-12">
                 <form method="POST" action="./linkTemaEntrevista">
                     <input value="<?php echo $nome?>" name="nome" style="display:none"/>  
-                    <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" >Adicionar ao Tema<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                    <button class="btEstilo"  value="<?php echo $id?>" name="idTema" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" >Adicionar ao Tema<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
                 </form> 
             </div> 
 
         
             <form method="POST" action="./criarEntrevista">
-                <button class="btEstilo" type="submit" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;" z>Consulta</button>
+                <button class="btEstilo" type="submit" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;">Consulta</button>
             </form> 
        
 

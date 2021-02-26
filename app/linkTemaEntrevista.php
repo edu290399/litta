@@ -1,7 +1,7 @@
 <?php
 session_start();
 ?>
-<?php if(!empty($_SESSION['id'])){  unset($_SESSION['idConsulta']);$nomeTema = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);?>
+<?php if(!empty($_SESSION['id'])){  unset($_SESSION['idConsulta']);$nomeTema = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
