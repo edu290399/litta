@@ -97,7 +97,6 @@ session_start();
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
 
-    
     <div class="row mb-5" style="text-align:center">
         <div class="col-lg-4 col-12">
             <div class="row mb-5">
@@ -121,11 +120,10 @@ session_start();
                                     <button type="submit" name="switch" value="0" class="btEstilo">Adicionar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
                                 </div>
                             </div>
-                        </div>
-                    </div>           
+                        </div>           
                     </div>
                 </form> 
-
+        </div>
         <div class="col-lg-4 col-12">
             <form method="POST" action="./novaEntrevista">
                 <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>

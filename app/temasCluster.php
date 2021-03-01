@@ -101,8 +101,29 @@ session_start();
     <div class="row mb-5" style="text-align:center">
         <div class="col-lg-4 col-12">
             <div class="row mb-5">
-                    <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Adicionar tema de Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                    <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar tema de Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
             </div>
+
+            <form method="POST" action="./dataBaseManager/novoTema.php">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered mw-lg-85 mw-md-100" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Adicionar Tema</h5>
+                            </div>
+                            <div class="modal-body mx-0 my-0">      
+                                <div class="row mb-lg-0 mb-5">
+                                        <input name="nomeTema"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="switch" value="2" class="btEstilo">Adicionar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+            </form>
         </div>
 
         <div class="col-lg-4 col-12">

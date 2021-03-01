@@ -109,36 +109,44 @@ session_start();
             $result = mysqli_query($conn, $sql);
             $cont = 0;
             if (mysqli_query($conn, $sql)) {
-            while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"];  ?>
-                
+                while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"];
+                    $sqlBox = "SELECT idQuiz FROM linkTemaQuiz  WHERE idQuiz = '$id' ";
+                    if ($reg = mysqli_query($conn, $sqlBox)) { 
+                        $total = mysqli_num_rows($reg); ?>
 
+                        <div class="row pl-lg-2 py-3 border-bottom border-white">
 
-        <div class="row pl-lg-2 py-3 border-bottom border-white">
+                            <div class="col-md-5 col-lg-5 col-12">
+                                
+                                <p>Nome: </p>
+                                <strong><?php echo $nome?></strong>
+                                
+                            </div> 
 
-            <div class="col-md-5 col-lg-5 col-12">
-                
-                <p>Nome: </p>
-                <strong><?php echo $nome?></strong>
-                
-            </div> 
+                                    
+                            <div class="col-md-5 col-lg-5 col-12" >
 
+                                <p>Descricação: </p>
+                                <strong><?php echo $descricao?></strong>
                     
-            <div class="col-md-5 col-lg-5 col-12" >
+                            </div>
+                            
+                            <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
+                                <?php if($total > 0){ ?>
+                                    <input  type="checkbox" value=" <?php echo $id?> " name="quiz[<?php echo $cont?>]" checked/>                                    
+                                    <input  type="checkbox" value=" <?php echo $id?> " name="quizDelete[<?php echo $cont?>]" style="display:none" checked/>  
+                                <?php } else{ ?>
+                                    <input  type="checkbox" value=" <?php echo $id?> " name="quiz[<?php echo $cont?>]" /> 
+                                    <input  type="checkbox" value=" <?php echo $id?> " name="quizDelete[<?php echo $cont?>]" style="display:none" checked/>  
+                                <?php } ?>
+                            </div> 
+                        
 
-                <p>Descricação: </p>
-                <strong><?php echo $descricao?></strong>
-    
-            </div>
-            
-            <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-                <input  type="checkbox" value=" <?php echo $id?> " name="quiz[<?php echo $cont?>]"/> 
-            </div>  
-        
+                        </div>
 
-        </div>
-
-        <?php
-                $cont++;
+                    <?php
+                    }
+                    $cont++;
                 } 
             }else {
             echo "mysqli_error($conn)";

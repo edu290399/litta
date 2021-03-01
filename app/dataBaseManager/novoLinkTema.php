@@ -9,14 +9,17 @@
     switch ($switch) {
         case 0:
             $entrevistaArray = $_POST['entrevista'];
-            $entrevistaSelecionado = 0;
+            $entrevistaDeleteArray = $_POST['entrevistaDelete'];
             for($cont=0; $cont <= $contInput; $cont++){
                 if(isset($entrevistaArray[$cont])){ 
                     $sql = "INSERT INTO linkTemaEntrevista(idTema,idEntrevista) VALUES ('$idTema','$entrevistaArray[$cont]')";
                     if(mysqli_query($conn, $sql)){
-                        $_SESSION['msgOk'] = "Entrevista adicionada ao tema";
-                    }else{
-                        $_SESSION['msgErro'] = "Entrevista já adicionada";
+                        $_SESSION['msgOk'] = "Alterações salvas";;
+                    };
+                }else{
+                    $sql = "DELETE FROM linkTemaEntrevista WHERE idTema = '$idTema' AND idEntrevista = '$entrevistaDeleteArray[$cont]' ";
+                    if(mysqli_query($conn, $sql)){
+                        $_SESSION['msgOk'] = "Alterações salvas";
                     };
                 }
             }
@@ -24,14 +27,17 @@
             break;
         case 1:
             $quizArray = $_POST['quiz'];
-            $quizSelecionado = 0;
+            $quizDeleteArray = $_POST['quizDelete'];
             for($cont=0; $cont <= $contInput; $cont++){
                 if(isset($quizArray[$cont])){ 
-                    $sql = "INSERT INTO linkTemaQuiz(idTema,idQuiz) VALUES ('$idTema','$quizsArray[$cont]')";
+                    $sql = "INSERT INTO linkTemaQuiz(idTema,idQuiz) VALUES ('$idTema','$quizArray[$cont]')";
                     if(mysqli_query($conn, $sql)){
-                        $_SESSION['msgOk'] = "Quiz adicionada ao tema";
-                    }else{
-                        $_SESSION['msgErro'] = "Quiz já adicionado";
+                        $_SESSION['msgOk'] = "Alterações salvas";;
+                    };
+                }else{
+                    $sql = "DELETE FROM linkTemaQuiz WHERE idTema = '$idTema' AND idQuiz = '$quizDeleteArray[$cont]' ";
+                    if(mysqli_query($conn, $sql)){
+                        $_SESSION['msgOk'] = "Alterações salvas";
                     };
                 }
             }
@@ -39,14 +45,17 @@
             break;
         case 2:
             $clusterArray = $_POST['cluster'];
-            $clusterSelecionado = 0;
+            $clusterDeleteArray = $_POST['clusterDelete'];
             for($cont=0; $cont <= $contInput; $cont++){
                 if(isset($clusterArray[$cont])){ 
                     $sql = "INSERT INTO linkTemaCluster(idTema,idCluster) VALUES ('$idTema','$clusterArray[$cont]')";
                     if(mysqli_query($conn, $sql)){
-                        $_SESSION['msgOk'] = "Tema de Cluster cadastrado";
-                    }else{
-                        $_SESSION['msgErro'] = "Cluster já adicionado";
+                        $_SESSION['msgOk'] = "Alterações salvas";;
+                    };
+                }else{
+                    $sql = "DELETE FROM linkTemaCluster WHERE idTema = '$idTema' AND idCluster = '$clusterDeleteArray[$cont]' ";
+                    if(mysqli_query($conn, $sql)){
+                        $_SESSION['msgOk'] = "Alterações salvas";
                     };
                 }
             }

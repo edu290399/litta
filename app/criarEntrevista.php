@@ -113,7 +113,7 @@ session_start();
         include_once("./dataBaseManager/conexao.php");
         $idTema = filter_input(INPUT_POST, 'idTema', FILTER_SANITIZE_STRING);
 
-        $sql = "SELECT id,nome,descricao FROM entrevistas WHERE visivel='1' AND idTema = '$idTema' ORDER BY id DESC ";
+        $sql = "SELECT id,nome,descricao FROM entrevistas INNER JOIN linkTemaEntrevista ON linkTemaEntrevista.idTema = '$idTema' AND entrevistas.visivel='1' AND  linkTemaEntrevista.idEntrevista = entrevistas.id ORDER BY id DESC ";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
