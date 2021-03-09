@@ -98,10 +98,10 @@ session_start();
     <?php unset($_SESSION['msgErro']);} ?>
 
     
-    <div class="row mb-5" style="text-align:center">
+    <div class="row mb-5 ml-1" style="text-align:center">
         <div class="col-lg-4 col-12">
-            <div class="row mb-5">
-                    <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar tema de Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+            <div class="col-lg-4 col-12">   
+                    <button class="btEstiloGrande"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar tema de Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
             </div>
 
             <form method="POST" action="./dataBaseManager/novoTema.php">
@@ -110,14 +110,15 @@ session_start();
                     <div class="modal-dialog modal-dialog-centered mw-lg-85 mw-md-100" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Adicionar Tema</h5>
+                                <h5 class="modal-title w-100" id="exampleModalCenterTitle">Adicionar Tema</h5>
                             </div>
                             <div class="modal-body mx-0 my-0">      
                                 <div class="row mb-lg-0 mb-5">
-                                        <input name="nomeTema"/>
+                                        <input class="w-100 text-center" name="nomeTema"/>
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <button type="button" class="btEstilo mr-auto " data-dismiss="modal">Cancelar</button>
                                 <button type="submit" name="switch" value="2" class="btEstilo">Adicionar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
                             </div>
                         </div>
@@ -128,13 +129,13 @@ session_start();
 
         <div class="col-lg-4 col-12">
             <form method="POST" action="./novoCluster">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                <button class="btEstiloGrande" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
             </form>    
         </div>
 
         <div class="col-lg-4 col-12">
             <form method="POST" action="./criarCluster">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Clusters<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
+                <button class="btEstiloGrande" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Clusters<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
             </form>    
         </div>
 </div> 
@@ -157,29 +158,34 @@ session_start();
 
             <div class="row pl-lg-2 py-3 border-bottom border-white">
 
-            <div class="col-md-5 col-lg-5 col-12">
-                    <p>Tema: </p>
-                    <strong><?php echo $nome?></strong>        
-            </div> 
+                <div class="col-md-4 col-lg-4 col-12">
+                        <p>Tema: </p>
+                        <strong><?php echo $nome?></strong>        
+                </div> 
 
-            <div class="col-md-5 col-lg-5 col-12">
-                <form method="POST" action="./linkTemaCluster">
-                    <input value="<?php echo $nome?>" name="nome" style="display:none"/>  
-                    <button class="btEstilo"  id="btnAdiciona" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Adicionar ao Tema<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
-                </form> 
-            </div> 
-        
-            <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
-                <form method="POST" action="./criarCluster">
-                    <button type="submit" class="btEstilo" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;">Consulta</button>
-                </form> 
-            </div>  
-       
-            <div class="col-lg-4 col-12">
-            <form method="POST" action="./criarCluster">
-                <button class="btEstilo" name="idTema" value="1 " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Clusters<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
-            </form>    
-        </div>
+                <div class="col-md-4 col-lg-4 col-12 text-center">
+                    <form method="POST" action="./linkTemaCluster">
+                        <input value="<?php echo $nome?>" name="nome" style="display:none"/>  
+                        <button class="btEstiloGrande"  id="btnAdiciona" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Adicionar ao Tema<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                    </form> 
+                </div> 
+            
+                <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12 text-center" style="text-align:left" >
+                    <form method="POST" action="./criarCluster">
+                        <button type="submit" class="btEstilo" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;">Consulta</button>
+                    </form> 
+                </div>
+                
+                <div class="col-md-2 col-lg-2 col-12 text-center">
+                    <form method="POST" action="./criarCluster">
+                        <button class="btEstilo " name="idTema" value="1 " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Clusters<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
+                    </form>    
+                </div>
+
+            </div>
+
+
+
     </div>
 
     <?php

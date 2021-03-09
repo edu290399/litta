@@ -97,10 +97,10 @@ session_start();
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
 
-    <div class="row mb-5" style="text-align:center">
+    <div class="row mb-5 ml-1" style="text-align:center">
         <div class="col-lg-4 col-12">
             <div class="row mb-5">
-                    <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar tema de Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                    <button class="btEstiloGrande"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar tema de Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
             </div>
 
                 <form method="POST" action="./dataBaseManager/novoTema.php">
@@ -108,16 +108,17 @@ session_start();
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered mw-lg-85 mw-md-100" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Adicionar Tema</h5>
+                                <div class="modal-header text-center">
+                                    <h5 class="modal-title w-100" id="exampleModalCenterTitle">Adicionar Tema</h5>
                                 </div>
                                 <div class="modal-body mx-0 my-0">      
                                     <div class="row mb-lg-0 mb-5">
-                                            <input name="nomeTema"/>
+                                            <input class="w-100 text-center" name="nomeTema"/>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" name="switch" value="0" class="btEstilo">Adicionar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
+                                    <button type="button" class="btEstilo mr-auto " data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" name="switch" value="0" class="btEstilo ">Adicionar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
                                 </div>
                             </div>
                         </div>           
@@ -126,13 +127,13 @@ session_start();
         </div>
         <div class="col-lg-4 col-12">
             <form method="POST" action="./novaEntrevista">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                <button class="btEstiloGrande" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Entrevista<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
             </form>    
         </div>
 
         <div class="col-lg-4 col-12">
             <form method="POST" action="./criarEntrevista">
-                <button class="btEstilo" name="idTema" value="1 " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Entrevistas<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
+                <button class="btEstiloGrande" name="idTema" value="1 " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Entrevistas<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
             </form>    
         </div>
     </div> 
@@ -161,7 +162,7 @@ session_start();
             <div class="col-md-5 col-lg-5 col-12">
                 <form method="POST" action="./linkTemaEntrevista">
                     <input value="<?php echo $nome?>" name="nome" style="display:none"/>  
-                    <button class="btEstilo"  value="<?php echo $id?>" name="idTema" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" >Adicionar ao Tema<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                    <button class="btEstiloGrande"  value="<?php echo $id?>" name="idTema" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" >Adicionar ao Tema<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
                 </form> 
             </div> 
 

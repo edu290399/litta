@@ -65,15 +65,6 @@ a:link
     background-color: rgb(88, 88, 90);
     background: transparent;
 }
-
-.modal-title{
-    text-align: center;
-    color: white;
-}
-
-.modal-title{
-    text-align: center;
-}
 .modalOption{
     font-size: 30px !important;
     color: rgb(230, 230, 230);
@@ -167,19 +158,8 @@ strong{
     width:150px !important;
     padding-right: 5px;
     padding-left: 5px ;
-    height: 40px;
-    border-radius: 5px;
-    border:none;
-    background-color:rgb(190, 187, 187);
-}
-
-
-.btEstiloGrande{
-    font-size: 15px;
-    width:150px !important;
-    padding-right: 5px;
-    padding-left: 5px ;
-    height: 50px;
+    height: 150px;
+    margin-top: 10vh;
     border-radius: 5px;
     border:none;
     background-color:rgb(190, 187, 187);
