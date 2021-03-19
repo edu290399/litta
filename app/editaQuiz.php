@@ -133,7 +133,7 @@ session_start();
                                 $result = mysqli_query($conn, $sql);
                                 if (mysqli_query($conn, $sql)) {$cont=0;
                                 while($row = mysqli_fetch_assoc($result)) { $idCluster = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"];$cont++;
-                                    $sqlBox = "SELECT id FROM quiz  WHERE (c1 = '$idCluster' OR c2 = '$idCluster' OR c3 = '$idCluster' OR c4 = '$idCluster' OR c5 = '$idCluster' OR c6 = '$idCluster' OR c7 = '$idCluster' OR c8 = '$idCluster' OR c9 = '$idCluster' OR c10 = '$idCluster' OR c11 = '$idCluster' OR c12 = '$idCluster' OR c13 = '$idCluster' OR c14 = '$idCluster' OR c15 = '$idCluster' OR c16 = '$idCluster' OR c17 = '$idCluster' OR c18 = '$idCluster' OR c19 = '$idCluster' OR c20 = '$idCluster') ";
+                                    $sqlBox = "SELECT id FROM quiz  WHERE (c1 = '$idCluster' OR c2 = '$idCluster' OR c3 = '$idCluster' OR c4 = '$idCluster' OR c5 = '$idCluster' OR c6 = '$idCluster' OR c7 = '$idCluster' OR c8 = '$idCluster' OR c9 = '$idCluster' OR c10 = '$idCluster' OR c11 = '$idCluster' OR c12 = '$idCluster' OR c13 = '$idCluster' OR c14 = '$idCluster' OR c15 = '$idCluster' OR c16 = '$idCluster' OR c17 = '$idCluster' OR c18 = '$idCluster' OR c19 = '$idCluster' OR c20 = '$idCluster') AND visivel = '1' ";
                                     if ($reg = mysqli_query($conn, $sqlBox)) { 
                                         $total = mysqli_num_rows($reg); ?>
 
