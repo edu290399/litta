@@ -116,59 +116,81 @@ session_start();
 
         <div class="row mb-5">
             <label>Descrição</label>
-            <input type="text" class="form-control campoDefault"  value= "<?php echo $descricao?>" name="descricao"/>
+            <input type="text" class="form-control campoDefault"  value= "<?php echo $descricao?>" name="descricao" required/>
         </div>
 
-        <div class="row  mb-5">
-
-            <?php for($n=1;$n<=20;$n++) { $cluster[$n] = $row["c".$n];}?>
-                    <?php for($cont1=1;$cont1<=20;$cont1++) {  if( ($cluster[$cont1]) == "0" ){continue;}?>
-                    <!-- >>>Fazer outra consulta no banco de dados aqui, recuperando o conteudo de cada cluster apontado <<< -->
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-
-                                    <?php
-                                        $idCluster =$cluster[$cont1];
-                                        $sql = "SELECT * FROM cluster WHERE id = $idCluster";
-                                        $result = mysqli_query($conn, $sql);
-                                        if (mysqli_query($conn, $sql)) { 
-                                            // Entrei no IF     
-                                            while($row = mysqli_fetch_assoc($result)) { $cont2 = 1; $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]; 
-                                                for($n=1;$n<=8;$n++) { $imagem[$n] = $row["img".$n]; $titulo[$n] = $row["t".$n]; $legenda[$n] = $row["leg".$n];}
-                                                for($cont2=1; $cont2<=8; $cont2++) { if($imagem[$cont2]==""){ break;}
-                                    ?>
-
-                                            
-                                        <div class="swiper-slide" style="background-image:url(<?php echo $imagem[$cont2]?>);background-size:100% 100%">
-                                            <input class="titulo"  name="<?php echo "t".$n?>" value="<?php echo $titulo[$cont2]?>" disabled/>
-                                            <input class="descricao" name="<?php echo "desc".$n?>" value="<?php echo $legenda[$cont2]?>" disabled/>
-                                        </div>
-                                    <?php
-        
-                                                }
-                                            }
-                                        }
-                                    ?>
-                                        <div class="swiper-pagination swiper-pagination-black"></div>
-                                        <div class="swiper-button-next swiper-button-black"></div>
-                                        <div class="swiper-button-prev swiper-button-black"></div>
-                                </div>
-                            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered mw-lg-85 mw-md-100" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Clusters</h5>
                         </div>
-                    <?php 
-                    }
-                        
-                    }}?>
+                        <div class="modal-body mx-0 my-0">
+                            <?php include_once("./dataBaseManager/conexao.php");
+                                
+                                $sql = "SELECT id,nome,descricao FROM cluster ORDER BY id DESC";
+                                $result = mysqli_query($conn, $sql);
+                                if (mysqli_query($conn, $sql)) {$cont=0;
+                                while($row = mysqli_fetch_assoc($result)) { $idCluster = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"];$cont++;
+                                    $sqlBox = "SELECT id FROM quiz  WHERE (c1 = '$idCluster' OR c2 = '$idCluster' OR c3 = '$idCluster' OR c4 = '$idCluster' OR c5 = '$idCluster' OR c6 = '$idCluster' OR c7 = '$idCluster' OR c8 = '$idCluster' OR c9 = '$idCluster' OR c10 = '$idCluster' OR c11 = '$idCluster' OR c12 = '$idCluster' OR c13 = '$idCluster' OR c14 = '$idCluster' OR c15 = '$idCluster' OR c16 = '$idCluster' OR c17 = '$idCluster' OR c18 = '$idCluster' OR c19 = '$idCluster' OR c20 = '$idCluster') ";
+                                    if ($reg = mysqli_query($conn, $sqlBox)) { 
+                                        $total = mysqli_num_rows($reg); ?>
 
-        </div>
+                                    <div class="row mb-lg-0 mb-5">
 
-        <div class="row mb-5">
-            <button class="btEstilo" type="submit" name='btnEdita' value="<?php echo $idCluster ?>" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Salvar Quiz</button>
+                                        <div class="col-md-5 col-lg-5 col-12">
+                                            <div class="row ">
+                                                <p>Nome: </p>
+                                                <strong><?php echo $nome?></strong>
+                                            </div> 
+                                        </div> 
+
+                                                
+                                        <div class="col-md-5 col-lg-5 col-12" >
+                                            <div class="row ">
+                                                <p>Descrição: </p>
+                                                <strong><?php echo $descricao?></strong>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 col-lg-2 col-12" >
+                                            <?php if($total > 0){ ?>
+                                                <input  type="checkbox" value="<?php echo $idCluster?>" name="cluster[<?php echo $cont?>]" checked/>
+                                                <input  type="checkbox" value="<?php echo $idCluster?>" name="clusterDelete[<?php echo $cont?>]" style="display:none" checked/>  
+                                            <?php } else{ ?>
+                                                <input  type="checkbox" value="<?php echo $idCluster?>" name="cluster[<?php echo $cont?>]"/>
+                                                <input  type="checkbox" value="<?php echo $idCluster?>" name="clusterDelete[<?php echo $cont?>]" style="display:none" checked/>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                            <?php
+                                }}}} 
+                                    }else {
+                                        echo "mysqli_error($conn)";
+                                    }?>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btEstilo">Adicionar<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <button class="btEstilo" type="submit" name='btnCadastra' style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Salvar Quiz</button>
+            </div>
+
         </div>
         
     </form>
+    <div class="row mb-5">
+            <button class="btEstilo"  id="btnAdiciona" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px" data-toggle="modal" data-target="#exampleModalCenter">Adicionar Cluster<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+    </div>
+    </div>
 
+</div>
     <form method="POST" onsubmit="return confirm('Cancelar alterações?');" action="./criar.php">
         <button class="btEstilo" type="submit" name='cancela'  style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Cancelar</button>
     </form>

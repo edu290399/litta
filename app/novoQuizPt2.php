@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Edita Cluster</title>
+  <title>Edita Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/editaQuiz.css">
@@ -94,7 +94,8 @@ session_start();
 
 <div class="container" >
 
-    <h2 style="text-align:center">VISUALIZAR QUIZ </h2>
+    <h2 style="text-align:center">EDITAR QUIZ </h2>
+
         <?php
             include_once("./dataBaseManager/conexao.php");
             $idQuiz = $_SESSION['idQuiz'];
@@ -104,6 +105,8 @@ session_start();
             if (mysqli_query($conn, $sql)) { 
                 while($row = mysqli_fetch_assoc($resultado)) { $id = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]; 
         ?>
+        
+        <input type="text" style="display:none" value= "<?php echo $idQuiz?>" name="idQuiz"/>
 
         <div class="row">
             <label>Nome do Quiz</label>
@@ -137,8 +140,8 @@ session_start();
 
                                             
                                         <div class="swiper-slide" style="background-image:url(<?php echo $imagem[$cont2]?>);background-size:100% 100%">
-                                            <input class="titulo"  name="<?php echo $tValido?>" value="<?php echo $legenda[$cont2]?>" disabled/>
-                                            <input class="descricao" name="<?php echo $legValida?>" value="<?php echo $titulo[$cont2]?>" disabled/>
+                                            <input class="titulo"  name="<?php echo "t".$n?>" value="<?php echo $titulo[$cont2]?>" disabled/>
+                                            <input class="descricao" name="<?php echo "desc".$n?>" value="<?php echo $legenda[$cont2]?>" disabled/>
                                         </div>
                                     <?php
         
@@ -156,15 +159,17 @@ session_start();
                     }
                         
                     }}?>
+
         </div>
 
 
-        <div class="row mb-5">
-            <form method="POST" action="./criar.php">
-                <button class="btEstilo" type="submit" name='cancela'  style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Voltar</button>
-            </form>
-        </div>
 
+    <form method="POST"  action="./criar.php">
+        <button class="btEstilo" type="submit" name='cancela'  style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">OK</button>
+    </form>
+
+
+</div>
 </div>
 
  <!-- Optional JavaScript -->
