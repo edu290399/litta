@@ -134,7 +134,7 @@ session_start();
         </div>
 
         <div class="col-lg-4 col-12">
-            <form method="POST" action="./criarCluster">
+            <form method="POST" action="./todosCluster">
                 <button class="btEstiloGrande" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Clusters<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
             </form>    
         </div>
@@ -176,12 +176,6 @@ session_start();
                     </form> 
                 </div>
                 
-                <div class="col-md-2 col-lg-2 col-12 text-center">
-                    <form method="POST" action="./criarCluster">
-                        <button class="btEstilo " name="idTema" value="1 " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Clusters<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
-                    </form>    
-                </div>
-
             </div>
 
 

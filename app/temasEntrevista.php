@@ -132,7 +132,7 @@ session_start();
         </div>
 
         <div class="col-lg-4 col-12">
-            <form method="POST" action="./criarEntrevista">
+            <form method="POST" action="./todosEntrevista">
                 <button class="btEstiloGrande" name="idTema" value="1 " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Entrevistas<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
             </form>    
         </div>

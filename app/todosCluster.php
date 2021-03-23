@@ -114,7 +114,7 @@ session_start();
         include_once("./dataBaseManager/conexao.php");
         $idTema = filter_input(INPUT_POST, 'idTema', FILTER_SANITIZE_STRING);
 
-        $sql = "SELECT id,nome,descricao FROM cluster INNER JOIN linkTemaCluster ON linkTemaCluster.idTema = '$idTema' AND cluster.visivel='1' AND  linkTemaCluster.idCluster = cluster.id ORDER BY id DESC";
+        $sql = "SELECT id,nome,descricao FROM cluster WHERE visivel = '1' ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
           while($row = mysqli_fetch_assoc($result)) { $idCluster = $row["id"]; $nome = $row["nome"]; $descricao = $row["descricao"]?>
