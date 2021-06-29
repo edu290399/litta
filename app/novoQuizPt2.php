@@ -149,10 +149,10 @@ session_start();
                                             }
                                         }
                                     ?>
-                                        <div class="swiper-pagination swiper-pagination-black"></div>
-                                        <div class="swiper-button-next swiper-button-black"></div>
-                                        <div class="swiper-button-prev swiper-button-black"></div>
                                 </div>
+                                <div class="swiper-pagination swiper-pagination-black"></div>
+                                <div class="swiper-button-next swiper-button-black"></div>
+                                <div class="swiper-button-prev swiper-button-black"></div>
                             </div>
                         </div>
                     <?php 

@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Edita Cluster</title>
+  <title>Visualiza Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/editaQuiz.css">
@@ -146,10 +146,11 @@ session_start();
                                             }
                                         }
                                     ?>
-                                        <div class="swiper-pagination swiper-pagination-black"></div>
-                                        <div class="swiper-button-next swiper-button-black"></div>
-                                        <div class="swiper-button-prev swiper-button-black"></div>
+
                                 </div>
+                                <div class="swiper-pagination swiper-pagination-light"></div>
+                                <div class="swiper-button-next swiper-button-light"></div>
+                                <div class="swiper-button-prev swiper-button-light"></div>
                             </div>
                         </div>
                     <?php 
