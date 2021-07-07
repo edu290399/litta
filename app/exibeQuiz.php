@@ -138,6 +138,7 @@ session_start();
         <div class="col-md-2 col-lg-2 ml-lg-n4 col-12" style="text-align:center" >
         
             <form method="POST" action="responderQuiz">
+                <?php $_SESSION['clusterAtual'] = 1 ?>
                 <button class="btEstilo" name="idQuiz" value="<?php echo $idQuiz ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Responder<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="external"></button>
             </form>    
 

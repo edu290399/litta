@@ -144,7 +144,6 @@ session_start();
     
     <?php
         include_once("./dataBaseManager/conexao.php");
-        
         $sql = "SELECT id, nome FROM temaEntrevista ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
