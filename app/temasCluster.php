@@ -158,7 +158,7 @@ session_start();
 
             <div class="row pl-lg-2 py-3 border-bottom border-white">
 
-                <div class="col-md-4 col-lg-4 col-12">
+                <div class="col-md-4 col-lg-4 col-12 ">
                         <p>Tema: </p>
                         <strong><?php echo $nome?></strong>        
                 </div> 
@@ -170,17 +170,13 @@ session_start();
                     </form> 
                 </div> 
             
-                <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12 text-center" style="text-align:left" >
+                <div class="col-md-4 col-lg-4  col-12 text-center">
                     <form method="POST" action="./criarCluster">
                         <button type="submit" class="btEstilo" name="idTema" value=" <?php echo $id?> " style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px;">Consulta</button>
                     </form> 
                 </div>
                 
             </div>
-
-
-
-    </div>
 
     <?php
             } 
@@ -223,5 +219,5 @@ session_start();
 
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login");	
+	header("Location: ./login");	
 }?>

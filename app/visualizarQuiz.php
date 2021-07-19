@@ -1,7 +1,7 @@
 <?php
 session_start();
 ?>
-<?php if(!empty($_SESSION['id'])){  unset($_SESSION['idConsulta']);?>
+<?php if(!empty($_SESSION['id'])){  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,9 +63,15 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="criar">
-                <span class="option align-baseline" id="option3"> VOLTAR <span>
-            </a>
+            <?php if($_SESSION['boss'] == '1'){?>
+                <a href="criar">
+                    <span class="option align-baseline" id="option3"> VOLTAR <span>
+                </a>
+            <?php }else{ ?>
+                <a href="exibeQuiz">
+                    <span class="option align-baseline" id="option3"> VOLTAR <span>
+                </a>
+            <?php }?>   
     </ul>
 
     </div>
@@ -81,9 +87,15 @@ session_start();
                     <a  href="criar" >
                         <span class="modalOption"> CRIAR <span>
                     </a>
-                    <a  href="criar" >
-                        <span class="modalOption"> VOLTAR <span>
-                    </a>
+                    <?php if($_SESSION['boss'] == '1'){?>
+                        <a href="criar">
+                            <span class="modalOption"> VOLTAR <span>
+                        </a>
+                    <?php }else{ ?>
+                        <a href="exibeQuiz">
+                            <span class="modalOption"> VOLTAR <span>
+                        </a>
+                    <?php }?>  
                 </ul>
         </div>
         </div>
@@ -206,6 +218,6 @@ session_start();
 
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login");	
+	header("Location: ./login");	
 }?>
 

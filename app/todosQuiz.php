@@ -102,13 +102,13 @@ session_start();
     <div class="row mb-5" style="text-align:center">
         <div class="col-lg-4 col-12">
             <form method="POST" action="./novoQuiz">
-                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Quizz<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
+                <button class="btEstilo" name="usuario" value=" <?php echo $id?> " type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Criar Quiz<img src="./public/open-iconic/svg/plus.svg" class="icon" alt="plus"></button>
             </form>    
         </div>
     </div>
 
-<!-- QUIZZ -->
-<h2 class="mt-5 mb-n1">QUIZZ</h2>
+<!-- QUIZ -->
+<h2 class="mt-5 mb-n1">QUIZ</h2>
     
     <?php
         include_once("./dataBaseManager/conexao.php");
@@ -213,5 +213,5 @@ session_start();
 
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login");	
+	header("Location: ./login");	
 }?>

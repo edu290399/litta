@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Entrevista</title>
+  <title>Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
@@ -97,14 +97,15 @@ session_start();
     <div class="container-fluid">
             <?php
                 include_once("./dataBaseManager/conexao.php");
-                $idEntrevista = filter_input(INPUT_POST, 'idEntrevista', FILTER_SANITIZE_STRING);
+                $idQuiz = filter_input(INPUT_POST, 'idQuiz', FILTER_SANITIZE_STRING);
+                $idEnvio = filter_input(INPUT_POST, 'idEnvio', FILTER_SANITIZE_STRING);
                 if (isset($_SESSION['idConsulta'])){
                     $idUsuario = $_SESSION['idConsulta'];
                 }else{
                     $idUsuario = $_SESSION['id'];
                 }
-                $sqlEntrevistas = "SELECT * FROM entrevistas WHERE id = $idEntrevista";
-                $sqlRespostas = "SELECT * FROM respostas WHERE idPergunta = $idEntrevista AND idUsuario = $idUsuario";
+                $sqlQuiz = "SELECT * FROM quiz WHERE id = $idQuiz";
+                $sqlRespostas = "SELECT * FROM respostasQuiz WHERE idEnvio = $idEnvio";
 
 
                 $resultEntrevistas = mysqli_query($conn, $sqlEntrevistas);
@@ -152,6 +153,6 @@ session_start();
 }
 else{
     $_SESSION['msgErro'] = "Faça login para continuar";
-    header("Location: ../login");	
+    header("Location: ./login");	
 }?>
 

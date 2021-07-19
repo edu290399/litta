@@ -1,11 +1,14 @@
 <?php
 session_start();
+unset($_SESSION['idEnvio']);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Quizz Consulta</title>
+  <title>Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
@@ -46,8 +49,8 @@ session_start();
             </a>
             <br>
             <br>
-            <a href="criar">
-                <span class="option align-baseline" id="option2"> CRIAR <span>
+            <a href="exibeQuiz">
+                <span class="option active align-baseline" id="option2"> QUIZ <span>
             </a>
             <br>
             <br>
@@ -66,8 +69,8 @@ session_start();
                     <a  href="work" >
                         <span class="modalOption"> WORK <span>
                     </a>
-                    <a  href="criar" >
-                        <span class="modalOption"> CRIAR <span>
+                    <a  href="exibeQuiz" >
+                        <span class="modalOption"> QUIZ <span>
                     </a>
                     <a  href="adiministrativo" >
                         <span class="modalOption"> VOLTAR <span>
@@ -99,19 +102,22 @@ session_start();
             </div>
     <?php unset($_SESSION['msgErro']);} ?>
 
-    <!-- ENTREVISTA -->
-    <h2 class="mb-n1">QUIZ</h2>
+
+
+
+ <!-- QUIZ -->
+ <h2 class="mb-n1">QUIZ</h2>
     
     <?php
         include_once("./dataBaseManager/conexao.php");
-        $id = $_SESSION['idConsulta'];
-        $sql = "SELECT * FROM entrevistas INNER JOIN entrevistados ON entrevistas.id = entrevistados.idPergunta AND entrevistados.idUsuario =  $id AND entrevistados.respondido = '0' ";
-        $sql2 = "SELECT * FROM entrevistas INNER JOIN entrevistados ON entrevistas.id = entrevistados.idPergunta AND entrevistados.idUsuario =  $id AND entrevistados.respondido = '1' ";
+        $idConsulta = $_SESSION['idConsulta'];
+        $sql = "SELECT * FROM quiz INNER JOIN quizados ON quiz.id = quizados.idQuiz AND quizados.idUsuario =  $idConsulta AND quizados.respondido = '0' ";
+        $sql2 = "SELECT * FROM quiz INNER JOIN quizados ON quiz.id = quizados.idQuiz AND quizados.idUsuario =  $idConsulta AND quizados.respondido = '1' ";
 
 
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $idPergunta = $row["idPergunta"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
+          while($row = mysqli_fetch_assoc($result)) { $idQuiz = $row["idQuiz"]; $idEnvio = $row["idEnvio"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
             
 
 
@@ -132,10 +138,12 @@ session_start();
  
         </div>
         
-        <div class="col-md-2 col-lg-2 ml-lg-n5 mt-lg-n1 col-12" style="text-align:left" >
+        <div class="col-md-2 col-lg-2 ml-lg-n4 col-12" style="text-align:center" >
         
-            <form method="POST" action="visualizarEntrevista">
-                <button class="btEstilo" name="idEntrevista" value="<?php echo $idPergunta ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver entrevistas<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="external"></button>
+            <form method="POST" action="visualizarQuiz">
+                <?php $_SESSION['clusterAtual'] = 1 ?>
+                <input value="<?php echo $idEnvio?>" name="idEnvio" style="display:none"></input>
+                <button class="btEstilo" name="idQuiz" value="<?php echo $idQuiz ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Quiz<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
             </form>    
 
         </div>  
@@ -156,7 +164,7 @@ session_start();
 
 $result = mysqli_query($conn, $sql2);
         if (mysqli_query($conn, $sql2)) {
-          while($row = mysqli_fetch_assoc($result)) { $idPergunta = $row["idPergunta"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
+          while($row = mysqli_fetch_assoc($result)) { $idQuiz = $row["idQuiz"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
             
 
 
@@ -180,7 +188,116 @@ $result = mysqli_query($conn, $sql2);
         <div class="col-md-2 col-lg-2 ml-lg-n4 col-12" style="text-align:center" >
         
         <form method="POST" action="visualizarResposta" >
-            <button class="btEstilo" name="idEntrevista" value="<?php echo $idPergunta ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Resposta<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
+            <button class="btEstilo" name="idQuiz" value="<?php echo $idQuiz ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Resposta<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
+        </form>
+
+        </div>  
+       
+
+    </div>
+
+<?php
+     } 
+}else {
+    echo "mysqli_error($conn)";
+}?>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ENTREVISTA -->
+    <h2 class="mt-5 mb-n1">ENTREVISTAS</h2>
+    
+    <?php
+        include_once("./dataBaseManager/conexao.php");
+        $idConsulta = $_SESSION['idConsulta'];
+        $sql = "SELECT a.* , b.idEnvio, b.idPergunta FROM entrevistas a, entrevistados b WHERE a.id = b.idPergunta AND b.idUsuario =  $idConsulta AND b.respondido = '0' ";
+        $sql2 = "SELECT a.* , b.idEnvio, b.idPergunta FROM entrevistas a, entrevistados b WHERE a.id = b.idPergunta AND b.idUsuario =  $idConsulta AND b.respondido = '1' ";
+
+
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_query($conn, $sql)) {
+          while($row = mysqli_fetch_assoc($result)) { $idPergunta = $row["idPergunta"]; $idEnvio = $row["idEnvio"];$nome = $row["nome"]; $descricao = $row["descricao"]; ?>
+            
+
+
+    <div class="row pl-lg-2 py-3 border-bottom border-white">
+
+        <div class="col-md-5 col-lg-5 col-12">
+            
+            <p>Nome: </p>
+            <strong><?php echo $nome?></strong>
+            
+        </div> 
+
+                
+        <div class="col-md-5 col-lg-5 col-12" >
+
+            <p>Descrição: </p>
+            <strong><?php echo $descricao?></strong>
+ 
+        </div>
+
+
+        
+        <div class="col-md-2 col-lg-2 ml-lg-n4 col-12" style="text-align:center" >
+        
+            <form method="POST" action="visualizarEntrevista">
+                <input value="<?php echo $idEnvio?>" name="idEnvio" style="display:none"></input>
+                <button class="btEstilo" name="idEntrevista" value="<?php echo $idPergunta ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Visualizar Entrevista<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
+            </form>    
+
+        </div>  
+
+    </div>
+
+    <?php
+          } 
+        }else {
+          echo "mysqli_error($conn)";
+        }?>
+
+
+
+
+<?php
+
+$result = mysqli_query($conn, $sql2);
+        if (mysqli_query($conn, $sql2)) {
+          while($row = mysqli_fetch_assoc($result)) { $idPergunta = $row["idPergunta"];  $idEnvio = $row["idEnvio"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
+            
+
+
+    <div class="row pl-lg-2 py-3 border-bottom border-white">
+
+        <div class="col-md-5 col-lg-5 col-12">
+            
+            <p>Nome: </p>
+            <strong><?php echo $nome?></strong>
+            
+        </div> 
+
+                
+        <div class="col-md-5 col-lg-5 col-12" >
+
+            <p>Descrição: </p>
+            <strong><?php echo $descricao?></strong>
+ 
+        </div>
+
+
+        <div class="col-md-2 col-lg-2 ml-lg-n4 col-12" style="text-align:center" >
+        
+        <form method="POST" action="visualizarRespostaEntrevista" >
+            <input value="<?php echo $idEnvio?>" name="idEnvio" style="display:none" />
+            <button class="btEstilo" name="idEntrevista" value="<?php echo $idPergunta ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Resposta<img src="./public/open-iconic/svg/check.svg" class="icon" alt="check"></button>
         </form>
 
         </div>  

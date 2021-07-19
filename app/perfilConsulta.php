@@ -220,5 +220,5 @@ session_start();
 
 <?php }else{
 	$_SESSION['msgErro'] = "Endereço restrito";
-	header("Location: ../login");	
+	header("Location: ./login");	
 }?>

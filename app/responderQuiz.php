@@ -107,6 +107,10 @@ session_start();
                     $id = $_SESSION['id'];
                     $clusterAtual = 'c'.$_SESSION['clusterAtual']; 
                     $idQuiz = filter_input(INPUT_POST, 'idQuiz', FILTER_SANITIZE_STRING);
+                    $idEnvio = filter_input(INPUT_POST, 'idEnvio', FILTER_SANITIZE_STRING);
+                    if($idEnvio==NULL){
+                        $idEnvio = $_SESSION['idEnvio'];
+                    }
                     if(!empty($_SESSION['idQuiz'])){
                         $idQuiz = $_SESSION['idQuiz'];
                     }
@@ -160,6 +164,7 @@ session_start();
 
         </div>
         <div class="col-md-12 text-center">
+            <input value="<?php echo $idEnvio?>" name="idEnvio" style="display:none"></input>
             <button class="btEstilo" type="submit" name='btnResposta' value="<?php echo $id?>" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Enviar</button>
         </div>
     </form>
@@ -188,6 +193,6 @@ session_start();
 }
 else{
     $_SESSION['msgErro'] = "Faça login para continuar";
-    header("Location: ../login");	
+    header("Location: ./login");	
 }?>
 

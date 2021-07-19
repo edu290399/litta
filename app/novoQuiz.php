@@ -253,6 +253,6 @@ var idContador = 1;
 
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login");	
+	header("Location: ./login");	
 }?>
 

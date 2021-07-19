@@ -1,11 +1,14 @@
 <?php
 session_start();
+unset($_SESSION['idEnvio']);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Quizz</title>
+  <title>Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./public/css/listagem.css">
@@ -114,7 +117,7 @@ session_start();
 
         $result = mysqli_query($conn, $sql);
         if (mysqli_query($conn, $sql)) {
-          while($row = mysqli_fetch_assoc($result)) { $idQuiz = $row["idQuiz"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
+          while($row = mysqli_fetch_assoc($result)) { $idQuiz = $row["idQuiz"]; $idEnvio = $row["idEnvio"]; $nome = $row["nome"]; $descricao = $row["descricao"]; ?>
             
 
 
@@ -139,6 +142,7 @@ session_start();
         
             <form method="POST" action="responderQuiz">
                 <?php $_SESSION['clusterAtual'] = 1 ?>
+                <input value="<?php echo $idEnvio?>" name="idEnvio" style="display:none"></input>
                 <button class="btEstilo" name="idQuiz" value="<?php echo $idQuiz ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Responder<img src="./public/open-iconic/svg/external-link.svg" class="icon" alt="external"></button>
             </form>    
 
@@ -183,7 +187,7 @@ $result = mysqli_query($conn, $sql2);
         
         <div class="col-md-2 col-lg-2 ml-lg-n4 col-12" style="text-align:center" >
         
-        <form method="POST" action="visualizarRespostaQuiz" >
+        <form method="POST" action="visualizarResposta" >
             <button class="btEstilo" name="idQuiz" value="<?php echo $idQuiz ?>" type="submit" style="padding-left: 10px; padding-right:10px;width:100px;margin-left:2px">Ver Resposta<img src="./public/open-iconic/svg/eye.svg" class="icon" alt="eye"></button>
         </form>
 

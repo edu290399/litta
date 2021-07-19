@@ -4,7 +4,7 @@ include_once("conexao.php");
 $btnCadastra = filter_has_var(INPUT_POST, 'btnCadastra');
 if($btnCadastra){
     $idPergunta = filter_input(INPUT_POST, 'btnCadastra', FILTER_SANITIZE_STRING);
-    $idEnvio = filter_input(INPUT_POST, 'idEnvio', FILTER_SANITIZE_STRING);;
+    $idEnvio = filter_input(INPUT_POST, 'idEnvio', FILTER_SANITIZE_STRING);
     $idUsuario = $_SESSION['id'];
     $r1 = filter_input(INPUT_POST, 'r1', FILTER_SANITIZE_STRING);
     if(isset($_POST['r2'])){ $r2 = filter_input(INPUT_POST, 'r2', FILTER_SANITIZE_STRING);}else{$r2="";};

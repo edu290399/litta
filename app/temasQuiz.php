@@ -220,5 +220,5 @@ session_start();
 
 <?php }else{
 	$_SESSION['msgErro'] = "Faça login para continuar";
-	header("Location: ../login");	
+	header("Location: ./login");	
 }?>
